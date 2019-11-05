@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Intelligence Refinery</title>
+    <link>/tags/</link>
+    <description>Recent content in Tags on Intelligence Refinery</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 04 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>#Dash</title>
+      <link>/tags/#dash/</link>
+      <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/#dash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>#Jupyter</title>
+      <link>/tags/#jupyter/</link>
+      <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/#jupyter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>#Streamlit</title>
+      <link>/tags/#streamlit/</link>
+      <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/#streamlit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>#Voila</title>
+      <link>/tags/#voila/</link>
+      <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/#voila/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

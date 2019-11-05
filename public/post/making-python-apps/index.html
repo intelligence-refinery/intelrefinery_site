@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+  <meta charset="utf-8">
+  <title>Intelligence Refinery</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="This is meta description">
+  
+  <meta name="author" content="Intelligence Refinery">
+  <meta name="generator" content="Hugo 0.57.2" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="/plugins/venobox/venobox.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="/scss/style.min.css" integrity="" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="/images/favicon.png " type="image/x-icon">
+
+</head><body>
+<!-- preloader start -->
+<div class="preloader">
+  
+</div>
+<!-- preloader end -->
+<!-- navigation -->
+<header class="navigation">
+  <div class="container">
+    
+    <nav class="navbar navbar-expand-lg navbar-white bg-transparent border-bottom">
+      <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation">
+        <i class="ti-menu h3"></i>
+      </button>
+
+      <div class="collapse navbar-collapse text-center" id="navigation">
+        <div class="desktop-view">
+          <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="ti-facebook"></i></a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="ti-twitter-alt"></i></a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="ti-instagram"></i></a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="ti-github"></i></a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="ti-linkedin"></i></a>
+            </li>
+            
+          </ul>
+        </div>
+
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/"> Home </a>
+          </li>
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/blog">Knowledge repo</a>
+          </li>
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/about">About</a>
+          </li>
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/contact">Contact</a>
+          </li>
+          
+          
+        </ul>
+
+        
+        <!-- search -->
+        <div class="search px-4">
+          <button id="searchOpen" class="search-btn"><i class="ti-search"></i></button>
+          <div class="search-wrapper">
+            <form action="//search" class="h-100">
+              <input class="search-box px-4" id="search-query" name="s" type="search" placeholder="Type & Hit Enter...">
+            </form>
+            <button id="searchClose" class="search-close"><i class="ti-close text-dark"></i></button>
+          </div>
+        </div>
+        
+
+        
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /navigation -->
+
+<section class="section-sm">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        
+        <a href="/tags/#dash"
+          class="text-primary"># dash</a>
+        
+        <a href="/tags/#jupyter"
+          class="text-primary"># jupyter</a>
+        
+        <a href="/tags/#streamlit"
+          class="text-primary"># streamlit</a>
+        
+        <a href="/tags/#voila"
+          class="text-primary"># voila</a>
+        
+        <h2 data-toc-skip>Going beyond Jupyter notebooks</h2>
+        <div class="mb-3"> <span
+            class="border-bottom border-primary px-2 mx-1"></span>
+          <span>November 04 2019</span></div>
+        <center><img src="/images/post/appify.png" class="img-fluid w-75 mb-4" alt="Going beyond Jupyter notebooks"></center>
+        <div class="content mb-5">
+          
+
+
+<p>As useful as they are, and they <em>really are</em>, Jupyter notebooks can feel rather stale after a few years. While they are great for quickly testing out code and exploring datasets, I can’t help but want something more fun and polished for presenting a completed project.</p>
+<p>For this reason I had been working largely in R for the past while, despite my preference for the simplicity of the Python syntax, in large part due to the vibrant Shiny ecosystem that makes creating dashboards and interactive web apps easy and fun. However, I am happy to report that in really just the past year or so, the interactive app/dashboard scene in Python has really flourished, first with the appearance of the Plotly Dash platform and then most recently with Streamlit. Here is a (ever updating) round-up of my experiences so far with Python packages that allow us to bring our data science projects to life.</p>
+<p><br></p>
+<div class="container">
+<!-- Nav tabs -->
+<ul class="nav nav-pills nav-justified" role="tablist">
+<li class="nav-item active">
+<a class="nav-link active" data-toggle="tab" href="#streamlit"><font size="+2"><b>Streamlit</b></font></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" data-toggle="tab" href="#plotly_dash"><font size="+2"><b>Plotly Dash</b></font></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" data-toggle="tab" href="#voila"><font size="+2"><b>Voilà</b></font></a>
+</li>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content">
+<div id="streamlit" class="container tab-pane active">
+<p>What really drew me back to Python is the appearance of <a href="https://streamlit.io/docs/">Streamlit</a>, an open-source library that really truly makes converting a data analysis workflow to an app a breeze. By adding a few magic commands, a Python script is spun to an <em>interactive</em> app that can be deployed on Heroku like any other web app.</p>
+<p><br></p>
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/B2iAodr0fOo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<p><br></p>
+<p>Initially, Streamlit seemed to me neither here nor there, sitting somewhere between Plotly Dash and Jupyter notebooks. While it seemed very easy to worked with, I thought that it was missing the “look” of Dash and also the versatility of cell-based operations of Jupyter. However, as soon as I gave it a try, I totally understood the allure.</p>
+<p>The absolute best feature of Streamlit, in my opinion, is how easy it is to create interactive widgets like dropdown menus, radio boxes, sliders and even text/number inputs, <em>without needing to write any callbacks</em>. Using an example from the official documentation, this is how to create and get input from a slider:</p>
+<pre class="python"><code>import streamlit as st
+
+age = st.slider(&#39;How old are you?&#39;, 0, 130, 25)
+
+st.write(&quot;I&#39;m &quot;, age, &#39;years old&#39;)</code></pre>
+<p>Creating other types of interactive widgets in Streamlit is just as easy. You can find a list of functionalities currently supported <a href="https://streamlit.io/docs/api.html">here</a>.</p>
+<p>In comparison, this is how to create the same thing in Plotly Dash:</p>
+<pre class="python"><code>import dash
+import dash_html_components as html
+import dash_core_components as dcc
+
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
+app.layout = html.Div([
+    dcc.Slider(
+        id=&#39;my-slider&#39;,
+        min=0,
+        max=20,
+        step=0.5,
+        value=10,
+    ),
+    html.Div(id=&#39;slider-output-container&#39;)
+])
+
+@app.callback(
+    dash.dependencies.Output(&#39;slider-output-container&#39;, &#39;children&#39;),
+    [dash.dependencies.Input(&#39;my-slider&#39;, &#39;value&#39;)])
+def update_output(value):
+    return &#39;You have selected &quot;{}&quot;&#39;.format(value)
+
+
+if __name__ == &#39;__main__&#39;:
+    app.run_server(debug=True)
+</code></pre>
+<p>Of course, Plotly Dash provides many other functionalities that Streamlit is not capable of, at least for now. However, the simplicity of working with Streamlit makes it so satistfying to quickly whip up an interactive app to showcase your work.</p>
+<p>For example, I have made two Streamlit apps to host my microlearning series on survival analysis and building a random forest classifier to predict customer churn. I made them both multipage apps that allow progressive reveal of the content at the learner’s pace, in order to take advantage of the easy interactive widgets to the fullest extent. Granted that I had the workflow written out before hand, but making either one of these apps took only 2-3 days. Check them out!</p>
+<p><br></p>
+<div class="container">
+<!-- Nav tabs -->
+<ul class="nav nav-pills nav-justified" role="tablist">
+<li class="nav-item active">
+<a class="nav-link active" data-toggle="tab" href="#survival"><font size="+1"><b>Survival analysis</b></font></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" data-toggle="tab" href="#rf"><font size="+1"><b>Random forest</b></font></a>
+</li>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content">
+<div id="survival" class="container tab-pane active">
+<iframe src="https://survival-analysis.herokuapp.com/" width="100%" height="900px">
+</iframe>
+</div>
+<div id="rf" class="container tab-pane fade">
+<iframe src="https://rf-streamlit.herokuapp.com/" width="100%" height="900px">
+</iframe>
+</div>
+<p>If you are interested in trying Streamlit out, there are several demo apps listed in the documentation linked above. In addition, many enthusiastic adopters of Streamlit have <a href="https://twitter.com/streamlit?lang=en">tweeted</a> about their own creations.</p>
+</div>
+</div>
+</div>
+<div id="plotly_dash" class="container tab-pane fade">
+<p><a href="https://dash.plot.ly/">Plotly Dash</a> has been around for quite a while now, so I will not go as much in depth here, trusting that everyone is already pretty familiar with it. Unlike the other two packages introduced here, Dash has the benefit of the very large and active <a href="https://community.plot.ly/">Plotly community</a> to serve as a solid knowledge base to support users of all levels.</p>
+<p>As of now, Plotly Dash just cannot be beat in terms of how polished its <a href="https://dash-gallery.plotly.host/Portal/">end products</a> look. It is my package of choice if I need to create a dashboard/app that will be used by non-technical end users, such as business professionals, with clear interactive features and sophisticated crosstalk between elements (<em>i.e.</em> data tables, plots, maps, etc.). For example, here is a <a href="https://biz-dash-app.herokuapp.com/">sales dashboard</a> that I had made while learning the Dash platform.</p>
+<p>However, as mentioned in comparison with Streamlit, the Dash code base can get quite large and complex very quickly, particularly when used with the built-in or Bootstrap grid system for layout. Consequently, it has a fairly steep learning curve, with very rewarding results. On a related note, I cannot recommend enough the <a href="https://dash-bootstrap-components.opensource.faculty.ai/">Dash Bootstrap Components</a> package, which greatly simplifies the implementations of a lot of layout and interactive features with the added benefit of the clean Bootstrap look.</p>
+<p>Want to get started on your own? For an step-by-step guide to building a professional dashboard, take a look at the video below made by a Plotly developer:</p>
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/ZT_f2OQAkao" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<p><br></p>
+</div>
+<div id="voila" class="container tab-pane fade">
+<p>Finally, just because we want to upgrade from Jupyter notebooks does not mean we are going to do away with it completely, as it is still a fantastic platform for exploring data and prototyping analysis workflows. In addition, the ability to use Python and R together in the same notebook makes it indispensible for data scientists who want the best of both worlds: ease of data wrangling in Python but mature analysis packages in R. Since so many of us begin a project in Jupyter notebooks, it would be a dream come true to be able to make dashboards/interactive apps from the analysis results right there. The recently released package <a href="https://blog.jupyter.org/and-voil%C3%A0-f6a2c08a4a93"><code>Voilà</code></a> grants that wish, somewhat.</p>
+<p>Here is an introduction to the package at SciPy 2019:</p>
+<p><br></p>
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/VtchVpoSdoQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<p><br></p>
+<p>While interactive widgets like dropdown menus and sliders can be added to the dashboard, as you can do in Streamlit and Plotly Dash, using the <a href="https://ipywidgets.readthedocs.io/en/latest/"><code>ipywidgets</code></a> library, I have personally found the syntax much less clear and not as many tutorials/help pages available to get a newcomer started. In addition, as Voilà is still in very early stages of development, the resulting dashboard/app looks rather barebones as compared to Dash. <a href="https://variable-importance.herokuapp.com/">Here</a> is an “learning dashboard” that I had made using Voilà to introduce various model-agnostic approaches to calculate feature importance, for comparison with the <a href="https://biz-dash-app.herokuapp.com/">sales dashboard</a> made with Dash.</p>
+<p>Nevertheless, as mentioned above, one strength of Jupyter notebooks is the ability to use other language kernels. Any language that is supported by a Jupyter kernel can be used to create a Voilà app, so for projects where that is needed, this would be the package for you.</p>
+</div>
+</div>
+</div>
+<hr>
+<p>Taken together, it is really an exciting time for finally being able to communicate/present your Python data science projects in style. This post will be updated as new features and packages become available, so please check back once in a while! :)</p>
+
+        </div>
+
+        
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5">
+        <br><hr><br>
+      </div>
+      <div class="col-lg-3 col-sm-6 mb-5">
+        <h6 class="mb-4">Contact Us</h6>
+        <ul class="list-unstyled">
+          <li class="mb-3"><i class="ti-location-pin mr-3 text-primary"></i>Toronto, Canada</li>
+          <li class="mb-3"><a class="text-dark" href="mailto:intelligence.refinery@gmail.com"><i
+                class="ti-email mr-3 text-primary"></i>intelligence.refinery@gmail.com</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6 mb-5">
+        <h6 class="mb-4">Social Contacts</h6>
+        <ul class="list-unstyled">
+          
+          <li class="mb-3"><a class="text-dark" href="#">facebook</a></li>
+          
+          <li class="mb-3"><a class="text-dark" href="#">twitter</a></li>
+          
+          <li class="mb-3"><a class="text-dark" href="#">instagram</a></li>
+          
+          <li class="mb-3"><a class="text-dark" href="#">github</a></li>
+          
+          <li class="mb-3"><a class="text-dark" href="#">linkedin</a></li>
+          
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6 mb-5">
+        <h6 class="mb-4">Categories</h6>
+        <ul class="list-unstyled">
+          <li class="mb-3"><a class="text-dark"
+              href="/categories/package-roundup">Package roundup</a>
+          </li>
+          <li class="mb-3"><a class="text-dark"
+              href="/categories/python">Python</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6 mb-5">
+        <h6 class="mb-4">Quick Links</h6>
+        <ul class="list-unstyled">
+          
+          <li class="mb-3"><a class="text-dark" href="/about/about">About</a></li>
+          
+          <li class="mb-3"><a class="text-dark" href="/blog">Knowledge repo</a></li>
+          
+          <li class="mb-3"><a class="text-dark" href="/contact">Contact</a></li>
+          
+        </ul>
+      </div>
+      <div class="col-12 border-top py-4 text-center">
+        | @2019 <a href="https://themefisher.com">Themefisher</a> All Rights Reserved |
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var indexURL = "/index.json"
+</script>
+
+<!-- Google Map API -->
+<script src="/"></script>
+<!-- JS Plugins -->
+
+<script src="/plugins/jQuery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="/plugins/slick/slick.min.js"></script>
+
+<script src="/plugins/venobox/venobox.min.js"></script>
+
+<script src="/plugins/search/fuse.min.js"></script>
+
+<script src="/plugins/search/mark.js"></script>
+
+<script src="/plugins/search/search.js"></script>
+
+<script src="/plugins/google-map/gmap.js"></script>
+
+<!-- Main Script -->
+
+<script src="/js/script.min.js"></script>
+<!-- google analitycs -->
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script></body>
+</html>

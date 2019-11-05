@@ -1,0 +1,53 @@
+{{ define "main" }}
+
+<section class="section-sm">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto text-center">
+        <img src="{{ .Params.Image | absURL }}" alt="" class="img-fluid d-block mx-auto rounded-circle mb-4">
+        <h4 class="widget-title">{{ "About Us" | markdownify }}</h4>
+        <div class="content">
+          {{ .Content }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto text-center">
+        <h4 class="widget-title">{{ "This Site" | markdownify }}</h4>
+        
+        <div class="content">
+          
+          This site is created using the <code>blogdown</code> package.
+          
+          Illustrations, unless attributed elsewhere, are taken from ___"
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{{ if .Site.Data.gallery.enable }}
+{{ with .Site.Data.gallery }}
+<section>
+  <div class="container-fluid px-0 col-6">
+    <div class="row no-gutters">
+      {{ range .gallery }}
+      <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+        <a href="{{ .image | absURL}}" class="venobox" data-gall="gallery"><img class="center img-fluid w-100"
+            src="{{ .image | absURL}}" alt=""></a>
+      </div>
+      {{ end }}
+      </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}
+
+
+{{ end }}
