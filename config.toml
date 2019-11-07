@@ -121,19 +121,16 @@ title = "Join Our Newsletter"
 content = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero"
 
 ############################# social site ########################
-[[params.social]]
-title = "facebook"
-icon = "ti-facebook" # themify icon : https://themify.me/themify-icons
-link = "#"
+
 
 [[params.social]]
 title = "twitter"
 icon = "ti-twitter-alt" # themify icon : https://themify.me/themify-icons
-link = "#"
+link = "https://twitter.com/IntelRefinery"
 
 [[params.social]]
-title = "instagram"
-icon = "ti-instagram" # themify icon : https://themify.me/themify-icons
+title = "tumblr
+icon = "ti-tumblr" # themify icon : https://themify.me/themify-icons
 link = "#"
 
 [[params.social]]
