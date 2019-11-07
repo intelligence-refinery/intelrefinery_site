@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dash on Liva | Personal blog template</title>
+    <title>Dash on Intelligence Refinery</title>
     <link>/tags/dash/</link>
-    <description>Recent content in Dash on Liva | Personal blog template</description>
+    <description>Recent content in Dash on Intelligence Refinery</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 04 Nov 2019 00:00:00 +0000</lastBuildDate>
@@ -12,12 +12,12 @@
     
     
     <item>
-      <title>Making Python apps</title>
+      <title>Going beyond Jupyter notebooks</title>
       <link>/post/making-python-apps/</link>
       <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/making-python-apps/</guid>
-      <description>   </description>
+      <description>As useful as they are, and they really are, Jupyter notebooks can feel rather stale after a few years.</description>
     </item>
     
   </channel>

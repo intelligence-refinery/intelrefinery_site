@@ -1,0 +1,166 @@
+---
+title: Neat HTML snippets to jazz up your site
+date: '2019-11-06'
+categories:
+  - Web development
+tags:
+  - Useful
+slug: neat-html-snippets-to-jazz-up-your-site
+type: featured
+image: images/post/html_snippets.png
+---
+
+
+
+<p><br></p>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link
+  rel="stylesheet"
+  href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+</head>
+<body>
+<body data-spy="scroll" data-target="#toc">
+<div class="container">
+<div class="row">
+<!-- sidebar, which will move to the top on a small screen -->
+<div class="col-sm-2">
+<p><nav id="toc" data-toggle="toc" class="sticky-top" style='padding-top:40px'></nav></p>
+</div>
+<!-- main content area -->
+<div class="col-sm-10">
+<h2 id="tabs">Tabs</h2>
+<p>Tabs are a great way to save on space:</p>
+<p>For example:</p>
+<p><br></p>
+<div class="container">
+<!-- Nav tabs -->
+<ul class="nav nav-pills nav-justified" role="tablist">
+<li class="nav-item active">
+<a class="nav-link active" data-toggle="tab" href="#tab1"><font size="+2"><b>Tab 1</b></font></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" data-toggle="tab" href="#tab2"><font size="+2"><b>Tab 2</b></font></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" data-toggle="tab" href="#tab3"><font size="+2"><b>Tab 3</b></font></a>
+</li>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content">
+<div id="tab1" class="container tab-pane active">
+<center>
+<a href="https://icons8.com/"><img src="https://i.ibb.co/27xG3rf/flame-searching.png" alt="flame-searching" border="0" width='40%'>
+<figcaption>
+Image credit: Icons 8
+</figcaption>
+</a>
+</center>
+</div>
+<div id="tab2" class="container tab-pane fade">
+<center>
+<a href="https://icons8.com/"><img src="https://i.ibb.co/qj49fCn/flame-thanksgiving.png" alt="flame-thanksgiving" border="0" width='40%'>
+<figcaption>
+Image credit: Icons 8
+</figcaption>
+</a>
+</center>
+</div>
+<div id="tab3" class="container tab-pane fade">
+<center>
+<a href="https://icons8.com/"><img src="https://i.ibb.co/5hf2C2c/flame-camera-access.png" alt="flame-camera-access" border="0" width='40%'>
+<figcaption>
+Image credit: Icons 8
+</figcaption>
+</a>
+</center>
+</div>
+</div>
+</div>
+<p><br></p>
+<p>To make this:</p>
+<pre class="html"><code>&lt;div class=&quot;container&quot;&gt;
+&lt;!-- Nav tabs --&gt;
+&lt;ul class=&quot;nav nav-pills nav-justified&quot; role=&quot;tablist&quot;&gt;
+
+&lt;li class=&quot;nav-item active&quot;&gt;
+&lt;a class=&quot;nav-link active&quot; data-toggle=&quot;tab&quot; href=&quot;#tab1&quot;&gt;&lt;font size=&quot;+2&quot;&gt;&lt;b&gt;Tab 1&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;
+&lt;/li&gt;
+
+&lt;li class=&quot;nav-item&quot;&gt;
+&lt;a class=&quot;nav-link&quot; data-toggle=&quot;tab&quot; href=&quot;#tab2&quot;&gt;&lt;font size=&quot;+2&quot;&gt;&lt;b&gt;Tab 2&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;
+&lt;/li&gt;
+
+&lt;li class=&quot;nav-item&quot;&gt;
+&lt;a class=&quot;nav-link&quot; data-toggle=&quot;tab&quot; href=&quot;#tab3&quot;&gt;&lt;font size=&quot;+2&quot;&gt;&lt;b&gt;Tab 3&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;
+&lt;/li&gt;
+
+&lt;/ul&gt;
+
+&lt;!-- Tab panes --&gt;
+&lt;div class=&quot;tab-content&quot;&gt;
+&lt;div id=&quot;tab1&quot; class=&quot;container tab-pane active&quot;&gt;
+Tab 1 content
+&lt;/div&gt;
+
+&lt;div id=&quot;tab2&quot; class=&quot;container tab-pane fade&quot;&gt;
+Tab 2 content
+&lt;/div&gt;
+
+&lt;div id=&quot;tab3&quot; class=&quot;container tab-pane fade&quot;&gt;
+Tab 3 content
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<p><br></p>
+<h2 id="floating-page-outline">Floating page outline</h2>
+<p>When the page has a lot of content, it is very helpful to include a floating table of contents on the side of the page that shows the reader where they are. You can see an example of this on the left!</p>
+<p>After experimenting with a few options, I found that the steps outlined <a href="https://afeld.github.io/bootstrap-toc/">here</a> by Aidan Feldman work most easily and the best for Blogdown sites:</p>
+<p><br></p>
+<pre class="html"><code>&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css&quot;&gt;
+&lt;link
+  rel=&quot;stylesheet&quot;
+  href=&quot;https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css&quot;
+/&gt;
+&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;body data-spy=&quot;scroll&quot; data-target=&quot;#toc&quot;&gt; 
+&lt;div class=&quot;container&quot;&gt;
+&lt;div class=&quot;row&quot;&gt;
+&lt;!-- sidebar, which will move to the top on a small screen --&gt;
+&lt;div class=&quot;col-sm-2&quot;&gt;
+&lt;nav id=&quot;toc&quot; data-toggle=&quot;toc&quot; class=&quot;sticky-top&quot; style=&#39;padding-top:40px&#39;&gt;&lt;/nav&gt;
+&lt;/div&gt;
+&lt;!-- main content area --&gt;
+&lt;div class=&quot;col-sm-10&quot;&gt;
+
+&lt;!-- Page content --&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;</code></pre>
+<p><br></p>
+<p>If there are headings that you do not want to be included in the outline, you can change the header HTML tag, like <code>&lt;h2&gt;</code>, to <code>&lt;h2 data-toc-skip&gt;</code>.</p>
+<p><br></p>
+<h2 id="style-code-blocks">Style code blocks</h2>
+</div>
+</div>
+</div>
+</body>

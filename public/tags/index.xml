@@ -6,44 +6,107 @@
     <description>Recent content in Tags on Intelligence Refinery</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 06 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>#Dash</title>
-      <link>/tags/#dash/</link>
-      <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
+      <title>Job search</title>
+      <link>/tags/job-search/</link>
+      <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/#dash/</guid>
+      <guid>/tags/job-search/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>#Jupyter</title>
-      <link>/tags/#jupyter/</link>
-      <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
+      <title>Resources</title>
+      <link>/tags/resources/</link>
+      <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/#jupyter/</guid>
+      <guid>/tags/resources/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>#Streamlit</title>
-      <link>/tags/#streamlit/</link>
-      <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
+      <title>Resume</title>
+      <link>/tags/resume/</link>
+      <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/#streamlit/</guid>
+      <guid>/tags/resume/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>#Voila</title>
-      <link>/tags/#voila/</link>
+      <title>UI</title>
+      <link>/tags/ui/</link>
+      <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/ui/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Useful</title>
+      <link>/tags/useful/</link>
+      <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/useful/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>UX</title>
+      <link>/tags/ux/</link>
+      <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/ux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dash</title>
+      <link>/tags/dash/</link>
       <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/#voila/</guid>
+      <guid>/tags/dash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jupyter</title>
+      <link>/tags/jupyter/</link>
+      <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/jupyter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>/tags/python/</link>
+      <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Streamlit</title>
+      <link>/tags/streamlit/</link>
+      <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/streamlit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Voila</title>
+      <link>/tags/voila/</link>
+      <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/voila/</guid>
       <description></description>
     </item>
     

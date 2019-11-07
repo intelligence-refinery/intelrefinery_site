@@ -1,19 +1,19 @@
 ---
 title: Going beyond Jupyter notebooks
-author: Nancy C.
 date: '2019-11-04'
 categories:
-  - Python
   - Package  roundup
 tags:
-  - '#Dash'
-  - '#Jupyter'
-  - '#Streamlit'
-  - '#Voila'
+  - Dash
+  - Jupyter
+  - Streamlit
+  - Voila
+  - Python
 slug: making-python-apps
 type: featured
 image: images/post/appify.png
 ---
+
 
 
 As useful as they are, and they *really are*, Jupyter notebooks can feel rather stale after a few years. While they are great for quickly testing out code and exploring datasets, I can't help but want something more fun and polished for presenting a completed project.  
@@ -26,7 +26,7 @@ For this reason I had been working largely in R for the past while, despite my p
 
 <div class="container">
 <!-- Nav tabs -->
-<ul class="nav nav-pills nav-justified" role="tablist">
+<ul class="nav nav-tabs nav-justified" role="tablist">
 
 <li class="nav-item active">
 <a class="nav-link active" data-toggle="tab" href="#streamlit"><font size="+2"><b>Streamlit</b></font></a>
@@ -108,7 +108,7 @@ For example, I have made two Streamlit apps to host my microlearning series on s
 
 <div class="container">
 <!-- Nav tabs -->
-<ul class="nav nav-pills nav-justified" role="tablist">
+<ul class="nav nav-tabs nav-justified" role="tablist">
 
 <li class="nav-item active">
 <a class="nav-link active" data-toggle="tab" href="#survival"><font size="+1"><b>Survival analysis</b></font></a>
@@ -181,7 +181,11 @@ Nevertheless, as mentioned above, one strength of Jupyter notebooks is the abili
 </div>
 </div>
 
+<br>
+
 <hr>
+
+<br>
 
 Taken together, it is really an exciting time for finally being able to communicate/present your Python data science projects in style. This post will be updated as new features and packages become available, so please check back once in a while! :)
 

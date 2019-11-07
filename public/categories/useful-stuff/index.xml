@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Useful stuff on Intelligence Refinery</title>
+    <link>/categories/useful-stuff/</link>
+    <description>Recent content in Useful stuff on Intelligence Refinery</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 06 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/useful-stuff/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Neat HTML snippets to jazz up your site</title>
+      <link>/post/useful-html-snippets-to-jazz-up-your-site/</link>
+      <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/useful-html-snippets-to-jazz-up-your-site/</guid>
+      <description>&amp;lt;div class=&amp;quot;container&amp;quot;&amp;gt; &amp;lt;!-- Nav tabs --&amp;gt; &amp;lt;ul class=&amp;quot;nav nav-pills nav-justified&amp;quot; role=&amp;quot;tablist&amp;quot;&amp;gt; &amp;lt;li class=&amp;quot;nav-item active&amp;quot;&amp;gt; &amp;lt;a class=&amp;quot;nav-link active&amp;quot; data-toggle=&amp;quot;tab&amp;quot; href=&amp;quot;#tab1&amp;quot;&amp;gt;&amp;lt;font size=&amp;quot;+2&amp;quot;&amp;gt;&amp;lt;b&amp;gt;Tab 1&amp;lt;/b&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;/a&amp;gt; &amp;lt;/li&amp;gt; &amp;lt;li class=&amp;quot;nav-item&amp;quot;&amp;gt; &amp;lt;a class=&amp;quot;nav-link&amp;quot; data-toggle=&amp;quot;tab&amp;quot; href=&amp;quot;#tab2&amp;quot;&amp;gt;&amp;lt;font size=&amp;quot;+2&amp;quot;&amp;gt;&amp;lt;b&amp;gt;Tab 2&amp;lt;/b&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;/a&amp;gt; &amp;lt;/li&amp;gt; &amp;lt;li class=&amp;quot;nav-item&amp;quot;&amp;gt; &amp;lt;a class=&amp;quot;nav-link&amp;quot; data-toggle=&amp;quot;tab&amp;quot; href=&amp;quot;#tab3&amp;quot;&amp;gt;&amp;lt;font size=&amp;quot;+2&amp;quot;&amp;gt;&amp;lt;b&amp;gt;Tab 3&amp;lt;/b&amp;gt;&amp;lt;/font&amp;gt;&amp;lt;/a&amp;gt; &amp;lt;/li&amp;gt; &amp;lt;/ul&amp;gt; &amp;lt;!</description>
+    </item>
+    
+  </channel>
+</rss>
