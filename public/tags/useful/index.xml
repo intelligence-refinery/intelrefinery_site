@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Useful on Intelligence Refinery</title>
-    <link>/tags/useful/</link>
+    <link>https://intelrefinery.netlify.com/tags/useful/</link>
     <description>Recent content in Useful on Intelligence Refinery</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 06 Nov 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/useful/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://intelrefinery.netlify.com/tags/useful/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HTML snippets to jazz up your site</title>
-      <link>/post/neat-html-snippets-to-jazz-up-your-site/</link>
+      <link>https://intelrefinery.netlify.com/post/neat-html-snippets-to-jazz-up-your-site/</link>
       <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/neat-html-snippets-to-jazz-up-your-site/</guid>
+      <guid>https://intelrefinery.netlify.com/post/neat-html-snippets-to-jazz-up-your-site/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Make resume writing fun again </title>
-      <link>/post/resume-builder-platforms/</link>
+      <link>https://intelrefinery.netlify.com/post/resume-builder-platforms/</link>
       <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/resume-builder-platforms/</guid>
+      <guid>https://intelrefinery.netlify.com/post/resume-builder-platforms/</guid>
       <description>  </description>
     </item>
     
     <item>
       <title>UI and UX resources </title>
-      <link>/post/ui-and-ux-resources/</link>
+      <link>https://intelrefinery.netlify.com/post/ui-and-ux-resources/</link>
       <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/ui-and-ux-resources/</guid>
+      <guid>https://intelrefinery.netlify.com/post/ui-and-ux-resources/</guid>
       <description></description>
     </item>
     
