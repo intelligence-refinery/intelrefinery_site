@@ -6,10 +6,28 @@
     <description>Recent content on Intelligence Refinery</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 06 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 07 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Graphing in Python - a walkthrough</title>
+      <link>/post/graphing-in-python-a-walkthrough/</link>
+      <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/graphing-in-python-a-walkthrough/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Free UI and UX resources </title>
+      <link>/post/ui-and-ux-resources/</link>
+      <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/ui-and-ux-resources/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>HTML and CSS snippets to jazz up your site</title>
@@ -30,15 +48,6 @@
     </item>
     
     <item>
-      <title>UI and UX resources </title>
-      <link>/post/ui-and-ux-resources/</link>
-      <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/ui-and-ux-resources/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Going beyond Jupyter notebooks</title>
       <link>/post/making-python-apps/</link>
       <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
@@ -53,7 +62,8 @@
       <pubDate>Tue, 29 Oct 2019 13:49:23 +0600</pubDate>
       
       <guid>/about/about/</guid>
-      <description>Welcome to Intelligence Refinery! We are Nancy and Mihai Chelaru, two ex-neuroscientists venturing into this brave new world of data and code.</description>
+      <description>Welcome to Intelligence Refinery!
+We are Nancy and Mihai Chelaru-Centea, two neuroscience majors who not so long ago ditched the lab notebooks for Jupyter notebooks.</description>
     </item>
     
   </channel>

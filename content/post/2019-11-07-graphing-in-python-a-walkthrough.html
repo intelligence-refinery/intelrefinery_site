@@ -1,0 +1,96 @@
+---
+title: Graphing in Python - a walkthrough
+author: ''
+date: '2019-11-07'
+slug: graphing-in-python-a-walkthrough
+categories:
+  - Visualizations
+tags: []
+type: "post"
+image: images/post/python_graphing.png
+---
+
+
+
+<p><br></p>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link
+  rel="stylesheet"
+  href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+</head>
+<body>
+<body data-spy="scroll" data-target="#toc">
+<div class="container">
+<div class="row">
+<!-- sidebar, which will move to the top on a small screen -->
+<div class="col-sm-3">
+<p><nav id="toc" data-toggle="toc" class="sticky-top" style='padding-top:40px'></nav></p>
+</div>
+<!-- main content area -->
+<div class="col-sm-9">
+<h2 id="matplotlib-seaborn">Matplotlib &amp; Seaborn</h2>
+<h2 id="plotly">Plotly</h2>
+<p><code>Plotly</code> does not need much introduction, as it is now very widely used to create interactive plots in both Python and R.</p>
+<h3 id="plotting">Plotting</h3>
+<p>For a while, one major drawback of <code>Plotly</code> is its, in my opinion, rather inconvenient syntax, where the source data needs to be passed in as arrays even though most of us want to be able to plot data directly from dataframes. <code>cufflinks</code> package, which bridges <code>pandas</code> and <code>Plotly</code>, the release of <code>Plotly Express</code></p>
+<h3 id="styling">Styling</h3>
+<h2 id="plotnine">Plotnine</h2>
+<p>One of the strengths of the R language is its very powerful graphing package <code>ggplot2</code>, with its distinctive implementation of Leland Wilkinson’s <em>Grammar of Graphics</em>. The <code>Plotnine</code> package brings this (at least part of it, it seems for now) capability to Python, with very little change to the R syntax. Here is a (ever growing) <a href="https://raindrop.io/collection/8766091">collection</a> of useful links curated by us to get your started with using <code>Plotnine</code>.</p>
+<p>The brackets around the <code>ggplot()</code> function call looks strange at first, but it is needed for the signature multi-line <code>ggplot2</code> grammer to work:</p>
+<pre class="python"><code>## Import libraries
+import pandas as pd
+from plotnine import *
+from random import randint
+
+# Generate dataset
+random_numbers = [randint(1, 100) for p in range(0, 100)]
+
+df = pd.DataFrame({&#39;number&#39;: random_numbers})
+
+# Draw plot
+p = (
+      ggplot(df, aes(x=&#39;number&#39;)) + 
+          geom_histogram(bins=20, na_rm=True) +
+          ggtitle(&#39;Histogram of random numbers&#39;) +
+          theme_light()
+                        )
+
+## Display plot
+p.draw();</code></pre>
+<p><img src="/post/2019-11-07-graphing-in-python-a-walkthrough_files/figure-html/unnamed-chunk-2-1.png" width="100%" /></p>
+<p>If you want to save the plot to file:</p>
+<pre class="python"><code>p.save(&quot;output.png&quot;)</code></pre>
+<p>And just because I can see myself wanting to use these plots in a Streamlit app, here is a working template:</p>
+<pre class="python"><code>import pandas as pd
+import numpy as np
+from plotnine import *
+import streamlit as st
+
+n = 10
+
+df = pd.DataFrame({&#39;x&#39;: np.arange(n),
+                   &#39;y&#39;: np.arange(n),
+                   &#39;yfit&#39;: np.arange(n) + np.tile([-.2, .2], n // 2),
+                   &#39;cat&#39;: [&#39;a&#39;, &#39;b&#39;] * (n // 2)})
+
+a = (
+      ggplot(df) +
+        geom_col(aes(&#39;x&#39;, &#39;y&#39;))
+                               )
+
+fig = a.draw();   ## Needed to remove the &quot;ggplot&lt;#&gt;&quot; message
+
+st.pyplot()</code></pre>
+<h2 id="yellowbrick">Yellowbrick</h2>
+</div>
+</div>
+</div>
+</body>

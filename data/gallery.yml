@@ -1,10 +1,10 @@
 enable : true
 gallery:
   - image : "images/gallery/blogdown.png"
-  - image : "images/gallery/hugo.png"
   - image : "images/gallery/rmarkdown.png"
   - image : "images/gallery/knitr.png"
-  - image : "images/gallery/heroku.jpg"
+  - image : "images/gallery/hugo.png"
+  - image : "images/gallery/netlify.png"
   - image : "images/gallery/icons8.jpg"
   
   

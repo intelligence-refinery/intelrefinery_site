@@ -1,0 +1,195 @@
+---
+title: Going beyond Jupyter notebooks
+date: '2019-11-04'
+categories:
+  - Package  roundup
+tags:
+  - Dash
+  - Jupyter
+  - Streamlit
+  - Voila
+  - Python
+slug: making-python-apps
+type: featured
+image: images/post/appify.png
+---
+
+
+
+As useful as they are, and they *really are*, Jupyter notebooks can feel rather stale after a few years. While they are great for quickly testing out code and exploring datasets, I can't help but want something more fun and polished for presenting a completed project.  
+
+For this reason I had been working largely in R for the past while, despite my preference for the simplicity of the Python syntax, in large part due to the vibrant Shiny ecosystem that makes creating dashboards and interactive web apps easy and fun. However, I am happy to report that in really just the past year or so, the interactive app/dashboard scene in Python has really flourished, first with the appearance of the Plotly Dash platform and then most recently with Streamlit. Here is a (ever updating) round-up of my experiences so far with Python packages that allow us to bring our data science projects to life.
+
+
+<br>
+
+
+<div class="container">
+<!-- Nav tabs -->
+<ul class="nav nav-pills nav-justified" role="tablist">
+
+<li class="nav-item active">
+<a class="nav-link active" data-toggle="tab" href="#streamlit"><font size="+2"><b>Streamlit</b></font></a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" data-toggle="tab" href="#plotly_dash"><font size="+2"><b>Plotly Dash</b></font></a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" data-toggle="tab" href="#voila"><font size="+2"><b>Voilà</b></font></a>
+</li>
+
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+<div id="streamlit" class="container tab-pane active">
+
+What really drew me back to Python is the appearance of [Streamlit](https://streamlit.io/docs/), an open-source library that really truly makes converting a data analysis workflow to an app a breeze. By adding a few magic commands, a Python script is spun to an *interactive* app that can be deployed on Heroku like any other web app. 
+
+<br> 
+
+<iframe width="100%"  height=500  src="https://www.youtube.com/embed/B2iAodr0fOo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<br>
+
+Initially, Streamlit seemed to me neither here nor there, sitting somewhere between Plotly Dash and Jupyter notebooks. While it seemed very easy to worked with, I thought that it was missing the "look" of Dash and also the versatility of cell-based operations of Jupyter. However, as soon as I gave it a try, I totally understood the allure.
+
+The absolute best feature of Streamlit, in my opinion, is how easy it is to create interactive widgets like dropdown menus, radio boxes, sliders and even text/number inputs, *without needing to write any callbacks*. Using an example from the official documentation, this is how to create and get input from a slider:
+
+```Python
+import streamlit as st
+
+age = st.slider('How old are you?', 0, 130, 25)
+
+st.write("I'm ", age, 'years old')
+```
+
+Creating other types of interactive widgets in Streamlit is just as easy. You can find a list of functionalities currently supported [here](https://streamlit.io/docs/api.html).
+
+In comparison, this is how to create the same thing in  Plotly Dash:
+
+```Python
+import dash
+import dash_html_components as html
+import dash_core_components as dcc
+
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
+app.layout = html.Div([
+    dcc.Slider(
+        id='my-slider',
+        min=0,
+        max=20,
+        step=0.5,
+        value=10,
+    ),
+    html.Div(id='slider-output-container')
+])
+
+@app.callback(
+    dash.dependencies.Output('slider-output-container', 'children'),
+    [dash.dependencies.Input('my-slider', 'value')])
+def update_output(value):
+    return 'You have selected "{}"'.format(value)
+
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
+
+```
+
+Of course, Plotly Dash provides many other functionalities that Streamlit is not capable of, at least for now. However, the simplicity of working with Streamlit makes it so satistfying to quickly whip up an interactive app to showcase your work.
+
+For example, I have made two Streamlit apps to host my microlearning series on survival analysis and building a random forest classifier to predict customer churn. I made them both multipage apps that allow progressive reveal of the content at the learner's pace, in order to take advantage of the easy interactive widgets to the fullest extent. Granted that I had the workflow written out before hand, but making either one of these apps took only 2-3 days. Check them out!
+
+<br>
+
+<div class="container">
+<!-- Nav tabs -->
+<ul class="nav nav-pills nav-justified" role="tablist">
+
+<li class="nav-item active">
+<a class="nav-link active" data-toggle="tab" href="#survival"><font size="+1"><b>Survival analysis</b></font></a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" data-toggle="tab" href="#rf"><font size="+1"><b>Random forest</b></font></a>
+</li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+<div id="survival" class="container tab-pane active">
+
+
+```{r, echo=F, out.width='100%'}
+library(knitr)
+
+include_url("https://survival-analysis.herokuapp.com/", height = "900px")
+```
+
+</div>
+<div id="rf" class="container tab-pane fade">
+
+
+```{r, echo=F, out.width='100%'}
+include_url("https://rf-streamlit.herokuapp.com/", height = "900px")
+```
+
+</div>
+
+If you are interested in trying Streamlit out, there are several demo apps listed in the documentation linked above. In addition, many enthusiastic adopters of Streamlit have [tweeted](https://twitter.com/streamlit?lang=en) about their own creations.
+
+</div>
+</div>
+</div>
+
+<div id="plotly_dash" class="container tab-pane fade">
+
+[Plotly Dash](https://dash.plot.ly/) has been around for quite a while now, so I will not go as much in depth here, trusting that everyone is already pretty familiar with it. Unlike the other two packages introduced here, Dash has the benefit of the very large and active [Plotly community](https://community.plot.ly/) to serve as a solid knowledge base to support users of all levels.
+
+As of now, Plotly Dash just cannot be beat in terms of how polished its [end products](https://dash-gallery.plotly.host/Portal/) look. It is my package of choice if I need to create a dashboard/app that will be used by non-technical end users, such as business professionals, with clear interactive features and sophisticated crosstalk between elements (*i.e.* data tables, plots, maps, etc.). For example, here is a [sales dashboard](https://biz-dash-app.herokuapp.com/) that I had made while learning the Dash platform. 
+
+However, as mentioned in comparison with Streamlit, the Dash code base can get quite large and complex very quickly, particularly when used with the built-in or Bootstrap grid system for layout. Consequently, it has a fairly steep learning curve, with very rewarding results. On a related note, I cannot recommend enough the [Dash Bootstrap Components](https://dash-bootstrap-components.opensource.faculty.ai/) package, which greatly simplifies the implementations of a lot of layout and interactive features with the added benefit of the clean Bootstrap look.
+
+Want to get started on your own? For an step-by-step guide to building a professional dashboard, take a look at the video below made by a Plotly developer:
+ 
+<iframe width="100%"  height=500 src="https://www.youtube.com/embed/ZT_f2OQAkao" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<br>
+
+</div>
+<div id="voila" class="container tab-pane fade">
+
+Finally, just because we want to upgrade from Jupyter notebooks does not mean we are going to do away with it completely, as it is still a fantastic platform for exploring data and prototyping analysis workflows. In addition, the ability to use Python and R together in the same notebook makes it indispensible for data scientists who want the best of both worlds: ease of data wrangling in Python but mature analysis packages in R. Since so many of us begin a project in Jupyter notebooks, it would be a dream come true to be able to make dashboards/interactive apps from the analysis results right there. The recently released package [`Voilà`](https://blog.jupyter.org/and-voil%C3%A0-f6a2c08a4a93) grants that wish, somewhat.
+
+Here is an introduction to the package at SciPy 2019:
+
+<br>
+
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/VtchVpoSdoQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<br>
+
+While interactive widgets like dropdown menus and sliders can be added to the dashboard, as you can do in Streamlit and Plotly Dash, using the [`ipywidgets`](https://ipywidgets.readthedocs.io/en/latest/) library, I have personally found the syntax much less clear and not as many tutorials/help pages available to get a newcomer started. In addition, as Voilà is still in very early stages of development, the resulting dashboard/app looks rather barebones as compared to Dash. [Here](https://variable-importance.herokuapp.com/) is an "learning dashboard" that I had made using Voilà to introduce various model-agnostic approaches to calculate feature importance, for comparison with the [sales dashboard](https://biz-dash-app.herokuapp.com/) made with Dash. 
+
+Nevertheless, as mentioned above, one strength of Jupyter notebooks is the ability to use other language kernels. Any language that is supported by a Jupyter kernel can be used to create a Voilà app, so for projects where that is needed, this would be the package for you.
+
+</div>
+</div>
+</div>
+
+<br>
+
+<hr>
+
+<br>
+
+Taken together, it is really an exciting time for finally being able to communicate/present your Python data science projects in style. This post will be updated as new features and packages become available, so please check back once in a while! :)
+
+
+
+ 
+

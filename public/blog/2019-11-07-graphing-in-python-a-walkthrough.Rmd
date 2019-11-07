@@ -1,0 +1,125 @@
+---
+title: Graphing in Python - a walkthrough
+author: ''
+date: '2019-11-07'
+slug: graphing-in-python-a-walkthrough
+categories:
+  - Visualizations
+tags: []
+type: "post"
+image: images/post/python_graphing.png
+---
+
+<br>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link
+  rel="stylesheet"
+  href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+</head>
+<body>
+
+<body data-spy="scroll" data-target="#toc"> 
+<div class="container">
+<div class="row">
+<!-- sidebar, which will move to the top on a small screen -->
+<div class="col-sm-3">
+<nav id="toc" data-toggle="toc" class="sticky-top" style='padding-top:40px'></nav>
+</div>
+<!-- main content area -->
+<div class="col-sm-9">
+
+```{r, echo=F}
+library(reticulate)
+use_python('/Users/nancy/miniconda3/bin/python')
+```
+
+## Matplotlib & Seaborn
+
+## Plotly
+
+## Plotnine
+
+One of the strengths of the R language is its very powerful graphing package `ggplot2`, with its distinctive implementation of Leland Wilkinson's Grammar of Graphics. The `Plotnine` package brings this (at least part of it, it seems for now) capability to Python, with very little change to the R syntax. 
+
+Here is a (ever growing) [collection](https://raindrop.io/collection/8766091) of useful links curated by us to get your started with using `Plotnine`.
+
+The brackets around the `ggplot()` function looks strange at first, but it is needed for the signature multi-line `ggplot2` grammer to work:
+
+```{python, message=FALSE, warning=FALSE, out.align='center', out.width='100%'}
+import pandas as pd
+from plotnine import *
+from random import randint
+
+# 100 random numbers
+random_numbers = [randint(1, 100) for p in range(0, 100)]
+
+# Create DataFrame
+df = pd.DataFrame({'number': random_numbers})
+
+# Draw plot
+p = (
+      ggplot(df, aes(x='number')) + 
+          geom_histogram(bins=20, na_rm=True) +
+          ggtitle('Histogram of random numbers') +
+          theme_light()
+                        )
+
+p.draw();
+```
+
+
+If you want to save the plot to file:
+
+```Python
+p.save("output.png")
+```
+
+
+### In Streamlit
+
+And just because I can see myself wanting to use these plots in a Streamlit app:
+
+```python
+import pandas as pd
+import numpy as np
+from plotnine import *
+import streamlit as st
+
+n = 10
+
+df = pd.DataFrame({'x': np.arange(n),
+                   'y': np.arange(n),
+                   'yfit': np.arange(n) + np.tile([-.2, .2], n // 2),
+                   'cat': ['a', 'b'] * (n // 2)})
+
+a = (ggplot(df)
+     + geom_col(aes('x', 'y'))
+     )
+
+fig = a.draw();   ## Needed to remove the "ggplot<#>" message
+
+st.pyplot()
+```
+
+
+## Yellowbrick
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+</body>

@@ -53,25 +53,25 @@ pygmentsStyle = "tango"
   weight = 3
   
   [[menu.main]]
-  name = "Knowledge repo"
-  URL = "blog"
-  weight = 2
+ # name = "Knowledge repo"
+ # URL = "blog"
+ # weight = 2
   
   [[menu.main]]
-  name = "Contact"
+  name = "Contact Us"
   URL = "contact"
   weight = 4
 
   # footer menu
   [[menu.footer]]
-  name = "About"
+  name = "About Us"
   URL = "about/about"
   weight = 3
   
   [[menu.footer]]
-  name = "Knowledge repo"
-  URL = "blog"
-  weight = 3
+  #name = "Knowledge repo"
+  #URL = "blog"
+  #weight = 3
   
   #[[menu.footer]]
   #name = "Contact Us"
@@ -97,7 +97,7 @@ googleAnalitycsID = "Your ID"
 email = "intelligence.refinery@gmail.com"
 location = "Toronto, Canada"
 # copyright
-copyright = "| @2019 [Themefisher](https://themefisher.com) All Rights Reserved |"
+copyright = "|  @2019 Intelligence Refinery  |  All Rights Reserved  |"
 
   # Preloader
   [params.preloader]

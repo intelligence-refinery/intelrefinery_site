@@ -11,5 +11,50 @@
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
+    <item>
+      <title>Graphing in Python - a walkthrough</title>
+      <link>/blog/graphing-in-python-a-walkthrough/</link>
+      <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/graphing-in-python-a-walkthrough/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Free UI and UX resources </title>
+      <link>/blog/ui-and-ux-resources/</link>
+      <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/ui-and-ux-resources/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HTML and CSS snippets to jazz up your site</title>
+      <link>/blog/neat-html-snippets-to-jazz-up-your-site/</link>
+      <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/neat-html-snippets-to-jazz-up-your-site/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Make resume writing fun again </title>
+      <link>/blog/resume-builder-platforms/</link>
+      <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/resume-builder-platforms/</guid>
+      <description>  </description>
+    </item>
+    
+    <item>
+      <title>Going beyond Jupyter notebooks</title>
+      <link>/blog/making-python-apps/</link>
+      <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/making-python-apps/</guid>
+      <description>As useful as they are, and they really are, Jupyter notebooks can feel rather stale after a few years.</description>
+    </item>
+    
   </channel>
 </rss>
