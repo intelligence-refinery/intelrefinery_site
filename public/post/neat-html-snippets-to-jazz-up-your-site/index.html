@@ -87,6 +87,12 @@
           </li>
           
           
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/contact">Contact</a>
+          </li>
+          
+          
         </ul>
 
         
@@ -113,11 +119,11 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 mx-auto">
-        <h2 data-toc-skip>HTML snippets to jazz up your site</h2>
+        <h2 data-toc-skip>HTML and CSS snippets to jazz up your site</h2>
         <div class="mb-3"> <span
             class="border-bottom border-primary px-2 mx-1"></span>
           <span>November 06 2019</span></div>
-        <center><img src="/images/post/html_snippets.png" class="img-fluid w-75 mb-4" alt="HTML snippets to jazz up your site"></center>
+        <center><img src="/images/post/html_snippets.png" class="img-fluid w-75 mb-4" alt="HTML and CSS snippets to jazz up your site"></center>
         <div class="content mb-5">
           
 
@@ -147,8 +153,7 @@
 <!-- main content area -->
 <div class="col-sm-10">
 <h2 id="tabs">Tabs</h2>
-<p>Tabs are a great way to save on space:</p>
-<p>For example:</p>
+<p>Tabs are a great way to display information that you might want to compare side-by-side. The horizontal layout also helps to save on space. I always opt for the Bootstrap tabsets, as they are very easy and consistent to implement:</p>
 <p><br></p>
 <div class="container">
 <!-- Nav tabs -->
@@ -270,6 +275,31 @@ Tab 3 content
 <p>If there are headings that you do not want to be included in the outline, you can change the header HTML tag, like <code>&lt;h2&gt;</code>, to <code>&lt;h2 data-toc-skip&gt;</code>.</p>
 <p><br></p>
 <h2 id="style-code-blocks">Style code blocks</h2>
+<p>I love the ability to use both Python and R code in a single Rmarkdown post on Blogdown sites. With that, it would be nice to be able to easily visually distinguish Python and R code blocks. Here are the CSS stylings that I use in my sites:</p>
+<pre class="css"><code>code{                /* Base styling for all code blocks */
+  padding: 3px 5px;
+  background: #ffffff; 
+  border: 1px solid $border-color;
+  border-radius: 3px;
+  color: $text-color-dark;
+}
+
+.python {              /* This can be any other language, ex. R, HTML, CSS */
+  background: #ffffff; 
+  border-color:  #F6B156;
+  border-style: dotted;
+  page-break-inside: avoid;
+  font-family: monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em 1.5em;
+  display: block;
+  word-wrap: break-word;
+}</code></pre>
+<p><br></p>
 </div>
 </div>
 </div>
