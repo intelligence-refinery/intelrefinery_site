@@ -1,5 +1,5 @@
 ######################## default configuration ####################
-baseURL = "https://examplesite.com"
+baseURL = "https://intelrefinery.netlify.com"
 languageCode = "en-us"
 title = "Intelligence Refinery"
 theme = "liva-hugo"
