@@ -2,8 +2,12 @@
 date: "2019-10-29T13:49:23+06:00"
 description: this is meta description
 draft: false
-title: Get In Touch
+title: We love to hear from you!
 type: contact
 ---
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+<br>
+
+Have any comments, suggestions or questions? Feel free to send them our way! 
+
+<br>
