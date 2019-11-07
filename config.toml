@@ -122,23 +122,20 @@ content = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam non
 
 ############################# social site ########################
 
+[[params.social]]
+title = "github"
+icon = "ti-github" # themify icon : https://themify.me/themify-icons
+link = "#"
+
 
 [[params.social]]
 title = "twitter"
 icon = "ti-twitter-alt" # themify icon : https://themify.me/themify-icons
 link = "https://twitter.com/IntelRefinery"
 
+
 [[params.social]]
-title = "tumblr
+title = "tumblr"
 icon = "ti-tumblr" # themify icon : https://themify.me/themify-icons
 link = "#"
 
-[[params.social]]
-title = "github"
-icon = "ti-github" # themify icon : https://themify.me/themify-icons
-link = "#"
-
-[[params.social]]
-title = "linkedin"
-icon = "ti-linkedin" # themify icon : https://themify.me/themify-icons
-link = "#"
