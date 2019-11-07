@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Job search on Intelligence Refinery</title>
-    <link>https://intelrefinery.netlify.com/tags/job-search/</link>
+    <link>/tags/job-search/</link>
     <description>Recent content in Job search on Intelligence Refinery</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 06 Nov 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://intelrefinery.netlify.com/tags/job-search/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/job-search/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Make resume writing fun again </title>
-      <link>https://intelrefinery.netlify.com/post/resume-builder-platforms/</link>
+      <link>/post/resume-builder-platforms/</link>
       <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://intelrefinery.netlify.com/post/resume-builder-platforms/</guid>
+      <guid>/post/resume-builder-platforms/</guid>
       <description>  </description>
     </item>
     
