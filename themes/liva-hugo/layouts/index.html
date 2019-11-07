@@ -15,7 +15,7 @@
           <div class="media-body">
             <div class="mb-3"> <span
                 class="border-bottom border-primary px-2 mx-1"></span>
-              <span>{{ .PublishDate.Format "Updated on Jan 02 2006" }}</span></div>
+              <span>{{ .PublishDate.Format "Updated Jan 02 2006" }}</span></div>
             <a href="{{ .Permalink }}" class="h5 d-block mb-3">{{ .Title | markdownify }}</a>
             <a href="{{ .Permalink }}" class="btn btn-outline-primary">read more</a>
           </div>
@@ -48,7 +48,7 @@
                 <a href="{{ .Permalink }}" class="h5 d-block my-3">{{ .Title | markdownify }}</a>
                 <div class="mb-3"><span
                     class="border-bottom border-primary px-2 mx-1"></span>
-                  <span>{{ .PublishDate.Format "Updated on Jan 02 2006" }}</span></div>
+                  <span>{{ .PublishDate.Format "Updated Jan 02 2006" }}</span></div>
                 <a href="{{ .Permalink }}" class="btn btn-outline-primary">read more</a>
               </div>
             </article>
