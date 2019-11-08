@@ -1,5 +1,5 @@
 ---
-title: 'Free UI and UX resources '
+title: 'Handy UI and UX resources '
 author: ''
 date: '2019-11-08'
 categories:
@@ -37,14 +37,26 @@ image: images/post/ui_ux_resources.png
 <!-- main content area -->
 <div class="col-sm-10">
 
+
+Making your own website or app is a great creative outlet. This is a continuously updated repository of free (or reasonably priced) resources for spicing up the UI/UX:
+
 ## Illustrations
 
- For those of us who are utterly not artistically inclined, jazz up landing pages and blog posts with these fantastic free illustration. Many of the images you see on this site are taken from these sites:
+For those of us who are utterly not artistically inclined, jazz up landing pages and blog posts with these fantastic free illustration. Many of the images you see on this site are taken from these sites:
 
 <iframe src="https://raindrop.io/collection/8774333" style="border:0px #ffffff none;" name="myiFrame"  scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="700px" width="100%" allowfullscreen></iframe>
 
+<br>
 
-‣
+## Icons & Glyphs
+
+Pepper these through out to keep things interesting:
+
+<iframe src="https://raindrop.io/collection/8775198" style="border:0px #ffffff none;" name="myiFrame"  scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="700px" width="100%" allowfullscreen></iframe>
+
+
+
+
 
 </div>
 </div>
