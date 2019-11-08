@@ -119,11 +119,11 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 mx-auto">
-        <h2 data-toc-skip>Graphing in Python - a walkthrough</h2>
+        <h2 data-toc-skip>Make job hunting fun again (kind of)</h2>
         <div class="mb-3"> <span
             class="border-bottom border-primary px-2 mx-1"></span>
-          <span>November 07 2019</span></div>
-        <center><img src="../../images/post/python_graphing.png" class="img-fluid w-75 mb-4" alt="Graphing in Python - a walkthrough"></center>
+          <span>November 08 2019</span></div>
+        <center><img src="../../images/post/resume_makers.png" class="img-fluid w-75 mb-4" alt="Make job hunting fun again (kind of)"></center>
         <div class="content mb-5">
           
 
@@ -149,136 +149,20 @@
 <div class="container">
 <div class="row">
 <!-- sidebar, which will move to the top on a small screen -->
-<div class="col-sm-3">
+<div class="col-sm-2">
 <p><nav id="toc" data-toggle="toc" class="sticky-top" style='padding-top:40px'></nav></p>
 </div>
 <!-- main content area -->
-<div class="col-sm-9">
-<h2 id="matplotlib">Matplotlib</h2>
-<h3 id="create-single-plot">Create single plot</h3>
-<p>The <code>figure</code> object holds all subplots and other plot elements inside it. A <code>figure</code> object can have one or more subplots inside it called <code>axes</code>, arranged in rows and columns. Every figure has at least one axes. The <code>axes</code> objects have no relation to the x- or y-axis.</p>
-<p>Matplotlib (version &gt;= 1.4) has a range of styles available for the plots. Yan Holtz of the <a href="https://python-graph-gallery.com/199-matplotlib-style-sheets/">Python Graph Gallery</a> has made a nice panel view of all of them:</p>
-<figure>
-<center>
-<img src="https://python-graph-gallery.com/wp-content/uploads/199_Matplotlib_style_sheet.png" alt="Matplotlib styles" />
-</center>
-</figure>
-<pre class="python"><code>## Import libraries
-import matplotlib.pyplot as plt
-
-## Set style
-plt.style.use(&#39;seaborn-ticks&#39;)   
-
-## Initiate figure
-fig, ax = plt.subplots(figsize=(8, 3))
-
-## Create lot
-plt.plot([1,2,3,4,5], [1,2,3,4,10], &#39;go&#39;, label=&#39;GreenDots&#39;)  # green dots
-plt.plot([1,2,3,4,5], [2,3,4,5,11], &#39;b*&#39;, label=&#39;Bluestars&#39;)  # blue stars
-
-## Label plot
-plt.title(&#39;A Simple Scatterplot&#39;, fontsize=20) 
-
-plt.xlabel(&#39;O&#39;, fontsize=18)
-plt.ylabel(&#39;Y&#39;, fontsize=18)
-
-plt.xlim([0, 6])</code></pre>
-<pre><code>## (0, 6)</code></pre>
-<pre class="python"><code>plt.ylim([0, 12])</code></pre>
-<pre><code>## (0, 12)</code></pre>
-<pre class="python"><code>plt.tick_params(axis=&#39;both&#39;, which=&#39;major&#39;, labelsize=14)
-
-## Legend
-## &#39;best&#39; prevents legend from overlapping with plot elements
-#plt.legend(title=&#39;Group&#39;, loc=&#39;best&#39;, fontsize=12)
-ax.legend(title=&quot;Legend Title&quot;, fontsize=6, title_fontsize=6)
-
-
-## Show plot
-plt.show()</code></pre>
-<p><img src="../../post/2019-11-07-graphing-in-python-a-walkthrough_files/figure-html/unnamed-chunk-2-1.png" width="100%" /></p>
-<h3 id="create-subplots">Create subplots</h3>
-<p>Initiate grid</p>
-<pre class="python"><code>## Set up subplot grid
-fig, axes = plt.subplots(nrows = 9, ncols = 2,
-                         sharex = False, sharey = False,
-                         figsize=(8, 15))
-                         </code></pre>
-<h4 id="with-a-for-loop"><strong>With a for loop</strong></h4>
-<p>To delete a blank subplot:</p>
-<pre class="python"><code>fig.subplots_adjust(top=0.92, wspace=0.2, hspace=0.3)
-
-plt.tight_layout()
-
-fig.delaxes(axes[8][1])                         </code></pre>
-<h2 id="seaborn">Seaborn</h2>
-<h2 id="plotly">Plotly</h2>
-<p><code>Plotly</code> does not need much introduction, as it is now very widely used to create interactive plots in both Python and R.</p>
-<h3>
-<font size="5">Plotting</font>
-</h3>
-<p>For a while, one major drawback of <code>Plotly</code> is its, in my opinion, rather inconvenient syntax, where the source data needs to be passed in as arrays even though most of us want to be able to plot data directly from dataframes. <code>cufflinks</code> package, which bridges <code>pandas</code> and <code>Plotly</code>, the release of <code>Plotly Express</code></p>
-<h3>
-<font size="5">Styling</font>
-</h3>
-<h2 id="plotnine">Plotnine</h2>
-<p>One of the strengths of the R language is its very powerful graphing package <code>ggplot2</code>, with its distinctive implementation of Leland Wilkinson’s <em>Grammar of Graphics</em>. The <code>Plotnine</code> package brings this (at least part of it, it seems for now) capability to Python, with very little change to the R syntax. Here is a (ever growing) <a href="https://raindrop.io/collection/8766091">collection</a> of useful links curated by us to get your started with using <code>Plotnine</code>.</p>
-<p>The brackets around the <code>ggplot()</code> function call looks strange at first, but it is needed for the signature multi-line <code>ggplot2</code> grammer to work:</p>
-<pre class="python"><code>## Import libraries
-import pandas as pd
-from plotnine import *
-from random import randint
-
-# Generate dataset
-random_numbers = [randint(1, 100) for p in range(0, 100)]
-
-df = pd.DataFrame({&#39;number&#39;: random_numbers})
-
-# Draw plot
-p = (
-      ggplot(df, aes(x=&#39;number&#39;)) + 
-          geom_histogram(bins=20, na_rm=True) +
-          ggtitle(&#39;Histogram of random numbers&#39;) +
-          theme_light()
-                        )
-
-## Display plot
-p.draw();</code></pre>
-<p><img src="../../post/2019-11-07-graphing-in-python-a-walkthrough_files/figure-html/unnamed-chunk-5-1.png" width="100%" /></p>
-<p>If you want to save the plot to file:</p>
-<pre class="python"><code>p.save(&quot;output.png&quot;)</code></pre>
-<p>And just because I can see myself wanting to use these plots in a Streamlit app, here is a working template:</p>
-<pre class="python"><code>import pandas as pd
-import numpy as np
-from plotnine import *
-import streamlit as st
-
-n = 10
-
-df = pd.DataFrame({&#39;x&#39;: np.arange(n),
-                   &#39;y&#39;: np.arange(n),
-                   &#39;yfit&#39;: np.arange(n) + np.tile([-.2, .2], n // 2),
-                   &#39;cat&#39;: [&#39;a&#39;, &#39;b&#39;] * (n // 2)})
-
-a = (
-      ggplot(df) +
-        geom_col(aes(&#39;x&#39;, &#39;y&#39;))
-                               )
-
-fig = a.draw();   ## Needed to remove the &quot;ggplot&lt;#&gt;&quot; message
-
-st.pyplot()</code></pre>
-<h2 id="yellowbrick">Yellowbrick</h2>
-<pre class="r"><code>x &lt;- 7
-
-y &lt;- 9
-
-x + y</code></pre>
-<pre><code>## [1] 16</code></pre>
-<pre class="r"><code>o = c(&#39;hello&#39;, &#39;1&#39;, &#39;2&#39;)
-
-print(o)</code></pre>
-<pre><code>## [1] &quot;hello&quot; &quot;1&quot;     &quot;2&quot;</code></pre>
+<div class="col-sm-10">
+<p>There may exist some people in this world who enjoy job hunting, but we have not met one of them yet. As data scientist/developer jobs are becoming more and more popular, it is all the more important to know how to keep track of the most interesting opportunity and make your application to stand out. Here are a continuously updating suite of tools and services that we have tried or want to try for getting that next job.</p>
+<h2 id="resumes">Resumes</h2>
+<p>One way to get yourself to stop putting off writing or updating your resume is make doing it fun and attractive. Remember the good old days of fiddling with Microsoft Word margins to get that two-column look just right? In recent years, almost too many online resume template/building platforms have popped up to keep track of. Here we have a collection of such platforms that offer at least some level of free services.</p>
+<p>For creating the “official” resume to be send out, our favourites are <a href="https://www.cakeresume.com/">CakeResume</a> and <a href="https://flowcv.io/">Flow CV</a>, as they offer the most innovative interfaces, generous free tiers and just the right amount of flexibility. For something a bit different, <a href="https://qwilr.com/resume-builder/index.html">Qwilir</a> offers templates to create a single-page web document to display the most salient points of your resume, which can be linked as part of a professional portfolio. Nevertheless, as everyone’s resume needs and aesthetic sensibilities differ, it might be worthwhile to look through each of the links below to find one that you particularly like.</p>
+<p><br></p>
+<iframe src="https://raindrop.io/collection/8775411" style="border:0px #ffffff none;" name="myiFrame" scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="600px" width="100%" allowfullscreen>
+</iframe>
+<p><br></p>
+<p>Finally, we have not tried it yet, but <a href="https://resumeworded.com/data-science-resumes">Resume Worded</a> offers a free AI-powered review of your data science resume to check for important key words.</p>
 </div>
 </div>
 </div>
