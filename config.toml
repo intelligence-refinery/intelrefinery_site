@@ -137,10 +137,5 @@ link = "https://twitter.com/IntelRefinery"
 [[params.social]]
 title = "tumblr"
 icon = "ti-tumblr" # themify icon : https://themify.me/themify-icons
-link = "#"
-
-[[params.social]]
-title = "portfolio"
-icon = "ti-folder" # themify icon : https://themify.me/themify-icons
-link = "https://nancychelaru.rbind.io"
-
+link = "https://intelrefinery.tumblr.com/"
+ 
