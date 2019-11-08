@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html lang="en-us"><head>
+<html lang="en-us"><link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/styles/default.min.css">
+
+<head>
   <meta charset="utf-8">
+  
   <title>Intelligence Refinery</title>
 
   <!-- mobile responsive meta -->
@@ -128,7 +132,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+-->
 <link
   rel="stylesheet"
   href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css"
@@ -150,30 +156,21 @@
 <div class="col-sm-9">
 <h2 id="matplotlib">Matplotlib</h2>
 <h3 id="create-single-plot">Create single plot</h3>
-<ul>
-<li>The <code>figure</code> object holds all subplots and other plot elements inside it
-<ul>
-<li>A <code>figure</code> can have one or more subplots inside it called <code>axes</code>, arranged in rows and columns.</li>
-<li>Every figure has at least one axes</li>
-<li>Not related to X- or Y-axis</li>
-</ul></li>
-</ul>
+<p>The <code>figure</code> object holds all subplots and other plot elements inside it. A <code>figure</code> object can have one or more subplots inside it called <code>axes</code>, arranged in rows and columns. Every figure has at least one axes. The <code>axes</code> objects have no relation to the x- or y-axis.</p>
+<p>Matplotlib (version &gt;= 1.4) has a range of styles available for the plots. Yan Holtz of the <a href="https://python-graph-gallery.com/199-matplotlib-style-sheets/">Python Graph Gallery</a> has made a nice panel view of all of them:</p>
 <figure>
 <center>
 <img src="https://python-graph-gallery.com/wp-content/uploads/199_Matplotlib_style_sheet.png" alt="Matplotlib styles" />
 </center>
-<figcaption>
-Image credit: <a href="https://python-graph-gallery.com/199-matplotlib-style-sheets/" class="uri">https://python-graph-gallery.com/199-matplotlib-style-sheets/</a>
-</figcaption>
 </figure>
 <pre class="python"><code>## Import libraries
 import matplotlib.pyplot as plt
 
 ## Set style
-plt.style.use(&#39;seaborn-ticks&#39;)    ## Matplotlib version &gt;= 1.4 to use this
+plt.style.use(&#39;seaborn-ticks&#39;)   
 
-## Set figure size
-plt.figure(figsize=(10,7))    ## Set as (width, height)
+## Initiate figure
+fig, ax = plt.subplots(figsize=(8, 3))
 
 ## Create lot
 plt.plot([1,2,3,4,5], [1,2,3,4,10], &#39;go&#39;, label=&#39;GreenDots&#39;)  # green dots
@@ -192,7 +189,10 @@ plt.xlim([0, 6])</code></pre>
 <pre class="python"><code>plt.tick_params(axis=&#39;both&#39;, which=&#39;major&#39;, labelsize=14)
 
 ## Legend
-plt.legend(loc=&#39;best&#39;, fontsize=16) ## &#39;best&#39; prevents legend from overlapping with plot elements
+## &#39;best&#39; prevents legend from overlapping with plot elements
+#plt.legend(title=&#39;Group&#39;, loc=&#39;best&#39;, fontsize=12)
+ax.legend(title=&quot;Legend Title&quot;, fontsize=6, title_fontsize=6)
+
 
 ## Show plot
 plt.show()</code></pre>
@@ -282,6 +282,13 @@ st.pyplot()</code></pre>
     </div>
   </div>
 </section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/highlight.min.js"></script>
+
+<script>
+hljs.configure({languages: []});
+hljs.initHighlightingOnLoad();
+</script>
 
 
 

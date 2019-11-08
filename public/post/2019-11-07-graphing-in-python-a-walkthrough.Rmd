@@ -15,7 +15,10 @@ image: images/post/python_graphing.png
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+-->
+
 <link
   rel="stylesheet"
   href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css"
@@ -48,14 +51,13 @@ use_python('/Users/nancy/miniconda3/bin/python')
 
 ### Create single plot
 
-- The `figure` object holds all subplots and other plot elements inside it
-  - A `figure` can have one or more subplots inside it called `axes`, arranged in rows and columns. 
-  - Every figure has at least one axes
-  - Not related to X- or Y-axis
+The `figure` object holds all subplots and other plot elements inside it. A `figure` object can have one or more subplots inside it called `axes`, arranged in rows and columns. Every figure has at least one axes. The `axes` objects have no relation to the x- or y-axis.
+
+
+Matplotlib (version >= 1.4) has a range of styles available for the plots. Yan Holtz of the [Python Graph Gallery](https://python-graph-gallery.com/199-matplotlib-style-sheets/) has made a nice panel view of all of them:
 
 <figure>
 <center><img src="https://python-graph-gallery.com/wp-content/uploads/199_Matplotlib_style_sheet.png" alt="Matplotlib styles" /></center>
-<figcaption>Image credit: https://python-graph-gallery.com/199-matplotlib-style-sheets/</figcaption>
 </figure>
 
 
@@ -64,10 +66,10 @@ use_python('/Users/nancy/miniconda3/bin/python')
 import matplotlib.pyplot as plt
 
 ## Set style
-plt.style.use('seaborn-ticks')    ## Matplotlib version >= 1.4 to use this
+plt.style.use('seaborn-ticks')   
 
-## Set figure size
-plt.figure(figsize=(10,7))    ## Set as (width, height)
+## Initiate figure
+fig, ax = plt.subplots(figsize=(8, 3))
 
 ## Create lot
 plt.plot([1,2,3,4,5], [1,2,3,4,10], 'go', label='GreenDots')  # green dots
@@ -85,7 +87,10 @@ plt.ylim([0, 12])
 plt.tick_params(axis='both', which='major', labelsize=14)
 
 ## Legend
-plt.legend(loc='best', fontsize=16) ## 'best' prevents legend from overlapping with plot elements
+## 'best' prevents legend from overlapping with plot elements
+#plt.legend(title='Group', loc='best', fontsize=12)
+ax.legend(title="Legend Title", fontsize=6, title_fontsize=6)
+
 
 ## Show plot
 plt.show()

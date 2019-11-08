@@ -17,15 +17,25 @@ image: images/post/html_snippets.png
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+-->
+
 <link
   rel="stylesheet"
   href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css"
 />
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+
+
+<style>
+h3 {font-size: 24px;}
+</style>
+
 </head>
 <body>
 
@@ -33,14 +43,17 @@ image: images/post/html_snippets.png
 <div class="container">
 <div class="row">
 <!-- sidebar, which will move to the top on a small screen -->
-<div class="col-sm-2">
+<div class="col-sm-3">
 <nav id="toc" data-toggle="toc" class="sticky-top" style='padding-top:40px'></nav>
 </div>
 <!-- main content area -->
-<div class="col-sm-10">
+<div class="col-sm-9">
 
 
-## Tabs
+
+## Navigation
+
+### Tabs
 
 Tabs are a great way to display information that you might want to compare side-by-side. The horizontal layout also helps to save on space. I always opt for the Bootstrap tabsets, as they are very easy and consistent to implement:
 
@@ -131,10 +144,9 @@ Tab 3 content
 
 <br>
 
- 
 
 
-## Floating page outline
+### Floating outline
 
 When the page has a lot of content, it is very helpful to include a floating table of contents on the side of the page that shows the reader where they are. You can see an example of this on the left!
 
@@ -146,7 +158,6 @@ After experimenting with a few options, I found that the steps outlined [here](h
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link
   rel="stylesheet"
   href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css"
@@ -182,7 +193,47 @@ If there are headings that you do not want to be included in the outline, you ca
 
 <br>
 
-## Style code blocks
+
+## Text elements
+
+### Bullet list 
+
+```html
+<ul style="list-style-type:circle;">
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ul>
+```
+
+<br>
+
+> fdf
+
+> jfsdf
+
+> fjsdf
+
+ 
+
+## Styling 
+
+### Font size 
+
+
+
+```HTML
+<font size="+2">This is bigger text.</font>
+```  
+
+Or, 
+
+```HTML
+<font size="1">This is really tiny text.</font>
+```
+
+
+### Color code blocks 
 
 I love the ability to use both Python and R code in a single Rmarkdown post on Blogdown sites. With that, it would be nice to be able to easily visually distinguish Python and R code blocks. Here are the CSS stylings that I use in my sites:
 
@@ -216,6 +267,8 @@ code{                /* Base styling for all code blocks */
 <br>
 
 
+
+## Misc.
 
 
 
