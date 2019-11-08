@@ -49,7 +49,7 @@ relativeURLs = true
   # main menu
   [[menu.main]]
   name = "About"
-  URL = "about"
+  URL = "about/about"
   weight = 3
   
   [[menu.main]]
@@ -65,7 +65,7 @@ relativeURLs = true
   # footer menu
   [[menu.footer]]
   name = "About Us"
-  URL = "about"
+  URL = "about/about"
   weight = 3
   
   [[menu.footer]]
