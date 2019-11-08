@@ -44,7 +44,7 @@ use_python('/Users/nancy/miniconda3/bin/python')
 
 
 
-## Matplotlib & Seaborn
+## Matplotlib  
 
 ### Create single plot
 
@@ -53,8 +53,13 @@ use_python('/Users/nancy/miniconda3/bin/python')
   - Every figure has at least one axes
   - Not related to X- or Y-axis
 
- 
-```{python out.align='center', out.width='100%'}
+<figure>
+<center><img src="https://python-graph-gallery.com/wp-content/uploads/199_Matplotlib_style_sheet.png" alt="Matplotlib styles" /></center>
+<figcaption>Image credit: https://python-graph-gallery.com/199-matplotlib-style-sheets/</figcaption>
+</figure>
+
+
+```{python, out.align='center', out.width='100%'}
 ## Import libraries
 import matplotlib.pyplot as plt
 
@@ -90,7 +95,7 @@ plt.show()
 
 ### Create subplots
 
-#### For loop
+Initiate grid 
 
 ```{python}
 ## Set up subplot grid
@@ -98,17 +103,26 @@ fig, axes = plt.subplots(nrows = 9, ncols = 2,
                          sharex = False, sharey = False,
                          figsize=(8, 15))
                          
-fig.subplots_adjust(top=0.92, wspace=0.2, hspace=0.3)
 
-plt.tight_layout()
 ```
+
+#### **With a for loop**
+
+
 
 
 To delete a blank subplot:
 
 ```{python}
+fig.subplots_adjust(top=0.92, wspace=0.2, hspace=0.3)
+
+plt.tight_layout()
+
 fig.delaxes(axes[8][1])                         
 ```                                         
+
+## Seaborn
+
 
 
 ## Plotly

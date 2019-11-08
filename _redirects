@@ -1,6 +1,7 @@
 # These rules will change if you change your site’s custom domains or HTTPS 
 # settings Redirect default Netlify subdomain to primary domain
-https://intelrefinery.netlify.com/ https://www.intelligencerefinery.io/
+https://intelrefinery.netlify.com/  https://www.intelligencerefinery.io/
 
-https://intelrefinery.netlify.com/blog/ https://www.intelligencerefinery.io/blog
+
+https://intelrefinery.netlify.com/about/about/ https://www.intelligencerefinery.io/about
 

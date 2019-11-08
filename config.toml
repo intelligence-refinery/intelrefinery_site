@@ -1,5 +1,5 @@
 ######################## default configuration ####################
-baseURL = "https://intelrefinery.netlify.com"
+baseURL = "https://intelligencerefinery.io"
 languageCode = "en-us"
 title = "Intelligence Refinery"
 theme = "liva-hugo"
@@ -49,7 +49,7 @@ pygmentsStyle = "tango"
   # main menu
   [[menu.main]]
   name = "About"
-  URL = "about/about"
+  URL = "about"
   weight = 3
   
   [[menu.main]]
@@ -65,7 +65,7 @@ pygmentsStyle = "tango"
   # footer menu
   [[menu.footer]]
   name = "About Us"
-  URL = "about/about"
+  URL = "about"
   weight = 3
   
   [[menu.footer]]
