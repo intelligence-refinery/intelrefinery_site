@@ -57,6 +57,15 @@
     </item>
     
     <item>
+      <title>Version control - Git handbook</title>
+      <link>/post/version-control-git-handbook/</link>
+      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/version-control-git-handbook/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Graphing in Python - A walkthrough</title>
       <link>/post/graphing-in-python-a-walkthrough/</link>
       <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
