@@ -1,5 +1,5 @@
 ######################## default configuration ####################
-baseURL = "https://intelligencerefinery.io"
+baseURL = "https://intelrefinery.netlify.com"
 languageCode = "en-us"
 title = "Intelligence Refinery"
 theme = "liva-hugo"
