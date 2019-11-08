@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>exPanDaR on Intelligence Refinery</title>
+    <link>/tags/expandar/</link>
+    <description>Recent content in exPanDaR on Intelligence Refinery</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 08 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/expandar/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fast exploratory data analysis for when you just can&#39;t wait</title>
+      <link>/post/fast-exploratory-data-analysis-for-the-impatient/</link>
+      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/fast-exploratory-data-analysis-for-the-impatient/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

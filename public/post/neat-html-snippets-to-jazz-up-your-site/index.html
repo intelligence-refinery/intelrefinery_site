@@ -287,7 +287,7 @@ Tab 3 content
 <pre class="html"><code>&lt;font size=&quot;1&quot;&gt;This is really tiny text.&lt;/font&gt;</code></pre>
 <p><br></p>
 <h3 id="code-blocks">Code blocks</h3>
-<p>I love the ability to use both Python and R code in a single Rmarkdown post on Blogdown sites. With that, it would be nice to be able to easily visually distinguish Python and R code blocks. Here are the CSS stylings that I use in my sites:</p>
+<p>We love the ability to use both Python and R code in a single Rmarkdown post on Blogdown sites. With that, it would be nice to be able to easily visually distinguish Python and R code blocks. Here are some CSS stylings used on this site:</p>
 <pre class="css"><code>code{                /* Base styling for all code blocks */
   padding: 3px 5px;
   background: #ffffff; 
@@ -296,7 +296,7 @@ Tab 3 content
   color: $text-color-dark;
 }
 
-.python {              /* This can be any other language, ex. R, HTML, CSS */
+.python {              
   background: #ffffff; 
   border-color:  #F6B156;
   border-style: dotted;
@@ -310,6 +310,22 @@ Tab 3 content
   padding: 1em 1.5em;
   display: block;
   word-wrap: break-word;
+}
+
+.r {
+    background: #ffffff; 
+    border-color:  #03d944;
+    border-style: dotted;
+    page-break-inside: avoid;
+    font-family: monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    overflow: auto;
+    padding: 1em 1.5em;
+    display: block;
+    word-wrap: break-word;
 }</code></pre>
 </div>
 </div>
@@ -358,16 +374,19 @@ hljs.initHighlightingOnLoad();
         <h6 data-toc-skip class="mb-4">Topics</h6>
         <ul class="list-unstyled">
           <li class="mb-3"><a class="text-dark"
+              href="../../categories/analytics-in-action">Analytics in action</a>
+          </li>
+          <li class="mb-3"><a class="text-dark"
               href="../../categories/careers">Careers</a>
+          </li>
+          <li class="mb-3"><a class="text-dark"
+              href="../../categories/data-science-toolbox">Data science toolbox</a>
           </li>
           <li class="mb-3"><a class="text-dark"
               href="../../categories/package-roundup">Package roundup</a>
           </li>
           <li class="mb-3"><a class="text-dark"
               href="../../categories/resources">Resources</a>
-          </li>
-          <li class="mb-3"><a class="text-dark"
-              href="../../categories/visualizations">Visualizations</a>
           </li>
           <li class="mb-3"><a class="text-dark"
               href="../../categories/web-development">Web development</a>

@@ -12,6 +12,33 @@
     
     
     <item>
+      <title>Business analytics microlearning series</title>
+      <link>/post/data-science-for-business/</link>
+      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/data-science-for-business/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Exploring variable importance </title>
+      <link>/post/exploring-variable-importance/</link>
+      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/exploring-variable-importance/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Fast exploratory data analysis for when you just can&#39;t wait</title>
+      <link>/post/fast-exploratory-data-analysis-for-the-impatient/</link>
+      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/fast-exploratory-data-analysis-for-the-impatient/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Handy UI and UX resources </title>
       <link>/post/ui-and-ux-resources/</link>
       <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
@@ -30,7 +57,7 @@
     </item>
     
     <item>
-      <title>Graphing in Python - a walkthrough</title>
+      <title>Graphing in Python - A walkthrough</title>
       <link>/post/graphing-in-python-a-walkthrough/</link>
       <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
       

@@ -12,6 +12,24 @@
     
     
     <item>
+      <title>Association rule mining</title>
+      <link>/tags/association-rule-mining/</link>
+      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/association-rule-mining/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>EDA</title>
+      <link>/tags/eda/</link>
+      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/eda/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Job search</title>
       <link>/tags/job-search/</link>
       <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
@@ -21,11 +39,38 @@
     </item>
     
     <item>
+      <title>Python</title>
+      <link>/tags/python/</link>
+      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>/tags/r/</link>
+      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Resume</title>
       <link>/tags/resume/</link>
       <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/resume/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Survival analysis</title>
+      <link>/tags/survival-analysis/</link>
+      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/survival-analysis/</guid>
       <description></description>
     </item>
     
@@ -57,6 +102,24 @@
     </item>
     
     <item>
+      <title>Variable importance</title>
+      <link>/tags/variable-importance/</link>
+      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/variable-importance/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Visualizations</title>
+      <link>/tags/visualizations/</link>
+      <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/visualizations/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Dash</title>
       <link>/tags/dash/</link>
       <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
@@ -71,15 +134,6 @@
       <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/jupyter/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>/tags/python/</link>
-      <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/python/</guid>
       <description></description>
     </item>
     
