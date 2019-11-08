@@ -122,11 +122,6 @@ content = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam non
 
 ############################# social site ########################
 
-[[params.social]]
-title = "github"
-icon = "ti-github" # themify icon : https://themify.me/themify-icons
-link = "#"
-
 
 [[params.social]]
 title = "twitter"
@@ -138,4 +133,11 @@ link = "https://twitter.com/IntelRefinery"
 title = "tumblr"
 icon = "ti-tumblr" # themify icon : https://themify.me/themify-icons
 link = "https://intelrefinery.tumblr.com/"
+
+
+[[params.social]]
+title = "pinterest"
+icon = "ti-pinterest" # themify icon : https://themify.me/themify-icons
+link = "https://www.pinterest.ca/intelligencerefinery/boards/"
+
  
