@@ -153,11 +153,67 @@
 <!-- main content area -->
 <div class="col-sm-9">
 <h2 id="matplotlib-seaborn">Matplotlib &amp; Seaborn</h2>
+<h3 id="create-single-plot">Create single plot</h3>
+<ul>
+<li>The <code>figure</code> object holds all subplots and other plot elements inside it
+<ul>
+<li>A <code>figure</code> can have one or more subplots inside it called <code>axes</code>, arranged in rows and columns.</li>
+<li>Every figure has at least one axes</li>
+<li>Not related to X- or Y-axis</li>
+</ul></li>
+</ul>
+<pre class="python"><code>## Import libraries
+import matplotlib.pyplot as plt
+
+## Set style
+plt.style.use(&#39;seaborn-ticks&#39;)    ## Matplotlib version &gt;= 1.4 to use this
+
+## Set figure size
+plt.figure(figsize=(10,7))    ## Set as (width, height)
+
+## Create lot
+plt.plot([1,2,3,4,5], [1,2,3,4,10], &#39;go&#39;, label=&#39;GreenDots&#39;)  # green dots
+plt.plot([1,2,3,4,5], [2,3,4,5,11], &#39;b*&#39;, label=&#39;Bluestars&#39;)  # blue stars
+
+## Label plot
+plt.title(&#39;A Simple Scatterplot&#39;, fontsize=20) 
+
+plt.xlabel(&#39;O&#39;, fontsize=18)
+plt.ylabel(&#39;Y&#39;, fontsize=18)
+
+plt.xlim([0, 6])</code></pre>
+<pre><code>## (0, 6)</code></pre>
+<pre class="python"><code>plt.ylim([0, 12])</code></pre>
+<pre><code>## (0, 12)</code></pre>
+<pre class="python"><code>plt.tick_params(axis=&#39;both&#39;, which=&#39;major&#39;, labelsize=14)
+
+## Legend
+plt.legend(loc=&#39;best&#39;, fontsize=16) ## &#39;best&#39; prevents legend from overlapping with plot elements
+
+## Show plot
+plt.show()</code></pre>
+<p><img src="/post/2019-11-07-graphing-in-python-a-walkthrough_files/figure-html/unnamed-chunk-2-1.png" width="100%" /></p>
+<h3 id="create-subplots">Create subplots</h3>
+<h4 id="for-loop">For loop</h4>
+<pre class="python"><code>## Set up subplot grid
+fig, axes = plt.subplots(nrows = 9, ncols = 2,
+                         sharex = False, sharey = False,
+                         figsize=(8, 15))
+                         
+fig.subplots_adjust(top=0.92, wspace=0.2, hspace=0.3)
+
+plt.tight_layout()</code></pre>
+<p>To delete a blank subplot:</p>
+<pre class="python"><code>fig.delaxes(axes[8][1])                         </code></pre>
 <h2 id="plotly">Plotly</h2>
 <p><code>Plotly</code> does not need much introduction, as it is now very widely used to create interactive plots in both Python and R.</p>
-<h3 id="plotting">Plotting</h3>
+<h3>
+<font size="5">Plotting</font>
+</h3>
 <p>For a while, one major drawback of <code>Plotly</code> is its, in my opinion, rather inconvenient syntax, where the source data needs to be passed in as arrays even though most of us want to be able to plot data directly from dataframes. <code>cufflinks</code> package, which bridges <code>pandas</code> and <code>Plotly</code>, the release of <code>Plotly Express</code></p>
-<h3 id="styling">Styling</h3>
+<h3>
+<font size="5">Styling</font>
+</h3>
 <h2 id="plotnine">Plotnine</h2>
 <p>One of the strengths of the R language is its very powerful graphing package <code>ggplot2</code>, with its distinctive implementation of Leland Wilkinson’s <em>Grammar of Graphics</em>. The <code>Plotnine</code> package brings this (at least part of it, it seems for now) capability to Python, with very little change to the R syntax. Here is a (ever growing) <a href="https://raindrop.io/collection/8766091">collection</a> of useful links curated by us to get your started with using <code>Plotnine</code>.</p>
 <p>The brackets around the <code>ggplot()</code> function call looks strange at first, but it is needed for the signature multi-line <code>ggplot2</code> grammer to work:</p>
@@ -181,7 +237,7 @@ p = (
 
 ## Display plot
 p.draw();</code></pre>
-<p><img src="/post/2019-11-07-graphing-in-python-a-walkthrough_files/figure-html/unnamed-chunk-2-1.png" width="100%" /></p>
+<p><img src="/post/2019-11-07-graphing-in-python-a-walkthrough_files/figure-html/unnamed-chunk-5-1.png" width="100%" /></p>
 <p>If you want to save the plot to file:</p>
 <pre class="python"><code>p.save(&quot;output.png&quot;)</code></pre>
 <p>And just because I can see myself wanting to use these plots in a Streamlit app, here is a working template:</p>

@@ -42,19 +42,86 @@ library(reticulate)
 use_python('/Users/nancy/miniconda3/bin/python')
 ```
 
+
+
 ## Matplotlib & Seaborn
+
+### Create single plot
+
+- The `figure` object holds all subplots and other plot elements inside it
+  - A `figure` can have one or more subplots inside it called `axes`, arranged in rows and columns. 
+  - Every figure has at least one axes
+  - Not related to X- or Y-axis
+
+ 
+```{python out.align='center', out.width='100%'}
+## Import libraries
+import matplotlib.pyplot as plt
+
+## Set style
+plt.style.use('seaborn-ticks')    ## Matplotlib version >= 1.4 to use this
+
+## Set figure size
+plt.figure(figsize=(10,7))    ## Set as (width, height)
+
+## Create lot
+plt.plot([1,2,3,4,5], [1,2,3,4,10], 'go', label='GreenDots')  # green dots
+plt.plot([1,2,3,4,5], [2,3,4,5,11], 'b*', label='Bluestars')  # blue stars
+
+## Label plot
+plt.title('A Simple Scatterplot', fontsize=20) 
+
+plt.xlabel('O', fontsize=18)
+plt.ylabel('Y', fontsize=18)
+
+plt.xlim([0, 6])
+plt.ylim([0, 12])
+
+plt.tick_params(axis='both', which='major', labelsize=14)
+
+## Legend
+plt.legend(loc='best', fontsize=16) ## 'best' prevents legend from overlapping with plot elements
+
+## Show plot
+plt.show()
+```
+
+
+
+### Create subplots
+
+#### For loop
+
+```{python}
+## Set up subplot grid
+fig, axes = plt.subplots(nrows = 9, ncols = 2,
+                         sharex = False, sharey = False,
+                         figsize=(8, 15))
+                         
+fig.subplots_adjust(top=0.92, wspace=0.2, hspace=0.3)
+
+plt.tight_layout()
+```
+
+
+To delete a blank subplot:
+
+```{python}
+fig.delaxes(axes[8][1])                         
+```                                         
+
 
 ## Plotly
 
 `Plotly` does not need much introduction, as it is now very widely used to create interactive plots in both Python and R. 
 
 
-### Plotting
+<h3><font size="5">Plotting</font></h3>
 
 For a while, one major drawback of `Plotly` is its, in my opinion, rather inconvenient syntax, where the source data needs to be passed in as arrays even though most of us want to be able to plot data directly from dataframes. `cufflinks` package, which bridges `pandas` and `Plotly`, the release of `Plotly Express` 
 
 
-### Styling
+<h3><font size="5">Styling</font></h3>
 
 
 
