@@ -1,12 +1,12 @@
 ######################## default configuration ####################
-baseURL = "https://intelrefinery.netlify.com"
+baseURL = "https://www.intelligencerefinery.io"
 languageCode = "en-us"
 title = "Intelligence Refinery"
 theme = "liva-hugo"
 summaryLength = "10"
 paginate = 6
 disqusShortname = ""
-pygmentsStyle = "tango"
+relativeURLs = true
 
 [outputs]
   home = ["HTML", "AMP", "RSS", "JSON"]
