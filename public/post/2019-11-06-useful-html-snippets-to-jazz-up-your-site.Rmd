@@ -43,12 +43,13 @@ h3 {font-size: 24px;}
 <div class="container">
 <div class="row">
 <!-- sidebar, which will move to the top on a small screen -->
-<div class="col-sm-3">
+<div class="col-sm-2">
 <nav id="toc" data-toggle="toc" class="sticky-top" style='padding-top:40px'></nav>
 </div>
 <!-- main content area -->
-<div class="col-sm-9">
+<div class="col-sm-10">
 
+Having made a few websites/web apps using Django, Blogdown and Shiny, some HTML and CSS snippets have turned out to be useful time and time again. Not being professional front-end developers, we thought it would probably be a good idea to create an easy-to-reference repository of them for future projects. 
 
 
 ## Navigation
@@ -152,7 +153,6 @@ When the page has a lot of content, it is very helpful to include a floating tab
 
 After experimenting with a few options, I found that the steps outlined [here](https://afeld.github.io/bootstrap-toc/) by Aidan Feldman work most easily and the best for Blogdown sites:
 
-<br> 
 
 ```HTML
 <head>
@@ -194,25 +194,6 @@ If there are headings that you do not want to be included in the outline, you ca
 <br>
 
 
-## Text elements
-
-### Bullet list 
-
-```html
-<ul style="list-style-type:circle;">
-  <li>Coffee</li>
-  <li>Tea</li>
-  <li>Milk</li>
-</ul>
-```
-
-<br>
-
-> fdf
-
-> jfsdf
-
-> fjsdf
 
  
 
@@ -220,20 +201,21 @@ If there are headings that you do not want to be included in the outline, you ca
 
 ### Font size 
 
-
+The font size of specific sections of text can be altered, either by relative change:
 
 ```HTML
 <font size="+2">This is bigger text.</font>
 ```  
 
-Or, 
+Or by setting the absolute size (1-7):
 
 ```HTML
 <font size="1">This is really tiny text.</font>
 ```
 
+<br>
 
-### Color code blocks 
+### Code blocks 
 
 I love the ability to use both Python and R code in a single Rmarkdown post on Blogdown sites. With that, it would be nice to be able to easily visually distinguish Python and R code blocks. Here are the CSS stylings that I use in my sites:
 
@@ -264,12 +246,6 @@ code{                /* Base styling for all code blocks */
 ```
 
  
-<br>
-
-
-
-## Misc.
-
 
 
 
