@@ -208,6 +208,17 @@ st.pyplot()
 
 ## Yellowbrick
 
+```{r}
+x <- 7
+
+y <- 9
+
+x + y
+
+o = c('hello', '1', '2')
+
+print(o)
+```
 
 
 
