@@ -94,7 +94,6 @@
         </div>
         
         
-      <!-- tags
         <br><br>
         <div class="widget">
           <h4 class="widget-title">Tags</h4>
@@ -109,7 +108,6 @@
           {{- end }}
           {{- end }}
         </div>
-      -->
         
 
 
@@ -124,23 +122,6 @@
     </div>
   </div>
   
-  <div class="col-12 mt-5">
-      <!-- tags -->
-    <br><br>
-    <div class="widget">
-      <h4 class="widget-title">Tags</h4>
-      {{- if isset .Site.Taxonomies "tags" }}
-      {{- if not (eq (len .Site.Taxonomies.tags) 0) }}
-      <ul class="list-inline">
-        {{- range $name, $items := .Site.Taxonomies.tags }}
-        <li class="list-inline-item"><a class="d-block p-2 bg-primary text-white"
-            href="{{ "tags/" | relLangURL }}{{ $name | urlize | lower }}">{{ $name | humanize | upper }}</a></li>
-        {{- end }}
-      </ul>
-      {{- end }}
-      {{- end }}
-    </div>
-  </div>
         
 </section>
 <!-- /blog post -->
