@@ -20,7 +20,9 @@
                 <div class="mb-3"><span
                     class="border-bottom border-primary px-2 mx-1"></span>
                   <span>{{ .PublishDate.Format "January 02 2006" }}</span></div>
+                <!--
                 <p class="card-text">{{ .Summary }}</p>
+                -->
                 <a href="{{ .Permalink }}" class="btn btn-outline-primary">read more</a>
               </div>
             </article>
@@ -32,11 +34,13 @@
       <div class="col-lg-4">
         <!-- about -->
         <div class="widget">
+          
+          
           {{ range first 1 (where .Site.RegularPages "Type" "about")}}
           <h4 class="widget-title">{{ .Title | markdownify }}</h4>
           <img src="{{ .Params.Image | absURL }}" alt=""
             class="img-fluid author-thumb-sm d-block mx-auto rounded-circle mb-4">
-          <p>Welcome to Intelligence Refinery!
+            <p>Welcome to Intelligence Refinery!
           
             <br><br>
             
@@ -46,6 +50,7 @@
         </div>
         
         <!-- category -->
+        <br><br>
         <div class="widget">
           <h4 class="widget-title">Category</h4>
           {{- if isset .Site.Taxonomies "categories" }}
@@ -62,6 +67,7 @@
         </div>
         
         <!-- tags -->
+        <br><br>
         <div class="widget">
           <h4 class="widget-title">Tags</h4>
           {{- if isset .Site.Taxonomies "tags" }}
@@ -69,7 +75,7 @@
           <ul class="list-inline">
             {{- range $name, $items := .Site.Taxonomies.tags }}
             <li class="list-inline-item"><a class="d-block p-2 bg-primary text-white"
-                href="{{ "tags/" | relLangURL }}{{ $name | urlize | lower }}">{{ $name | humanize }}</a></li>
+                href="{{ "tags/" | relLangURL }}{{ $name | urlize | lower }}">{{ $name | humanize | upper }}</a></li>
             {{- end }}
           </ul>
           {{- end }}
