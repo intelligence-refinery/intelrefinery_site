@@ -1,6 +1,5 @@
 ---
-title: Business analytics microlearning series
-author: ''
+title: Data science for business
 date: '2019-11-08'
 slug: data-science-for-business
 categories: 

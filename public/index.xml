@@ -6,13 +6,22 @@
     <description>Recent content on Intelligence Refinery</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 08 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 11 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Business analytics microlearning series</title>
+      <title>Be the first to know - package updates and releases</title>
+      <link>/post/stay-in-the-know/</link>
+      <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/stay-in-the-know/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data science for business</title>
       <link>/post/data-science-for-business/</link>
       <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
       

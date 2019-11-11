@@ -1,6 +1,5 @@
 ---
 title: Graphing in Python - A walkthrough
-author: ''
 date: '2019-11-07'
 slug: graphing-in-python-a-walkthrough
 categories:

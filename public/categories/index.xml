@@ -6,10 +6,19 @@
     <description>Recent content in Categories on Intelligence Refinery</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 08 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 11 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Dev handbook</title>
+      <link>/categories/dev-handbook/</link>
+      <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/dev-handbook/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Careers</title>
@@ -26,15 +35,6 @@
       <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>/categories/data-science-toolbox/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Dev handbook</title>
-      <link>/categories/dev-handbook/</link>
-      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/dev-handbook/</guid>
       <description></description>
     </item>
     
