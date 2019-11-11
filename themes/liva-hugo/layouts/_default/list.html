@@ -40,11 +40,7 @@
           <h4 class="widget-title">{{ .Title | markdownify }}</h4>
           <img src="{{ .Params.Image | absURL }}" alt=""
             class="img-fluid author-thumb-sm d-block mx-auto rounded-circle mb-4">
-            <p>Welcome to Intelligence Refinery!
-          
-            <br><br>
-            
-            We are Nancy and Mihai Chelaru, two ex-neuroscientists venturing into this brave new world of data and code.</p>  
+            <p>Welcome to Intelligence Refinery, an ever growing and updating repository of useful tidbits for all things data science and software development!</p>  
 
           {{ end }}
         </div>
@@ -57,9 +53,9 @@
           {{- if not (eq (len .Site.Taxonomies.categories) 0) }}
           <ul class="list-unstyled">
             {{- range $name, $items := .Site.Taxonomies.categories }}
-            <li><a
+            <b><li><a
                 href="{{ "categories/" | relLangURL }}{{ $name | urlize | lower }}">{{ $name | title | humanize }}</a>
-            </li>
+            </li></b>
             {{- end }}
           </ul>
           {{- end }}
@@ -74,8 +70,8 @@
           {{- if not (eq (len .Site.Taxonomies.tags) 0) }}
           <ul class="list-inline">
             {{- range $name, $items := .Site.Taxonomies.tags }}
-            <li class="list-inline-item"><a class="d-block p-2 bg-primary text-white"
-                href="{{ "tags/" | relLangURL }}{{ $name | urlize | lower }}">{{ $name | humanize | upper }}</a></li>
+            <font size="-1"><b><li class="list-inline-item"><a class="d-block p-2 bg-primary text-white"
+                href="{{ "tags/" | relLangURL }}{{ $name | urlize | lower }}">{{ $name | humanize | upper }}</a></li></b></font>
             {{- end }}
           </ul>
           {{- end }}
