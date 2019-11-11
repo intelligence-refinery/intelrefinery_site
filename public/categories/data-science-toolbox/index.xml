@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Business analytics microlearning series</title>
+      <link>/post/data-science-for-business/</link>
+      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/data-science-for-business/</guid>
+      <description>--</description>
+    </item>
+    
+    <item>
       <title>Exploring variable importance </title>
       <link>/post/exploring-variable-importance/</link>
       <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
@@ -36,6 +45,15 @@
       
       <guid>/post/graphing-in-python-a-walkthrough/</guid>
       <description>--</description>
+    </item>
+    
+    <item>
+      <title>Going beyond Jupyter notebooks</title>
+      <link>/post/making-python-apps/</link>
+      <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/making-python-apps/</guid>
+      <description>As useful as they are, and they really are, Jupyter notebooks can feel rather stale after a few years.</description>
     </item>
     
   </channel>
