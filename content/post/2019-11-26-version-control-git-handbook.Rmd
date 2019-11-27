@@ -1,0 +1,66 @@
+---
+title: Version control with Git
+author: ''
+date: '2019-11-26'
+categories:
+  - Dev handbook
+tags:
+  - Git
+slug: version-control-git-handbook
+image: images/post/git.png
+---
+
+<br>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+-->
+
+<link
+  rel="stylesheet"
+  href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+</head>
+<body>
+
+<body data-spy="scroll" data-target="#toc"> 
+<div class="container">
+<div class="row">
+<!-- sidebar, which will move to the top on a small screen -->
+<div class="col-sm-2">
+<nav id="toc" data-toggle="toc" class="sticky-top" style='padding-top:40px'></nav>
+</div>
+<!-- main content area -->
+<div class="col-sm-10">
+
+
+Where do we start with version control? It's a bit finicky, often neglected, but oh-so important. 
+
+One of the key components of building good habits is to make the action easy to do. So here we round up the (usual) cheat sheets and some fun tools that make learning/remembering those git commands a little easier.
+
+## Cheat sheet
+
+Of course, to start us off, the official cheat sheet from Github:
+
+<iframe src="https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf" style="border:0px #ffffff none;" name="myiFrame" scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="900px" width="100%" allowfullscreen></iframe>
+
+
+<br>
+
+## Git Explorer
+
+As promised, here is a fun one:
+
+<iframe src="https://gitexplorer.com/" style="border:0px #ffffff none;" name="myiFrame" scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="900px" width="100%" allowfullscreen></iframe>
+
+</div>
+</div>
+</div>
+</body>

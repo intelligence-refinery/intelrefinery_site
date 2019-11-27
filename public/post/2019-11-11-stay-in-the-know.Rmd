@@ -1,10 +1,15 @@
 ---
-title: 'Be the first to know - package updates and releases'
+title: Keeping up with data science and dev news
 author: ''
 date: '2019-11-11'
-slug: stay-in-the-know
 categories:
   - Dev handbook
-tags: []
+slug: stay-in-the-know
 image: images/post/news.png
 ---
+
+<br>
+
+<iframe src="https://raindrop.io/collection/8805247" style="border:0px #ffffff none;" name="myiFrame"  scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="600px" width="100%" allowfullscreen></iframe>
+
+

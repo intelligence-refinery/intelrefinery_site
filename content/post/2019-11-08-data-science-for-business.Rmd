@@ -44,9 +44,36 @@ image: images/post/business_analytics.png
 <!-- main content area -->
 <div class="col-sm-9">
 
-## Machine learning
 
-<iframe width="100%" height="600" src="https://www.inoreader.com/stream/user/1006275036/tag/Free%20illustrations/view/html?cs=m" frameborder="0" tabindex="-1"></iframe>
+## Getting data
+
+
+## Data wrangling
+
+
+## Analysis  
+### Association rule mining
+
+<iframe src="https://coda.io/embed/W-q1QIbnV-/_sutxU?viewMode=embedplay" width=900 height=500 style="max-width: 100%;" allow="fullscreen"></iframe>
+
+
+
+### RFM analysis
+
+### Survival analysis
+
+### Time-series analysis
+ 
+ 
+### Machine learning
+
+#### Supervised learning
+
+#### Unsupervised learning
+
+## Reporting  
+
+
 
 
 </div>

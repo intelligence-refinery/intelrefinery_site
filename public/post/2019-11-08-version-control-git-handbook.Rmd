@@ -1,11 +1,16 @@
 ---
-title: Version control - Git handbook
+title: Version control with Git
 author: ''
 date: '2019-11-08'
-slug: version-control-git-handbook
 categories:
-  -  Dev handbook
+  - Dev handbook
 tags:
   - Git
+slug: version-control-git-handbook
 image: images/post/git.png
 ---
+
+
+## Git Explorer
+
+<iframe src="https://gitexplorer.com/" style="border:0px #ffffff none;" name="myiFrame" scrolling="yes" frameborder="1" marginheight="0px" marginwidth="0px" height="600px" width="100%" allowfullscreen></iframe>

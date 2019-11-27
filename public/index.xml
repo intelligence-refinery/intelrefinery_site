@@ -6,18 +6,27 @@
     <description>Recent content on Intelligence Refinery</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 27 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Be the first to know - package updates and releases</title>
-      <link>/post/stay-in-the-know/</link>
-      <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
+      <title>Fast exploratory data analysis for when you just can&#39;t wait</title>
+      <link>/post/fast-exploratory-data-analysis-for-the-impatient/</link>
+      <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/stay-in-the-know/</guid>
-      <description></description>
+      <guid>/post/fast-exploratory-data-analysis-for-the-impatient/</guid>
+      <description>--</description>
+    </item>
+    
+    <item>
+      <title>Version control with Git</title>
+      <link>/post/version-control-git-handbook/</link>
+      <pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/version-control-git-handbook/</guid>
+      <description>--</description>
     </item>
     
     <item>
@@ -35,16 +44,7 @@
       <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/exploring-variable-importance/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Fast exploratory data analysis for when you just can&#39;t wait</title>
-      <link>/post/fast-exploratory-data-analysis-for-the-impatient/</link>
-      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/fast-exploratory-data-analysis-for-the-impatient/</guid>
-      <description></description>
+      <description>--</description>
     </item>
     
     <item>
@@ -63,15 +63,6 @@
       
       <guid>/post/job-hunting-tools/</guid>
       <description>--</description>
-    </item>
-    
-    <item>
-      <title>Version control - Git handbook</title>
-      <link>/post/version-control-git-handbook/</link>
-      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/version-control-git-handbook/</guid>
-      <description></description>
     </item>
     
     <item>

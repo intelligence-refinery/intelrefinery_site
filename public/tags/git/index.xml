@@ -6,18 +6,18 @@
     <description>Recent content in Git on Intelligence Refinery</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 08 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/git/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Version control - Git handbook</title>
+      <title>Version control with Git</title>
       <link>/post/version-control-git-handbook/</link>
-      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/version-control-git-handbook/</guid>
-      <description></description>
+      <description>--</description>
     </item>
     
   </channel>
