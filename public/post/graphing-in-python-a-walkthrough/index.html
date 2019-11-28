@@ -155,7 +155,7 @@
 <!-- main content area -->
 <div class="col-sm-10">
 <p>We are always going to need <code>matplotlib</code> and <code>seaborn</code>, but it is so great to see new Python plotting packages popping up in the past few years. In addition to showcasing them here, we will document the little tricks and gotchas that we come across along the way.</p>
-<h2 id="plotly">Plotly</h2>
+<h2 id="plotly-express">Plotly Express</h2>
 <p><code>Plotly</code> does not need much introduction, as it is now very widely used to create interactive plots in both Python and R. For a while, one major drawback of <code>Plotly</code> is its rather inconvenient syntax, where the source data needs to be passed in as arrays even though most of us want to be able to plot data directly from dataframes.</p>
 <p>With the release of Plotly Express with its succinct <code>Seaborn</code>-like one-liner syntax, however, the situation is now much improved. While not all Plotly graphs can be made this way, there is an <a href="https://plot.ly/python-api-reference/plotly.express.html">impressive variety of plots</a> available in the Plotly Express library, including interactive maps.</p>
 <p>One small annoyance is that the legends in graphs made using Plotly Express are cluttered by the column names. Following the useful tip <a href="https://github.com/plotly/plotly_express/issues/36#issuecomment-490108301">here</a>, you can use the <code>.for_each_trace()</code> function call to remove them. For example, here we will replace <code>species=</code> with an empty space:</p>
@@ -166,9 +166,12 @@ iris = px.data.iris()
 fig = px.scatter(iris, 
                  x=&quot;sepal_width&quot;, 
                  y=&quot;sepal_length&quot;).for_each_trace(lambda t: t.update(name=t.name.replace(&quot;species=&quot;,&quot;&quot;)))</code></pre>
+<center>
+<img src="https://i.ibb.co/ySJxLN6/fig1.png" alt="plotly_express" border="0"></a>
+</center>
 <p><br></p>
 <h2 id="yellowbrick">Yellowbrick</h2>
-<p>This <a href="https://www.scikit-yb.org/en/latest/">package</a>, built on top of <code>matplotlib</code>, facilitates visualizing a variety of information from each stage of machine learning workflows. It is a sizable library, and looking through its API is an education in itself.</p>
+<p>This <a href="https://www.scikit-yb.org/en/latest/">package</a>, built on top of <code>matplotlib</code>, facilitates visualizing a variety of information from various stages of machine learning workflows. It is a sizable library, and looking through its API is an education in itself.</p>
 <p><img src='https://www.scikit-yb.org/en/latest/_images/banner.png' width='100%'></p>
 <p>We have not had many chances to use <code>Yellowbrick</code> yet, but are looking forward to being able to delve deeper into this package in the future!</p>
 <p><br></p>

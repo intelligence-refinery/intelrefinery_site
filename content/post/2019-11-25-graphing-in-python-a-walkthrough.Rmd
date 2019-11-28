@@ -52,7 +52,7 @@ We are always going to need `matplotlib` and `seaborn`, but it is so great to se
 
 
 
-## Plotly
+## Plotly Express
 
 `Plotly` does not need much introduction, as it is now very widely used to create interactive plots in both Python and R. For a while, one major drawback of `Plotly` is its rather inconvenient syntax, where the source data needs to be passed in as arrays even though most of us want to be able to plot data directly from dataframes. 
 
@@ -70,11 +70,15 @@ fig = px.scatter(iris,
                  y="sepal_length").for_each_trace(lambda t: t.update(name=t.name.replace("species=","")))
 ```
 
+<center>
+<img src="https://i.ibb.co/ySJxLN6/fig1.png" alt="plotly_express" border="0"></a>
+</center>
+
 <br>
 
 ## Yellowbrick
 
-This [package](https://www.scikit-yb.org/en/latest/), built on top of `matplotlib`, facilitates visualizing a variety of information from each stage of machine learning workflows. It is a sizable library, and looking through its API is an education in itself. 
+This [package](https://www.scikit-yb.org/en/latest/), built on top of `matplotlib`, facilitates visualizing a variety of information from various stages of machine learning workflows. It is a sizable library, and looking through its API is an education in itself. 
 
 <img src='https://www.scikit-yb.org/en/latest/_images/banner.png' width='100%'>
 
