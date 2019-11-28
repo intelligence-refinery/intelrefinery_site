@@ -1,0 +1,161 @@
+---
+title: Graphing in Python - New(er) kids on the block
+author: ''
+date: '2019-11-25'
+categories:
+  - Data science toolbox
+tags:
+  - Python
+  - Visualizations
+slug: graphing-in-python-a-walkthrough
+type: post
+image: images/post/python_graphing.png
+---
+
+<br>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+-->
+
+<link
+  rel="stylesheet"
+  href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+</head>
+<body>
+
+<body data-spy="scroll" data-target="#toc"> 
+<div class="container">
+<div class="row">
+<!-- sidebar, which will move to the top on a small screen -->
+<div class="col-sm-2">
+<nav id="toc" data-toggle="toc" class="sticky-top" style='padding-top:40px'></nav>
+</div>
+<!-- main content area -->
+<div class="col-sm-10">
+
+```{r, echo=F}
+library(reticulate)
+use_python('/Users/nancy/miniconda3/bin/python')
+```
+
+
+We are always going to need `matplotlib` and `seaborn`, but it is so great to see new Python plotting packages popping up in the past few years. In addition to showcasing them here, we will document the little tricks and gotchas that we come across along the way.
+
+
+
+## Plotly
+
+`Plotly` does not need much introduction, as it is now very widely used to create interactive plots in both Python and R. For a while, one major drawback of `Plotly` is its rather inconvenient syntax, where the source data needs to be passed in as arrays even though most of us want to be able to plot data directly from dataframes. 
+
+With the release of Plotly Express with its succinct `Seaborn`-like one-liner syntax, however, the situation is now much improved. While not all Plotly graphs can be made this way, there is an [impressive variety of plots](https://plot.ly/python-api-reference/plotly.express.html) available in the Plotly Express library, including interactive maps.
+
+One small annoyance is that the legends in graphs made using Plotly Express are cluttered by the column names. Following the useful tip [here](https://github.com/plotly/plotly_express/issues/36#issuecomment-490108301), you can use the `.for_each_trace()` function call to remove them. For example, here we will replace `species=` with an empty space:
+
+```python
+import plotly.express as px
+
+iris = px.data.iris()
+
+fig = px.scatter(iris, 
+                 x="sepal_width", 
+                 y="sepal_length").for_each_trace(lambda t: t.update(name=t.name.replace("species=","")))
+```
+
+<br>
+
+## Yellowbrick
+
+This [package](https://www.scikit-yb.org/en/latest/), built on top of `matplotlib`, facilitates visualizing a variety of information from each stage of machine learning workflows. It is a sizable library, and looking through its API is an education in itself. 
+
+<img src='https://www.scikit-yb.org/en/latest/_images/banner.png' width='100%'>
+
+We have not had many chances to use `Yellowbrick` yet, but are looking forward to being able to delve deeper into this package in the future! 
+
+
+<br>
+
+## Plotnine
+
+One of the strengths of the R language is its very powerful graphing package `ggplot2`, with its distinctive implementation of Leland Wilkinson's *Grammar of Graphics*. The `Plotnine` package brings this (at least part of it, it seems for now) capability to Python, with very little change to the R syntax. Here is a (ever growing) [collection](https://raindrop.io/collection/8766091) of useful links curated by us to get your started with using `Plotnine`.
+
+The brackets around the `ggplot()` function call looks strange at first, but it is needed for the signature multi-line `ggplot2` grammer to work:
+
+```{python, message=FALSE, warning=FALSE, out.align='center', out.width='100%'}
+## Import libraries
+import pandas as pd
+from plotnine import *
+from random import randint
+
+# Generate dataset
+random_numbers = [randint(1, 100) for p in range(0, 100)]
+
+df = pd.DataFrame({'number': random_numbers})
+
+# Draw plot
+p = (
+      ggplot(df, aes(x='number')) + 
+          geom_histogram(bins=20, na_rm=True) +
+          ggtitle('Histogram of random numbers') +
+          theme_light()
+                        )
+
+## Display plot
+p.draw();
+```
+
+
+If you want to save the plot to file:
+
+```python
+p.save("output.png")
+```
+
+And just because I can see myself wanting to use these plots in a Streamlit app, here is a working template:
+
+```python
+import pandas as pd
+import numpy as np
+from plotnine import *
+import streamlit as st
+
+n = 10
+
+df = pd.DataFrame({'x': np.arange(n),
+                   'y': np.arange(n),
+                   'yfit': np.arange(n) + np.tile([-.2, .2], n // 2),
+                   'cat': ['a', 'b'] * (n // 2)})
+
+a = (
+      ggplot(df) +
+        geom_col(aes('x', 'y'))
+                               )
+
+fig = a.draw();   ## Needed to remove the "ggplot<#>" message
+
+st.pyplot()
+```
+
+ 
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+</body>

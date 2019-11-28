@@ -119,11 +119,11 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 mx-auto">
-        <h2 data-toc-skip>Graphing in Python - A walkthrough</h2>
+        <h2 data-toc-skip>Graphing in Python - New(er) kids on the block</h2>
         <div class="mb-3"> <span
             class="border-bottom border-primary px-2 mx-1"></span>
-          <span>November 07 2019</span></div>
-        <center><img src="../../images/post/python_graphing.png" class="img-fluid w-75 mb-4" alt="Graphing in Python - A walkthrough"></center>
+          <span>November 25 2019</span></div>
+        <center><img src="../../images/post/python_graphing.png" class="img-fluid w-75 mb-4" alt="Graphing in Python - New(er) kids on the block"></center>
         <div class="content mb-5">
           
 
@@ -149,78 +149,29 @@
 <div class="container">
 <div class="row">
 <!-- sidebar, which will move to the top on a small screen -->
-<div class="col-sm-3">
+<div class="col-sm-2">
 <p><nav id="toc" data-toggle="toc" class="sticky-top" style='padding-top:40px'></nav></p>
 </div>
 <!-- main content area -->
-<div class="col-sm-9">
-<h2 id="matplotlib">Matplotlib</h2>
-<h3 id="create-single-plot">Create single plot</h3>
-<p>The <code>figure</code> object holds all subplots and other plot elements inside it. A <code>figure</code> object can have one or more subplots inside it called <code>axes</code>, arranged in rows and columns. Every figure has at least one axes. The <code>axes</code> objects have no relation to the x- or y-axis.</p>
-<p>Matplotlib (version &gt;= 1.4) has a range of styles available for the plots. Yan Holtz of the <a href="https://python-graph-gallery.com/199-matplotlib-style-sheets/">Python Graph Gallery</a> has made a nice panel view of all of them:</p>
-<figure>
-<center>
-<img src="https://python-graph-gallery.com/wp-content/uploads/199_Matplotlib_style_sheet.png" alt="Matplotlib styles" />
-</center>
-</figure>
-<pre class="python"><code>## Import libraries
-import matplotlib.pyplot as plt
-
-## Set style
-plt.style.use(&#39;seaborn-ticks&#39;)   
-
-## Initiate figure
-fig, ax = plt.subplots(figsize=(8, 3))
-
-## Create lot
-plt.plot([1,2,3,4,5], [1,2,3,4,10], &#39;go&#39;, label=&#39;GreenDots&#39;)  # green dots
-plt.plot([1,2,3,4,5], [2,3,4,5,11], &#39;b*&#39;, label=&#39;Bluestars&#39;)  # blue stars
-
-## Label plot
-plt.title(&#39;A Simple Scatterplot&#39;, fontsize=20) 
-
-plt.xlabel(&#39;O&#39;, fontsize=18)
-plt.ylabel(&#39;Y&#39;, fontsize=18)
-
-plt.xlim([0, 6])</code></pre>
-<pre><code>## (0, 6)</code></pre>
-<pre class="python"><code>plt.ylim([0, 12])</code></pre>
-<pre><code>## (0, 12)</code></pre>
-<pre class="python"><code>plt.tick_params(axis=&#39;both&#39;, which=&#39;major&#39;, labelsize=14)
-
-## Legend
-## &#39;best&#39; prevents legend from overlapping with plot elements
-#plt.legend(title=&#39;Group&#39;, loc=&#39;best&#39;, fontsize=12)
-ax.legend(title=&quot;Legend Title&quot;, fontsize=6, title_fontsize=6)
-
-
-## Show plot
-plt.show()</code></pre>
-<p><img src="../../post/2019-11-07-graphing-in-python-a-walkthrough_files/figure-html/unnamed-chunk-2-1.png" width="100%" /></p>
-<h3 id="create-subplots">Create subplots</h3>
-<p>Initiate grid</p>
-<pre class="python"><code>## Set up subplot grid
-fig, axes = plt.subplots(nrows = 9, ncols = 2,
-                         sharex = False, sharey = False,
-                         figsize=(8, 15))
-                         </code></pre>
-<h4 id="with-a-for-loop"><strong>With a for loop</strong></h4>
-<p>To delete a blank subplot:</p>
-<pre class="python"><code>fig.subplots_adjust(top=0.92, wspace=0.2, hspace=0.3)
-
-plt.tight_layout()
-
-fig.delaxes(axes[8][1])                         </code></pre>
-<h2 id="seaborn">Seaborn</h2>
+<div class="col-sm-10">
+<p>We are always going to need <code>matplotlib</code> and <code>seaborn</code>, but it is so great to see new Python plotting packages popping up in the past few years. In addition to showcasing them here, we will document the little tricks and gotchas that we come across along the way.</p>
 <h2 id="plotly">Plotly</h2>
-<p><code>Plotly</code> does not need much introduction, as it is now very widely used to create interactive plots in both Python and R.</p>
-<h3>
-<font size="5">Plotting</font>
-</h3>
-<p>For a while, one major drawback of <code>Plotly</code> is its, in my opinion, rather inconvenient syntax, where the source data needs to be passed in as arrays even though most of us want to be able to plot data directly from dataframes. <code>cufflinks</code> package, which bridges <code>pandas</code> and <code>Plotly</code>, the release of <code>Plotly Express</code></p>
-<h3>
-<font size="5">Styling</font>
-</h3>
+<p><code>Plotly</code> does not need much introduction, as it is now very widely used to create interactive plots in both Python and R. For a while, one major drawback of <code>Plotly</code> is its rather inconvenient syntax, where the source data needs to be passed in as arrays even though most of us want to be able to plot data directly from dataframes.</p>
+<p>With the release of Plotly Express with its succinct <code>Seaborn</code>-like one-liner syntax, however, the situation is now much improved. While not all Plotly graphs can be made this way, there is an <a href="https://plot.ly/python-api-reference/plotly.express.html">impressive variety of plots</a> available in the Plotly Express library, including interactive maps.</p>
+<p>One small annoyance is that the legends in graphs made using Plotly Express are cluttered by the column names. Following the useful tip <a href="https://github.com/plotly/plotly_express/issues/36#issuecomment-490108301">here</a>, you can use the <code>.for_each_trace()</code> function call to remove them. For example, here we will replace <code>species=</code> with an empty space:</p>
+<pre class="python"><code>import plotly.express as px
+
+iris = px.data.iris()
+
+fig = px.scatter(iris, 
+                 x=&quot;sepal_width&quot;, 
+                 y=&quot;sepal_length&quot;).for_each_trace(lambda t: t.update(name=t.name.replace(&quot;species=&quot;,&quot;&quot;)))</code></pre>
+<p><br></p>
+<h2 id="yellowbrick">Yellowbrick</h2>
+<p>This <a href="https://www.scikit-yb.org/en/latest/">package</a>, built on top of <code>matplotlib</code>, facilitates visualizing a variety of information from each stage of machine learning workflows. It is a sizable library, and looking through its API is an education in itself.</p>
+<p><img src='https://www.scikit-yb.org/en/latest/_images/banner.png' width='100%'></p>
+<p>We have not had many chances to use <code>Yellowbrick</code> yet, but are looking forward to being able to delve deeper into this package in the future!</p>
+<p><br></p>
 <h2 id="plotnine">Plotnine</h2>
 <p>One of the strengths of the R language is its very powerful graphing package <code>ggplot2</code>, with its distinctive implementation of Leland Wilkinson’s <em>Grammar of Graphics</em>. The <code>Plotnine</code> package brings this (at least part of it, it seems for now) capability to Python, with very little change to the R syntax. Here is a (ever growing) <a href="https://raindrop.io/collection/8766091">collection</a> of useful links curated by us to get your started with using <code>Plotnine</code>.</p>
 <p>The brackets around the <code>ggplot()</code> function call looks strange at first, but it is needed for the signature multi-line <code>ggplot2</code> grammer to work:</p>
@@ -244,7 +195,7 @@ p = (
 
 ## Display plot
 p.draw();</code></pre>
-<p><img src="../../post/2019-11-07-graphing-in-python-a-walkthrough_files/figure-html/unnamed-chunk-5-1.png" width="100%" /></p>
+<p><img src="../../post/2019-11-25-graphing-in-python-a-walkthrough_files/figure-html/unnamed-chunk-2-1.png" width="100%" /></p>
 <p>If you want to save the plot to file:</p>
 <pre class="python"><code>p.save(&quot;output.png&quot;)</code></pre>
 <p>And just because I can see myself wanting to use these plots in a Streamlit app, here is a working template:</p>
@@ -268,17 +219,6 @@ a = (
 fig = a.draw();   ## Needed to remove the &quot;ggplot&lt;#&gt;&quot; message
 
 st.pyplot()</code></pre>
-<h2 id="yellowbrick">Yellowbrick</h2>
-<pre class="r"><code>x &lt;- 7
-
-y &lt;- 9
-
-x + y</code></pre>
-<pre><code>## [1] 16</code></pre>
-<pre class="r"><code>o = c(&#39;hello&#39;, &#39;1&#39;, &#39;2&#39;)
-
-print(o)</code></pre>
-<pre><code>## [1] &quot;hello&quot; &quot;1&quot;     &quot;2&quot;</code></pre>
 </div>
 </div>
 </div>

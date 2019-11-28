@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Association rule mining</title>
+      <link>/tags/association-rule-mining/</link>
+      <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/association-rule-mining/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>EDA</title>
       <link>/tags/eda/</link>
       <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
@@ -39,6 +48,15 @@
     </item>
     
     <item>
+      <title>Survival analysis</title>
+      <link>/tags/survival-analysis/</link>
+      <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/survival-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Git</title>
       <link>/tags/git/</link>
       <pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate>
@@ -48,11 +66,11 @@
     </item>
     
     <item>
-      <title>Association rule mining</title>
-      <link>/tags/association-rule-mining/</link>
-      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
+      <title>Visualizations</title>
+      <link>/tags/visualizations/</link>
+      <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/association-rule-mining/</guid>
+      <guid>/tags/visualizations/</guid>
       <description></description>
     </item>
     
@@ -71,15 +89,6 @@
       <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/resume/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Survival analysis</title>
-      <link>/tags/survival-analysis/</link>
-      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/survival-analysis/</guid>
       <description></description>
     </item>
     
@@ -116,15 +125,6 @@
       <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/variable-importance/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Visualizations</title>
-      <link>/tags/visualizations/</link>
-      <pubDate>Thu, 07 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/visualizations/</guid>
       <description></description>
     </item>
     

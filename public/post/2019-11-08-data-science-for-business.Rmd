@@ -12,7 +12,11 @@ tags:
 image: images/post/business_analytics.png
 ---
 
+```{r eval=T, echo=F, message=FALSE, warning=FALSE}
+library(reticulate)
 
+use_python('/Users/nancy/miniconda3/bin/python')
+```
 
 <br>
 
@@ -45,35 +49,234 @@ image: images/post/business_analytics.png
 <div class="col-sm-9">
 
 
+Business applications of data science is obviously a very broad topic, as data-driven approaches are becoming increasingly integrated into corporate practices. For this reason, this collection will begin as a <i>scaffold</i> of the topics that we are currently using or want to become familiar with in the near future. Be sure to check back regularly as we add add more content!
+
+
 ## Getting data
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.accordion {
+  background-color: #FCB97D;
+  color: #F2CC8F;
+  cursor: pointer;
+  padding: 14px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 13px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #F2CC8F;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+h3 {
+  padding-top: 0;
+  font-size: 15px;
+}
+
+.content h3 {
+  margin-bottom: 0;
+}
+
+</style>
+</head>
+<body>
+
+
+ 
+
+<button class="accordion"><h3>Working with Excel files</h3></button>
+<div class="panel">
+<p>
+Read data from Excel file:
+
+```{python}
+import pandas as pd
+
+df = pd.read_excel('https://archive.ics.uci.edu/ml/machine-learning-databases/00352/Online%20Retail.xlsx')
+```
+
+```{r, eval=T, echo=F}
+library(reactable)
+
+df <- py$df
+
+reactable(head(df, 3))
+```
+
+
+</p>
+<br>
+</div>
+
+<button class="accordion"><h3>Optical Character Recognition (OCR) of documents</h3></button>
+<div class="panel">
+<p>
+Often, we need to extract data from print or scanned business documents, which is where these packages can come in handy:
+
+<iframe src="https://coda.io/embed/W-q1QIbnV-/_sutxU?hideSections=true" width=900 height=500 style="max-width: 100%;" allow="fullscreen"></iframe>
+ 
+</p>
+<br>
+</div>
+
+<button class="accordion"><h3>Text parsing using regular expressions</h3></button>
+<div class="panel">
+<p> 
+To process OCR results into clean tabular data:
+
+<iframe src="https://coda.io/embed/W-q1QIbnV-/_suZ3W?hideSections=true" width=900 height=500 style="max-width: 100%;" allow="fullscreen"></iframe>
+</p>
+</div>
+
 
 
 ## Data wrangling
 
 
-## Analysis  
-### Association rule mining
 
-<iframe src="https://coda.io/embed/W-q1QIbnV-/_sutxU?viewMode=embedplay" width=900 height=500 style="max-width: 100%;" allow="fullscreen"></iframe>
+<button class="accordion" style='background-color:#D6DBB2;'><h3>Pivot tables</h3></button>
+<div class="panel">
+<p>
+ 
+</p>
+<br>
+</div>
+
+<button class="accordion" style='background-color:#D6DBB2;'><h3>Crosstab</h3></button>
+<div class="panel">
+<p>
+ 
+</p>
+<br>
+</div>
+
+<button class="accordion" style='background-color:#D6DBB2;'><h3>Sets</h3></button>
+<div class="panel">
+<p> 
+ 
+</p>
+<br>
+</div>
+
+<button class="accordion" style='background-color:#D6DBB2;'><h3>Vlookup</h3></button>
+<div class="panel">
+<p> 
+ 
+</p>
+<br>
+</div>
+
+## Analysis techniques
+
+For machine learning methods, please see a future post devoted to the topic.
 
 
+<button class="accordion" style='background-color:#E5C2C0;'><h3>Association rule mining</h3></button>
+<div class="panel">
+<p>
+ 
+</p>
+<br>
+</div>
 
-### RFM analysis
+<button class="accordion" style='background-color:#E5C2C0;'><h3>RFM analysis</h3></button>
+<div class="panel">
+<p>
+ 
+</p>
+<br>
+</div>
 
-### Survival analysis
+<button class="accordion" style='background-color:#E5C2C0;'><h3>Survival analysis</h3></button>
+<div class="panel">
+<p> 
+ 
+</p>
+<br>
+</div>
 
-### Time-series analysis
+<button class="accordion" style='background-color:#E5C2C0;'><h3>Time-series analysis</h3></button>
+<div class="panel">
+<p> 
+ 
+</p>
+<br>
+</div>
+
  
  
-### Machine learning
+ 
 
-#### Supervised learning
-
-#### Unsupervised learning
+ 
 
 ## Reporting  
 
 
+<button class="accordion" style='background-color:#A7CECB;'><h3>Dashboards</h3></button>
+<div class="panel">
+<p>
+ 
+</p>
+<br>
+</div>
+
+<button class="accordion" style='background-color:#A7CECB;'><h3>Presentation slides</h3></button>
+<div class="panel">
+<p> 
+ 
+</p>
+<br>
+</div>
+
+<button class="accordion" style='background-color:#A7CECB;'><h3>Automated reports</h3></button>
+<div class="panel">
+<p>
+ 
+</p>
+<br>
+</div>
+
+
+
+
+
+ 
+ 
+ 
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+
+</body>
+</html>
 
 
 </div>

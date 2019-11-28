@@ -1,0 +1,290 @@
+---
+title: Data science for business
+author: ''
+date: '2019-11-27'
+categories:
+  - Data science toolbox
+tags:
+  - Association rule mining
+  - Python
+  - R
+  - Survival analysis
+slug: data-science-for-business
+image: images/post/business_analytics.png
+---
+
+<script src="/rmarkdown-libs/core-js/shim.min.js"></script>
+<script src="/rmarkdown-libs/react/react.min.js"></script>
+<script src="/rmarkdown-libs/react/react-dom.min.js"></script>
+<script src="/rmarkdown-libs/reactwidget/react-tools.js"></script>
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/reactable-binding/reactable.js"></script>
+
+
+<p><br></p>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+-->
+<link
+  rel="stylesheet"
+  href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+</head>
+<body>
+<body data-spy="scroll" data-target="#toc">
+<div class="container">
+<div class="row">
+<!-- sidebar, which will move to the top on a small screen -->
+<div class="col-sm-3">
+<p><nav id="toc" data-toggle="toc" class="sticky-top" style='padding-top:40px'></nav></p>
+</div>
+<!-- main content area -->
+<div class="col-sm-9">
+
+
+<p>Business applications of data science is obviously a very broad topic, as data-driven approaches are becoming increasingly integrated into corporate practices. For this reason, this collection will begin as a <i>scaffold</i> of the topics that we are currently using or want to become familiar with in the near future. Be sure to check back regularly as we add add more content!</p>
+<div id="getting-data" class="section level2">
+<h2>Getting data</h2>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.accordion {
+  background-color: #FCB97D;
+  color: #F2CC8F;
+  cursor: pointer;
+  padding: 14px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 13px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #F2CC8F;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+h3 {
+  padding-top: 0;
+  font-size: 15px;
+}
+
+.content h3 {
+  margin-bottom: 0;
+}
+
+</style>
+</head>
+<body>
+<button class="accordion">
+<h3>
+Working with Excel files
+</h3>
+</button>
+<div class="panel">
+<p>
+<p>Read data from Excel file:</p>
+<pre class="python"><code>import pandas as pd
+
+df = pd.read_excel(&#39;https://archive.ics.uci.edu/ml/machine-learning-databases/00352/Online%20Retail.xlsx&#39;)</code></pre>
+<div id="htmlwidget-1" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"InvoiceNo":[[536365],[536365],[536365]],"StockCode":[["85123A"],[71053],["84406B"]],"Description":[["WHITE HANGING HEART T-LIGHT HOLDER"],["WHITE METAL LANTERN"],["CREAM CUPID HEARTS COAT HANGER"]],"Quantity":[6,6,8],"InvoiceDate":["2010-12-01T08:26:00","2010-12-01T08:26:00","2010-12-01T08:26:00"],"UnitPrice":[2.55,3.39,2.75],"CustomerID":[17850,17850,17850],"Country":["United Kingdom","United Kingdom","United Kingdom"]},"columns":[{"accessor":"InvoiceNo","name":"InvoiceNo","type":"list"},{"accessor":"StockCode","name":"StockCode","type":"list"},{"accessor":"Description","name":"Description","type":"list"},{"accessor":"Quantity","name":"Quantity","type":"numeric"},{"accessor":"InvoiceDate","name":"InvoiceDate","type":"Date"},{"accessor":"UnitPrice","name":"UnitPrice","type":"numeric"},{"accessor":"CustomerID","name":"CustomerID","type":"numeric"},{"accessor":"Country","name":"Country","type":"character"}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"e3d7eb06698ef9fb96ced2163802ea0a"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</p>
+<p><br></p>
+</div>
+<button class="accordion">
+<h3>
+Optical Character Recognition (OCR) of documents
+</h3>
+</button>
+<div class="panel">
+<p>
+<p>Often, we need to extract data from print or scanned business documents, which is where these packages can come in handy:</p>
+<iframe src="https://coda.io/embed/W-q1QIbnV-/_sutxU?hideSections=true" width="900" height="500" style="max-width: 100%;" allow="fullscreen">
+</iframe>
+</p>
+<p><br></p>
+</div>
+<button class="accordion">
+<h3>
+Text parsing using regular expressions
+</h3>
+</button>
+<div class="panel">
+<p>
+<p>To process OCR results into clean tabular data:</p>
+<iframe src="https://coda.io/embed/W-q1QIbnV-/_suZ3W?hideSections=true" width="900" height="500" style="max-width: 100%;" allow="fullscreen">
+</iframe>
+</p>
+</div>
+</div>
+<div id="data-wrangling" class="section level2">
+<h2>Data wrangling</h2>
+<button class="accordion" style="background-color:#D6DBB2;">
+<h3>
+Pivot tables
+</h3>
+</button>
+<div class="panel">
+<p>
+More coming soon!
+</p>
+<p><br></p>
+</div>
+<button class="accordion" style="background-color:#D6DBB2;">
+<h3>
+Crosstab
+</h3>
+</button>
+<div class="panel">
+<p>
+More coming soon!
+</p>
+<p><br></p>
+</div>
+<button class="accordion" style="background-color:#D6DBB2;">
+<h3>
+Sets
+</h3>
+</button>
+<div class="panel">
+<p>
+More coming soon!
+</p>
+<p><br></p>
+</div>
+<button class="accordion" style="background-color:#D6DBB2;">
+<h3>
+Vlookup
+</h3>
+</button>
+<div class="panel">
+<p>
+More coming soon!
+</p>
+<p><br></p>
+</div>
+</div>
+<div id="analysis-techniques" class="section level2">
+<h2>Analysis techniques</h2>
+<p>For machine learning methods, please see a future post devoted to the topic.</p>
+<button class="accordion" style="background-color:#E5C2C0;">
+<h3>
+Association rule mining
+</h3>
+</button>
+<div class="panel">
+<p>
+More coming soon!
+</p>
+<p><br></p>
+</div>
+<button class="accordion" style="background-color:#E5C2C0;">
+<h3>
+RFM analysis
+</h3>
+</button>
+<div class="panel">
+<p>
+More coming soon!
+</p>
+<p><br></p>
+</div>
+<button class="accordion" style="background-color:#E5C2C0;">
+<h3>
+Survival analysis
+</h3>
+</button>
+<div class="panel">
+<p>
+More coming soon!
+</p>
+<p><br></p>
+</div>
+<button class="accordion" style="background-color:#E5C2C0;">
+<h3>
+Time-series analysis
+</h3>
+</button>
+<div class="panel">
+<p>
+More coming soon!
+</p>
+<p><br></p>
+</div>
+</div>
+<div id="reporting" class="section level2">
+<h2>Reporting</h2>
+<button class="accordion" style="background-color:#A7CECB;">
+<h3>
+Dashboards
+</h3>
+</button>
+<div class="panel">
+<p>
+More coming soon!
+</p>
+<p><br></p>
+</div>
+<button class="accordion" style="background-color:#A7CECB;">
+<h3>
+Presentation slides
+</h3>
+</button>
+<div class="panel">
+<p>
+More coming soon!
+</p>
+<p><br></p>
+</div>
+<button class="accordion" style="background-color:#A7CECB;">
+<h3>
+Automated reports
+</h3>
+</button>
+<div class="panel">
+<p>
+More coming soon!
+</p>
+<p><br></p>
+</div>
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+</body>
+</html>
+</div>
+</div>
+</div>
+</body>
+</div>

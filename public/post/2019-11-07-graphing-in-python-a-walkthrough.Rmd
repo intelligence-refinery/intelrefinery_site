@@ -1,5 +1,5 @@
 ---
-title: Graphing in Python - A walkthrough
+title: Graphing in Python - New(er) kids on the block
 date: '2019-11-07'
 slug: graphing-in-python-a-walkthrough
 categories:
@@ -49,6 +49,7 @@ use_python('/Users/nancy/miniconda3/bin/python')
 
 
 ## Matplotlib  
+
 
 ### Create single plot
 
