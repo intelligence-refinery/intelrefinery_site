@@ -48,13 +48,13 @@ use_python('/Users/nancy/miniconda3/bin/python')
 ```
 
 
-We are always going to need `matplotlib` and `seaborn`, but it is so great to see new Python plotting packages popping up in the past few years. In addition to showcasing them here, we will document the little tricks and gotchas that we come across along the way.
+We are always going to need `Matplotlib` and `Seaborn`, but it is so great to see new Python plotting packages popping up in the past few years. In addition to showcasing them here, we will document the little tricks and gotchas that we come across along the way.
 
 
 
 ## Plotly Express
 
-`Plotly` does not need much introduction, as it is now very widely used to create interactive plots in both Python and R. For a while, one major drawback of `Plotly` is its rather inconvenient syntax, where the source data needs to be passed in as arrays even though most of us want to be able to plot data directly from dataframes. 
+Plotly does not need much introduction, as it is now very widely used to create interactive plots in both Python and R. For a while, one major drawback of Plotly is its rather inconvenient syntax, where the source data needs to be passed in as arrays even though most of us want to be able to plot data directly from dataframes. 
 
 With the release of Plotly Express with its succinct `Seaborn`-like one-liner syntax, however, the situation is now much improved. While not all Plotly graphs can be made this way, there is an [impressive variety of plots](https://plot.ly/python-api-reference/plotly.express.html) available in the Plotly Express library, including interactive maps.
 
@@ -78,7 +78,7 @@ fig = px.scatter(iris,
 
 ## Yellowbrick
 
-This [package](https://www.scikit-yb.org/en/latest/), built on top of `matplotlib`, facilitates visualizing a variety of information from various stages of machine learning workflows. It is a sizable library, and looking through its API is an education in itself. 
+This [package](https://www.scikit-yb.org/en/latest/), built on top of `Matplotlib`, facilitates visualizing a variety of information from various stages of machine learning workflows. It is a sizable library, and looking through its API is an education in itself. 
 
 <img src='https://www.scikit-yb.org/en/latest/_images/banner.png' width='100%'>
 
