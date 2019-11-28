@@ -135,9 +135,6 @@ icon = "ti-tumblr" # themify icon : https://themify.me/themify-icons
 link = "https://intelrefinery.tumblr.com/"
 
 
-[[params.social]]
-title = "pinterest"
-icon = "ti-pinterest" # themify icon : https://themify.me/themify-icons
-link = "https://www.pinterest.ca/intelligencerefinery/boards/"
+
 
  
