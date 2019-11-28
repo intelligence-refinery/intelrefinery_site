@@ -129,8 +129,8 @@ reactable(head(df, 3))
 <p>
 Often, we need to extract data from print or scanned business documents, which is where these packages can come in handy:
 
-<iframe src="https://coda.io/embed/W-q1QIbnV-/_sutxU?hideSections=true" width=900 height=500 style="max-width: 100%;" allow="fullscreen"></iframe>
- 
+<iframe src="https://coda.io/embed/W-q1QIbnV-/_sutxU?viewMode=embedplay&hideSections=true" width=900 height=500 style="max-width: 100%;" allow="fullscreen"></iframe>
+
 </p>
 <br>
 </div>
@@ -148,7 +148,7 @@ To process OCR results into clean tabular data:
 
 ## Data wrangling
 
-
+Given the topic, here we will focus on replicating common Excel functionalities/tasks in Python and R:
 
 <button class="accordion" style='background-color:#D6DBB2;'><h3>Pivot tables</h3></button>
 <div class="panel">
@@ -184,7 +184,7 @@ More coming soon!
 
 ## Analysis techniques
 
-For machine learning methods, please see a future post devoted to the topic.
+This will be a collection of more "traditional" business analytics approaches. For machine learning methods, please see a future post devoted to the topic.
 
 
 <button class="accordion" style='background-color:#E5C2C0;'><h3>Association rule mining</h3></button>
@@ -227,6 +227,7 @@ More coming soon!
 
 ## Reporting  
 
+Good results are only useful when they are effectively communicated:
 
 <button class="accordion" style='background-color:#A7CECB;'><h3>Dashboards</h3></button>
 <div class="panel">

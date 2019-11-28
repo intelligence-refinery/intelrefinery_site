@@ -122,10 +122,11 @@
         <h2 data-toc-skip>Exploring variable importance</h2>
         <div class="mb-3"> <span
             class="border-bottom border-primary px-2 mx-1"></span>
-          <span>November 08 2019</span></div>
+          <span>November 22 2019</span></div>
         <center><img src="../../images/post/var_imp.png" class="img-fluid w-75 mb-4" alt="Exploring variable importance"></center>
         <div class="content mb-5">
           
+<script src="../../rmarkdown-libs/kePrint/kePrint.js"></script>
 
 
 <p><br></p>
@@ -154,22 +155,1864 @@
 </div>
 <!-- main content area -->
 <div class="col-sm-9">
+
 <p>While examining feature importance is most commonly thought of as something to do after building a machine learning model, it can and should also be done before performing any serious data analysis, as both a sanity check and a time saver.</p>
 <p>Seeing which input features are the most predictive of the target feature can reveal potential problems with the dataset and/or the need to add more features to the dataset. Ultimately, narrowing down the entire feature space to a core set of variables that are the most predictive of the target variable is key to building successful data models.</p>
 <p>Here you will find a collection of model-independent and dependent approaches for exploring the “informativeness” of variables in a dataset.</p>
-<h2 id="unsupervised-model-agnostic-approaches">Unsupervised model-agnostic approaches</h2>
-<h3 id="factor-analysis-of-mixed-type-data">Factor analysis of mixed-type data</h3>
-<h3 id="hierarchical-clustering-of-variables">Hierarchical clustering of variables</h3>
-<h2 id="supervised-model-agnostic-approaches">Supervised model-agnostic approaches</h2>
-<h3 id="variable-similarity">Variable similarity</h3>
-<h3 id="correlation-based">Correlation-based</h3>
-<h3 id="information-theory">Information theory</h3>
-<h2 id="model-dependent-approaches">Model-dependent approaches</h2>
-<h3 id="random-forest">Random forest</h3>
+<div id="unsupervised-model-agnostic-approaches" class="section level2">
+<h2>Unsupervised model-agnostic approaches</h2>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.accordion {
+  background-color: #FCB97D;
+  color: #F2CC8F;
+  cursor: pointer;
+  padding: 14px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 13px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #F2CC8F;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+h3 {
+  padding-top: 0;
+  font-size: 15px;
+}
+
+.content h3 {
+  margin-bottom: 0;
+}
+
+</style>
+</head>
+<body>
+<button class="accordion" style="background-color:#dcffcc;">
+<h3>
+Factor analysis of mixed-type data
+</h3>
+</button>
+<div class="panel">
+<p>
+<pre class="r"><code>## Import libraries
+library(FactoMineR)
+library(factoextra)</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre><code>## Welcome! Related Books: `Practical Guide To Cluster Analysis in R` at https://goo.gl/13EFCZ</code></pre>
+<pre class="r"><code>library(plyr)
+library(dplyr)
+library(arulesCBA)</code></pre>
+<pre><code>## Loading required package: Matrix</code></pre>
+<pre><code>## Loading required package: arules</code></pre>
+<pre><code>## 
+## Attaching package: &#39;arules&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     recode</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     abbreviate, write</code></pre>
+<pre><code>## Loading required package: discretization</code></pre>
+<pre><code>## Loading required package: glmnet</code></pre>
+<pre><code>## Loaded glmnet 3.0</code></pre>
+<pre class="r"><code>## Discretize &quot;Tenure&quot; with respect to &quot;Churn&quot;/&quot;No Churn&quot;
+df$Binned_Tenure &lt;- discretizeDF.supervised(Churn ~ .,
+                                            df[, c(&#39;Tenure&#39;, &#39;Churn&#39;)],
+                                            method = &#39;mdlp&#39;)$Tenure
+
+## MCA, with &quot;Churn&quot; set as the supplementary variable
+res.mca &lt;- MCA(df,
+               quanti.sup = c(5, 18, 19),
+               quali.sup = c(20))</code></pre>
+<p><img src="../../post/2019-11-22-exploring-variable-importance_files/figure-html/unnamed-chunk-2-1.png" width="672" /><img src="../../post/2019-11-22-exploring-variable-importance_files/figure-html/unnamed-chunk-2-2.png" width="672" /><img src="../../post/2019-11-22-exploring-variable-importance_files/figure-html/unnamed-chunk-2-3.png" width="672" /><img src="../../post/2019-11-22-exploring-variable-importance_files/figure-html/unnamed-chunk-2-4.png" width="672" /></p>
+<pre class="r"><code>## Plot relationship between levels of categorical variables obtained from MCA
+fviz_mca_var(res.mca, col.var = &quot;cos2&quot;) </code></pre>
+<p><img src="../../post/2019-11-22-exploring-variable-importance_files/figure-html/unnamed-chunk-2-5.png" width="672" /></p>
+</p>
+<p><br></p>
+</div>
+<button class="accordion" style="background-color:#dcffcc;">
+<h3>
+Hierarchical clustering of variables
+</h3>
+</button>
+<div class="panel">
+<p>
+<pre class="r"><code>## Import libraries
+library(ClustOfVar)
+library(PCAmixdata)
+library(dendextend)
+
+## Split up continuous and categorical varibles
+split &lt;- splitmix(df)
+
+X1 &lt;- split$X.quanti 
+
+X2 &lt;- split$X.quali
+
+## Hierarchical clustering
+tree &lt;- hclustvar(X.quanti = X1, X.quali = X2)
+
+## Evaluate the stability of each partition
+x &lt;- stability(tree, B=5) ## 5 bootstrap samples</code></pre>
+<p><img src="../../post/2019-11-22-exploring-variable-importance_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Plot the hierarchically clustered variables in a dendrogram:</p>
+<pre class="r"><code>par(mar = c(3, 4, 3, 8))
+
+dend &lt;- tree %&gt;% as.dendrogram %&gt;% hang.dendrogram
+
+dend %&gt;% color_branches(k=5) %&gt;% color_labels(k=5) %&gt;% plot(horiz=TRUE)</code></pre>
+<p><img src="../../post/2019-11-22-exploring-variable-importance_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</p>
+<p><br></p>
+</div>
+</div>
+<div id="supervised-model-agnostic-approaches" class="section level2">
+<h2>Supervised model-agnostic approaches</h2>
+<button class="accordion" style="background-color:#baabda;">
+<h3>
+Correlation-based
+</h3>
+</button>
+<div class="panel">
+<p>
+<p><b><code>autoEDA</code></b></p>
+<p>We have met the <code>autoEDA</code> package previously, as a tool for automated exploratory data analysis. In addition to making generating exploratory visualizations a breeze, it has a very cool <code>predictivePower()</code> function that calculates the “predictive power” of each input feature with respect to an outcome feature of your choice, which is quantified by <b>correlation</b> when the outcome feature is continuous and the <b>Kolmogorov-Smirnov distance</b> when it is categorical.</p>
+<p>Note, the author of the package has <b>warned</b> that the estimation of feature predictive power is sensitive to how the data is prepared. Therefore, like all other tasks in data science, it is very advisable to put the same dataset through different analysis methods and see how the results match up.</p>
+<p>Let’s give it a try for our outcome of interest, customer churn:</p>
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Feature
+</th>
+<th style="text-align:right;">
+PredictivePowerPercentage
+</th>
+<th style="text-align:left;">
+PredictivePower
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Contract
+</td>
+<td style="text-align:right;">
+46
+</td>
+<td style="text-align:left;">
+Medium
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tenure
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:left;">
+Medium
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Binned_Tenure
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:left;">
+Medium
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MonthlyCharges
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:left;">
+Low
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PaymentMethod
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:left;">
+Low
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TotalCharges
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:left;">
+Low
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+InternetService
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:left;">
+Low
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PaperlessBilling
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:left;">
+Low
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+OnlineSecurity
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:left;">
+Low
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Partner
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:left;">
+Low
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dependents
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:left;">
+Low
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TechSupport
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:left;">
+Low
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SeniorCitizen
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:left;">
+Low
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+OnlineBackup
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+Low
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DeviceProtection
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+Low
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+StreamingTV
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+Low
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+StreamingMovies
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+Low
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MultipleLines
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Low
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gender
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Low
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PhoneService
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Low
+</td>
+</tr>
+</tbody>
+</table>
+<p><b><code>ClustOfVar</code></b></p>
+<pre class="r"><code>## Import libraries
+library(ClustOfVar)
+
+## Calculate similarity between each variable and Churn
+i &lt;- 1
+
+score_list = list()
+
+for (c in colnames(within(df, rm(&quot;Churn&quot;)))){
+  score_list[[i]] &lt;- mixedVarSim(df[[c]], df$Churn)
+  
+  i &lt;- i + 1
+}
+
+## Concatenate the two lists to a dataframe
+score_df &lt;- do.call(rbind, 
+                    Map(data.frame, 
+                        Var=as.list(colnames(within(df, rm(&quot;Churn&quot;)))), 
+                        Score=score_list))</code></pre>
+</p>
+<br>
+</div>
+<button class="accordion" style="background-color:#baabda;">
+<h3>
+Information theory
+</h3>
+</button>
+<div class="panel">
+<p>
+<pre class="r"><code>## Import library
+library(funModeling)
+library(scorecard)
+library(ggplot2)
+library(ggpubr)
+
+## Calulate variable importance
+fM_imp &lt;- var_rank_info(df, &quot;Churn&quot;)
+
+## Scorecard
+sc_iv &lt;- iv(df, y=&quot;Churn&quot;)
+
+colnames(sc_iv) &lt;- c(&#39;var&#39;, &#39;info_value&#39;)
+
+## Combine the two 
+combine_df &lt;- left_join(fM_imp, sc_iv, by = &quot;var&quot;) 
+
+## Min-max scale result of each package, so they are comparable
+normalize &lt;- function(x) {
+    return ((x - min(x)) / (max(x) - min(x)))
+  }
+
+dfNorm &lt;- as.data.frame(lapply(combine_df[, 2:6], normalize))
+
+x &lt;- cbind(combine_df$var, dfNorm)
+
+rownames(x) &lt;- x[, 1]
+
+x &lt;- x[, 2:6]
+
+colnames(x) &lt;- c(&#39;Entropy&#39;, &#39;Mutual information&#39;, &#39;Information gain&#39;, &#39;Gain ratio&#39;, &#39;Information value&#39;)
+
+## Make balloon plot
+ggballoonplot(x, fill = &quot;value&quot;, size.range = c(1, 7)) +
+  scale_fill_viridis_c(option = &quot;C&quot;)</code></pre>
+<p><img src="../../post/2019-11-22-exploring-variable-importance_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</p>
+<p><br></p>
+</div>
+</div>
+<div id="model-dependent-approaches" class="section level2">
+<h2>Model-dependent approaches</h2>
+<button class="accordion" style="background-color:#9fdfcd;">
+<h3>
+Random forest
+</h3>
+</button>
+<div class="panel">
+<p>
+<pre class="r"><code>library(Boruta)</code></pre>
+<pre><code>## Loading required package: ranger</code></pre>
+<pre class="r"><code>set.seed(456)
+
+boruta &lt;- Boruta(Churn~., data=df, doTrace=0)
+
+kable(boruta$ImpHistory)  %&gt;%
+  kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Gender
+</th>
+<th style="text-align:right;">
+SeniorCitizen
+</th>
+<th style="text-align:right;">
+Partner
+</th>
+<th style="text-align:right;">
+Dependents
+</th>
+<th style="text-align:right;">
+Tenure
+</th>
+<th style="text-align:right;">
+PhoneService
+</th>
+<th style="text-align:right;">
+MultipleLines
+</th>
+<th style="text-align:right;">
+InternetService
+</th>
+<th style="text-align:right;">
+OnlineSecurity
+</th>
+<th style="text-align:right;">
+OnlineBackup
+</th>
+<th style="text-align:right;">
+DeviceProtection
+</th>
+<th style="text-align:right;">
+TechSupport
+</th>
+<th style="text-align:right;">
+StreamingTV
+</th>
+<th style="text-align:right;">
+StreamingMovies
+</th>
+<th style="text-align:right;">
+Contract
+</th>
+<th style="text-align:right;">
+PaperlessBilling
+</th>
+<th style="text-align:right;">
+PaymentMethod
+</th>
+<th style="text-align:right;">
+MonthlyCharges
+</th>
+<th style="text-align:right;">
+TotalCharges
+</th>
+<th style="text-align:right;">
+shadowMax
+</th>
+<th style="text-align:right;">
+shadowMean
+</th>
+<th style="text-align:right;">
+shadowMin
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.1356936
+</td>
+<td style="text-align:right;">
+11.445128
+</td>
+<td style="text-align:right;">
+3.809561
+</td>
+<td style="text-align:right;">
+5.695892
+</td>
+<td style="text-align:right;">
+42.16776
+</td>
+<td style="text-align:right;">
+4.336411
+</td>
+<td style="text-align:right;">
+7.258039
+</td>
+<td style="text-align:right;">
+27.78640
+</td>
+<td style="text-align:right;">
+18.79429
+</td>
+<td style="text-align:right;">
+9.808921
+</td>
+<td style="text-align:right;">
+12.178180
+</td>
+<td style="text-align:right;">
+19.16411
+</td>
+<td style="text-align:right;">
+9.876858
+</td>
+<td style="text-align:right;">
+11.481957
+</td>
+<td style="text-align:right;">
+43.20538
+</td>
+<td style="text-align:right;">
+9.897038
+</td>
+<td style="text-align:right;">
+11.35855
+</td>
+<td style="text-align:right;">
+32.98180
+</td>
+<td style="text-align:right;">
+35.92263
+</td>
+<td style="text-align:right;">
+2.857294
+</td>
+<td style="text-align:right;">
+0.0303948
+</td>
+<td style="text-align:right;">
+-2.304786
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-0.0402413
+</td>
+<td style="text-align:right;">
+11.030769
+</td>
+<td style="text-align:right;">
+5.085756
+</td>
+<td style="text-align:right;">
+5.890952
+</td>
+<td style="text-align:right;">
+42.84863
+</td>
+<td style="text-align:right;">
+5.164849
+</td>
+<td style="text-align:right;">
+6.732929
+</td>
+<td style="text-align:right;">
+27.98407
+</td>
+<td style="text-align:right;">
+18.39544
+</td>
+<td style="text-align:right;">
+10.475808
+</td>
+<td style="text-align:right;">
+9.020434
+</td>
+<td style="text-align:right;">
+17.05949
+</td>
+<td style="text-align:right;">
+11.626636
+</td>
+<td style="text-align:right;">
+11.498145
+</td>
+<td style="text-align:right;">
+41.86202
+</td>
+<td style="text-align:right;">
+11.925629
+</td>
+<td style="text-align:right;">
+12.39496
+</td>
+<td style="text-align:right;">
+34.14153
+</td>
+<td style="text-align:right;">
+34.88156
+</td>
+<td style="text-align:right;">
+1.444568
+</td>
+<td style="text-align:right;">
+-0.2671151
+</td>
+<td style="text-align:right;">
+-4.125890
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-0.0259858
+</td>
+<td style="text-align:right;">
+11.768550
+</td>
+<td style="text-align:right;">
+3.711172
+</td>
+<td style="text-align:right;">
+5.682888
+</td>
+<td style="text-align:right;">
+44.08623
+</td>
+<td style="text-align:right;">
+5.387057
+</td>
+<td style="text-align:right;">
+6.856358
+</td>
+<td style="text-align:right;">
+28.68633
+</td>
+<td style="text-align:right;">
+17.75918
+</td>
+<td style="text-align:right;">
+10.172381
+</td>
+<td style="text-align:right;">
+11.187578
+</td>
+<td style="text-align:right;">
+16.89430
+</td>
+<td style="text-align:right;">
+11.897434
+</td>
+<td style="text-align:right;">
+12.259004
+</td>
+<td style="text-align:right;">
+43.87689
+</td>
+<td style="text-align:right;">
+10.479638
+</td>
+<td style="text-align:right;">
+12.37823
+</td>
+<td style="text-align:right;">
+33.67295
+</td>
+<td style="text-align:right;">
+36.55203
+</td>
+<td style="text-align:right;">
+1.969644
+</td>
+<td style="text-align:right;">
+0.2433086
+</td>
+<td style="text-align:right;">
+-2.357704
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-0.7747869
+</td>
+<td style="text-align:right;">
+8.367250
+</td>
+<td style="text-align:right;">
+7.020584
+</td>
+<td style="text-align:right;">
+5.037047
+</td>
+<td style="text-align:right;">
+41.64053
+</td>
+<td style="text-align:right;">
+3.126726
+</td>
+<td style="text-align:right;">
+8.108658
+</td>
+<td style="text-align:right;">
+27.83533
+</td>
+<td style="text-align:right;">
+17.75716
+</td>
+<td style="text-align:right;">
+12.275353
+</td>
+<td style="text-align:right;">
+10.758749
+</td>
+<td style="text-align:right;">
+16.28029
+</td>
+<td style="text-align:right;">
+9.353090
+</td>
+<td style="text-align:right;">
+11.651878
+</td>
+<td style="text-align:right;">
+40.96605
+</td>
+<td style="text-align:right;">
+10.329537
+</td>
+<td style="text-align:right;">
+10.34502
+</td>
+<td style="text-align:right;">
+35.49940
+</td>
+<td style="text-align:right;">
+36.76387
+</td>
+<td style="text-align:right;">
+1.550604
+</td>
+<td style="text-align:right;">
+-0.1329682
+</td>
+<td style="text-align:right;">
+-3.765066
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0.1044963
+</td>
+<td style="text-align:right;">
+11.064880
+</td>
+<td style="text-align:right;">
+5.179288
+</td>
+<td style="text-align:right;">
+6.419857
+</td>
+<td style="text-align:right;">
+43.29015
+</td>
+<td style="text-align:right;">
+3.756288
+</td>
+<td style="text-align:right;">
+7.482023
+</td>
+<td style="text-align:right;">
+29.50315
+</td>
+<td style="text-align:right;">
+16.62142
+</td>
+<td style="text-align:right;">
+10.251592
+</td>
+<td style="text-align:right;">
+11.022635
+</td>
+<td style="text-align:right;">
+18.22732
+</td>
+<td style="text-align:right;">
+11.157475
+</td>
+<td style="text-align:right;">
+11.065602
+</td>
+<td style="text-align:right;">
+41.58393
+</td>
+<td style="text-align:right;">
+11.292338
+</td>
+<td style="text-align:right;">
+11.24278
+</td>
+<td style="text-align:right;">
+34.23869
+</td>
+<td style="text-align:right;">
+36.86663
+</td>
+<td style="text-align:right;">
+2.809089
+</td>
+<td style="text-align:right;">
+0.2731351
+</td>
+<td style="text-align:right;">
+-2.160476
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-0.3291886
+</td>
+<td style="text-align:right;">
+9.283133
+</td>
+<td style="text-align:right;">
+4.043369
+</td>
+<td style="text-align:right;">
+2.951300
+</td>
+<td style="text-align:right;">
+41.16744
+</td>
+<td style="text-align:right;">
+4.663319
+</td>
+<td style="text-align:right;">
+9.117128
+</td>
+<td style="text-align:right;">
+27.38804
+</td>
+<td style="text-align:right;">
+18.66747
+</td>
+<td style="text-align:right;">
+10.395198
+</td>
+<td style="text-align:right;">
+10.441834
+</td>
+<td style="text-align:right;">
+18.18472
+</td>
+<td style="text-align:right;">
+11.087163
+</td>
+<td style="text-align:right;">
+10.175477
+</td>
+<td style="text-align:right;">
+43.50909
+</td>
+<td style="text-align:right;">
+11.028153
+</td>
+<td style="text-align:right;">
+10.77145
+</td>
+<td style="text-align:right;">
+37.96813
+</td>
+<td style="text-align:right;">
+36.70303
+</td>
+<td style="text-align:right;">
+3.016841
+</td>
+<td style="text-align:right;">
+0.6012491
+</td>
+<td style="text-align:right;">
+-2.023635
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1.6016141
+</td>
+<td style="text-align:right;">
+11.377006
+</td>
+<td style="text-align:right;">
+4.493496
+</td>
+<td style="text-align:right;">
+4.851501
+</td>
+<td style="text-align:right;">
+43.50342
+</td>
+<td style="text-align:right;">
+2.279622
+</td>
+<td style="text-align:right;">
+9.388070
+</td>
+<td style="text-align:right;">
+28.69641
+</td>
+<td style="text-align:right;">
+17.23874
+</td>
+<td style="text-align:right;">
+10.550455
+</td>
+<td style="text-align:right;">
+9.812307
+</td>
+<td style="text-align:right;">
+16.63531
+</td>
+<td style="text-align:right;">
+10.587342
+</td>
+<td style="text-align:right;">
+10.337582
+</td>
+<td style="text-align:right;">
+42.80841
+</td>
+<td style="text-align:right;">
+11.580611
+</td>
+<td style="text-align:right;">
+13.82565
+</td>
+<td style="text-align:right;">
+34.83401
+</td>
+<td style="text-align:right;">
+37.33883
+</td>
+<td style="text-align:right;">
+3.304929
+</td>
+<td style="text-align:right;">
+0.1350296
+</td>
+<td style="text-align:right;">
+-3.644524
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-1.9833526
+</td>
+<td style="text-align:right;">
+10.588582
+</td>
+<td style="text-align:right;">
+4.053792
+</td>
+<td style="text-align:right;">
+5.616524
+</td>
+<td style="text-align:right;">
+41.39554
+</td>
+<td style="text-align:right;">
+4.470852
+</td>
+<td style="text-align:right;">
+8.973348
+</td>
+<td style="text-align:right;">
+29.45276
+</td>
+<td style="text-align:right;">
+17.14044
+</td>
+<td style="text-align:right;">
+10.521982
+</td>
+<td style="text-align:right;">
+9.969879
+</td>
+<td style="text-align:right;">
+16.90613
+</td>
+<td style="text-align:right;">
+11.149776
+</td>
+<td style="text-align:right;">
+10.755274
+</td>
+<td style="text-align:right;">
+41.07355
+</td>
+<td style="text-align:right;">
+10.421386
+</td>
+<td style="text-align:right;">
+10.91403
+</td>
+<td style="text-align:right;">
+34.63494
+</td>
+<td style="text-align:right;">
+37.19351
+</td>
+<td style="text-align:right;">
+2.337012
+</td>
+<td style="text-align:right;">
+0.3844707
+</td>
+<td style="text-align:right;">
+-3.390337
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0.4089996
+</td>
+<td style="text-align:right;">
+12.749351
+</td>
+<td style="text-align:right;">
+3.160562
+</td>
+<td style="text-align:right;">
+3.236891
+</td>
+<td style="text-align:right;">
+43.08461
+</td>
+<td style="text-align:right;">
+6.145945
+</td>
+<td style="text-align:right;">
+8.509750
+</td>
+<td style="text-align:right;">
+29.24886
+</td>
+<td style="text-align:right;">
+15.97429
+</td>
+<td style="text-align:right;">
+11.513107
+</td>
+<td style="text-align:right;">
+9.912314
+</td>
+<td style="text-align:right;">
+16.37133
+</td>
+<td style="text-align:right;">
+10.269893
+</td>
+<td style="text-align:right;">
+9.947096
+</td>
+<td style="text-align:right;">
+43.14908
+</td>
+<td style="text-align:right;">
+9.784528
+</td>
+<td style="text-align:right;">
+11.46805
+</td>
+<td style="text-align:right;">
+35.40394
+</td>
+<td style="text-align:right;">
+36.22696
+</td>
+<td style="text-align:right;">
+3.276767
+</td>
+<td style="text-align:right;">
+-0.1623191
+</td>
+<td style="text-align:right;">
+-2.623780
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+0.1548490
+</td>
+<td style="text-align:right;">
+10.148420
+</td>
+<td style="text-align:right;">
+3.728750
+</td>
+<td style="text-align:right;">
+3.529062
+</td>
+<td style="text-align:right;">
+43.04334
+</td>
+<td style="text-align:right;">
+5.199150
+</td>
+<td style="text-align:right;">
+7.917032
+</td>
+<td style="text-align:right;">
+29.10187
+</td>
+<td style="text-align:right;">
+20.03492
+</td>
+<td style="text-align:right;">
+12.864714
+</td>
+<td style="text-align:right;">
+9.585355
+</td>
+<td style="text-align:right;">
+15.79663
+</td>
+<td style="text-align:right;">
+9.366043
+</td>
+<td style="text-align:right;">
+8.684432
+</td>
+<td style="text-align:right;">
+41.25331
+</td>
+<td style="text-align:right;">
+10.396281
+</td>
+<td style="text-align:right;">
+12.49702
+</td>
+<td style="text-align:right;">
+35.30919
+</td>
+<td style="text-align:right;">
+38.25095
+</td>
+<td style="text-align:right;">
+1.983142
+</td>
+<td style="text-align:right;">
+0.2618099
+</td>
+<td style="text-align:right;">
+-1.245741
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-2.1084201
+</td>
+<td style="text-align:right;">
+11.949892
+</td>
+<td style="text-align:right;">
+3.260423
+</td>
+<td style="text-align:right;">
+4.223116
+</td>
+<td style="text-align:right;">
+43.44643
+</td>
+<td style="text-align:right;">
+2.497987
+</td>
+<td style="text-align:right;">
+10.259971
+</td>
+<td style="text-align:right;">
+26.85989
+</td>
+<td style="text-align:right;">
+17.33358
+</td>
+<td style="text-align:right;">
+10.067193
+</td>
+<td style="text-align:right;">
+9.808401
+</td>
+<td style="text-align:right;">
+18.70230
+</td>
+<td style="text-align:right;">
+10.716907
+</td>
+<td style="text-align:right;">
+11.021818
+</td>
+<td style="text-align:right;">
+40.37838
+</td>
+<td style="text-align:right;">
+11.896557
+</td>
+<td style="text-align:right;">
+12.62720
+</td>
+<td style="text-align:right;">
+33.14540
+</td>
+<td style="text-align:right;">
+38.71916
+</td>
+<td style="text-align:right;">
+2.467228
+</td>
+<td style="text-align:right;">
+0.0343937
+</td>
+<td style="text-align:right;">
+-2.946434
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-Inf
+</td>
+<td style="text-align:right;">
+9.180634
+</td>
+<td style="text-align:right;">
+4.363038
+</td>
+<td style="text-align:right;">
+5.395308
+</td>
+<td style="text-align:right;">
+44.03111
+</td>
+<td style="text-align:right;">
+5.356118
+</td>
+<td style="text-align:right;">
+9.724825
+</td>
+<td style="text-align:right;">
+30.74367
+</td>
+<td style="text-align:right;">
+19.59800
+</td>
+<td style="text-align:right;">
+11.438992
+</td>
+<td style="text-align:right;">
+10.900286
+</td>
+<td style="text-align:right;">
+17.79593
+</td>
+<td style="text-align:right;">
+11.673326
+</td>
+<td style="text-align:right;">
+9.061115
+</td>
+<td style="text-align:right;">
+44.97793
+</td>
+<td style="text-align:right;">
+12.510901
+</td>
+<td style="text-align:right;">
+14.48827
+</td>
+<td style="text-align:right;">
+35.34330
+</td>
+<td style="text-align:right;">
+38.55780
+</td>
+<td style="text-align:right;">
+2.775809
+</td>
+<td style="text-align:right;">
+0.3261479
+</td>
+<td style="text-align:right;">
+-1.999441
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-Inf
+</td>
+<td style="text-align:right;">
+10.041568
+</td>
+<td style="text-align:right;">
+2.165427
+</td>
+<td style="text-align:right;">
+2.701832
+</td>
+<td style="text-align:right;">
+44.31531
+</td>
+<td style="text-align:right;">
+4.671867
+</td>
+<td style="text-align:right;">
+8.599824
+</td>
+<td style="text-align:right;">
+27.80714
+</td>
+<td style="text-align:right;">
+18.32608
+</td>
+<td style="text-align:right;">
+11.049520
+</td>
+<td style="text-align:right;">
+8.939225
+</td>
+<td style="text-align:right;">
+16.07197
+</td>
+<td style="text-align:right;">
+11.232623
+</td>
+<td style="text-align:right;">
+11.344527
+</td>
+<td style="text-align:right;">
+43.93037
+</td>
+<td style="text-align:right;">
+10.375393
+</td>
+<td style="text-align:right;">
+12.26345
+</td>
+<td style="text-align:right;">
+33.97118
+</td>
+<td style="text-align:right;">
+36.26994
+</td>
+<td style="text-align:right;">
+1.931157
+</td>
+<td style="text-align:right;">
+0.0329752
+</td>
+<td style="text-align:right;">
+-2.035081
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-Inf
+</td>
+<td style="text-align:right;">
+11.639190
+</td>
+<td style="text-align:right;">
+4.834238
+</td>
+<td style="text-align:right;">
+5.836192
+</td>
+<td style="text-align:right;">
+41.95306
+</td>
+<td style="text-align:right;">
+6.020835
+</td>
+<td style="text-align:right;">
+8.827196
+</td>
+<td style="text-align:right;">
+27.85897
+</td>
+<td style="text-align:right;">
+18.69084
+</td>
+<td style="text-align:right;">
+11.592711
+</td>
+<td style="text-align:right;">
+9.927759
+</td>
+<td style="text-align:right;">
+18.61056
+</td>
+<td style="text-align:right;">
+9.675507
+</td>
+<td style="text-align:right;">
+11.234843
+</td>
+<td style="text-align:right;">
+42.08601
+</td>
+<td style="text-align:right;">
+12.363494
+</td>
+<td style="text-align:right;">
+10.66494
+</td>
+<td style="text-align:right;">
+34.71949
+</td>
+<td style="text-align:right;">
+36.70988
+</td>
+<td style="text-align:right;">
+3.382837
+</td>
+<td style="text-align:right;">
+-0.1050904
+</td>
+<td style="text-align:right;">
+-2.677616
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-Inf
+</td>
+<td style="text-align:right;">
+10.227206
+</td>
+<td style="text-align:right;">
+5.926294
+</td>
+<td style="text-align:right;">
+4.677897
+</td>
+<td style="text-align:right;">
+41.91494
+</td>
+<td style="text-align:right;">
+3.194645
+</td>
+<td style="text-align:right;">
+8.727515
+</td>
+<td style="text-align:right;">
+29.83875
+</td>
+<td style="text-align:right;">
+19.78845
+</td>
+<td style="text-align:right;">
+10.849001
+</td>
+<td style="text-align:right;">
+9.831286
+</td>
+<td style="text-align:right;">
+17.02572
+</td>
+<td style="text-align:right;">
+11.333985
+</td>
+<td style="text-align:right;">
+11.593612
+</td>
+<td style="text-align:right;">
+42.81615
+</td>
+<td style="text-align:right;">
+9.509118
+</td>
+<td style="text-align:right;">
+11.54749
+</td>
+<td style="text-align:right;">
+35.98680
+</td>
+<td style="text-align:right;">
+36.21868
+</td>
+<td style="text-align:right;">
+2.959059
+</td>
+<td style="text-align:right;">
+-0.2810412
+</td>
+<td style="text-align:right;">
+-2.290092
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-Inf
+</td>
+<td style="text-align:right;">
+10.086779
+</td>
+<td style="text-align:right;">
+5.904646
+</td>
+<td style="text-align:right;">
+4.829387
+</td>
+<td style="text-align:right;">
+43.79991
+</td>
+<td style="text-align:right;">
+3.202237
+</td>
+<td style="text-align:right;">
+9.072997
+</td>
+<td style="text-align:right;">
+27.47360
+</td>
+<td style="text-align:right;">
+18.56422
+</td>
+<td style="text-align:right;">
+8.126669
+</td>
+<td style="text-align:right;">
+9.020453
+</td>
+<td style="text-align:right;">
+17.75415
+</td>
+<td style="text-align:right;">
+11.014845
+</td>
+<td style="text-align:right;">
+10.548466
+</td>
+<td style="text-align:right;">
+43.37546
+</td>
+<td style="text-align:right;">
+10.841772
+</td>
+<td style="text-align:right;">
+11.75929
+</td>
+<td style="text-align:right;">
+35.52433
+</td>
+<td style="text-align:right;">
+37.49800
+</td>
+<td style="text-align:right;">
+3.422602
+</td>
+<td style="text-align:right;">
+0.3428991
+</td>
+<td style="text-align:right;">
+-2.707708
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-Inf
+</td>
+<td style="text-align:right;">
+9.177680
+</td>
+<td style="text-align:right;">
+4.573067
+</td>
+<td style="text-align:right;">
+4.991486
+</td>
+<td style="text-align:right;">
+45.96927
+</td>
+<td style="text-align:right;">
+4.229134
+</td>
+<td style="text-align:right;">
+8.713716
+</td>
+<td style="text-align:right;">
+28.71831
+</td>
+<td style="text-align:right;">
+17.83862
+</td>
+<td style="text-align:right;">
+10.026637
+</td>
+<td style="text-align:right;">
+10.069013
+</td>
+<td style="text-align:right;">
+16.78743
+</td>
+<td style="text-align:right;">
+11.501990
+</td>
+<td style="text-align:right;">
+11.143915
+</td>
+<td style="text-align:right;">
+42.74678
+</td>
+<td style="text-align:right;">
+10.417723
+</td>
+<td style="text-align:right;">
+12.73232
+</td>
+<td style="text-align:right;">
+35.83626
+</td>
+<td style="text-align:right;">
+37.71385
+</td>
+<td style="text-align:right;">
+1.969737
+</td>
+<td style="text-align:right;">
+0.1153363
+</td>
+<td style="text-align:right;">
+-3.085783
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-Inf
+</td>
+<td style="text-align:right;">
+9.365604
+</td>
+<td style="text-align:right;">
+4.352948
+</td>
+<td style="text-align:right;">
+3.166828
+</td>
+<td style="text-align:right;">
+42.98059
+</td>
+<td style="text-align:right;">
+5.488087
+</td>
+<td style="text-align:right;">
+7.624188
+</td>
+<td style="text-align:right;">
+26.48458
+</td>
+<td style="text-align:right;">
+18.84666
+</td>
+<td style="text-align:right;">
+12.576935
+</td>
+<td style="text-align:right;">
+9.678820
+</td>
+<td style="text-align:right;">
+15.74183
+</td>
+<td style="text-align:right;">
+11.928859
+</td>
+<td style="text-align:right;">
+12.342695
+</td>
+<td style="text-align:right;">
+43.58864
+</td>
+<td style="text-align:right;">
+10.227816
+</td>
+<td style="text-align:right;">
+12.66173
+</td>
+<td style="text-align:right;">
+37.48989
+</td>
+<td style="text-align:right;">
+39.18548
+</td>
+<td style="text-align:right;">
+2.166790
+</td>
+<td style="text-align:right;">
+0.0480508
+</td>
+<td style="text-align:right;">
+-1.838376
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+-Inf
+</td>
+<td style="text-align:right;">
+11.068530
+</td>
+<td style="text-align:right;">
+6.220184
+</td>
+<td style="text-align:right;">
+5.258431
+</td>
+<td style="text-align:right;">
+44.24030
+</td>
+<td style="text-align:right;">
+6.539318
+</td>
+<td style="text-align:right;">
+10.427192
+</td>
+<td style="text-align:right;">
+28.58650
+</td>
+<td style="text-align:right;">
+19.88253
+</td>
+<td style="text-align:right;">
+10.447289
+</td>
+<td style="text-align:right;">
+8.898954
+</td>
+<td style="text-align:right;">
+15.58969
+</td>
+<td style="text-align:right;">
+10.322936
+</td>
+<td style="text-align:right;">
+10.083186
+</td>
+<td style="text-align:right;">
+43.41685
+</td>
+<td style="text-align:right;">
+10.599833
+</td>
+<td style="text-align:right;">
+11.96873
+</td>
+<td style="text-align:right;">
+33.03099
+</td>
+<td style="text-align:right;">
+35.53740
+</td>
+<td style="text-align:right;">
+2.155777
+</td>
+<td style="text-align:right;">
+-0.2940855
+</td>
+<td style="text-align:right;">
+-2.182421
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>plot(boruta, las = 2, cex.axis = 0.7, xlab=NULL)</code></pre>
+<p><img src="../../post/2019-11-22-exploring-variable-importance_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</p>
+<br>
+</div>
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+</body>
+</html>
 </div>
 </div>
 </div>
 </body>
+</div>
 
         </div>
 

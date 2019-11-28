@@ -88,12 +88,17 @@
   </url>
   
   <url>
-    <loc>/categories/careers/</loc>
-    <lastmod>2019-11-08T00:00:00+00:00</lastmod>
+    <loc>/post/exploring-variable-importance/</loc>
+    <lastmod>2019-11-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/exploring-variable-importance/</loc>
+    <loc>/tags/variable-importance/</loc>
+    <lastmod>2019-11-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/careers/</loc>
     <lastmod>2019-11-08T00:00:00+00:00</lastmod>
   </url>
   
@@ -129,11 +134,6 @@
   
   <url>
     <loc>/tags/ux/</loc>
-    <lastmod>2019-11-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/variable-importance/</loc>
     <lastmod>2019-11-08T00:00:00+00:00</lastmod>
   </url>
   
@@ -190,6 +190,11 @@
   <url>
     <loc>/contact/</loc>
     <lastmod>2019-10-29T13:49:23+06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2019-11-08-exploring-variable-importance/</loc>
+    <priority>0</priority>
   </url>
   
 </urlset>

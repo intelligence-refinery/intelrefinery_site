@@ -1,0 +1,372 @@
+---
+title: 'Exploring variable importance '
+author: ''
+date: '2019-11-22'
+categories:
+  - Data science toolbox
+tags:
+  - EDA
+  - Variable importance
+slug: exploring-variable-importance
+image: images/post/var_imp.png
+---
+
+<br>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+-->
+
+<link
+  rel="stylesheet"
+  href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+</head>
+<body>
+
+<body data-spy="scroll" data-target="#toc"> 
+<div class="container">
+<div class="row">
+<!-- sidebar, which will move to the top on a small screen -->
+<div class="col-sm-3">
+<nav id="toc" data-toggle="toc" class="sticky-top" style='padding-top:40px'></nav>
+</div>
+<!-- main content area -->
+<div class="col-sm-9">
+
+While examining feature importance is most commonly thought of as something to do after building a machine learning model, it can and should also be done before performing any serious data analysis, as both a sanity check and a time saver.
+
+Seeing which input features are the most predictive of the target feature can reveal potential problems with the dataset and/or the need to add more features to the dataset. Ultimately, narrowing down the entire feature space to a core set of variables that are the most predictive of the target variable is key to building successful data models.
+
+Here you will find a collection of model-independent and dependent approaches for exploring the "informativeness" of variables in a dataset.
+
+
+```{r eval=T, echo=F, message=FALSE, warning=FALSE}
+library(plyr)
+library(dplyr)
+
+## Import data
+df <- read.csv("https://github.com/nchelaru/data-prep/raw/master/telco_cleaned_yes_no.csv")
+
+## Scale numeric features
+ind <- sapply(df, is.numeric)
+
+df[ind] <- lapply(df[ind], scale)
+
+## Re-encode "Churn" variable as 0/1
+df$Churn <- ifelse(df$Churn == "Yes", 1, 0)
+
+df$Churn <- as.factor(df$Churn)
+
+## Convert categorical variables to factor
+col_names = c('Partner', 'Dependents','PhoneService', 'Contract', 'PaymentMethod', 'DeviceProtection', 'MultipleLines', 'OnlineSecurity', 
+            'OnlineBackup', 'TechSupport', 'StreamingTV', 'StreamingMovies', 'PaperlessBilling', 'Churn', 'InternetService')
+
+df[col_names] <- lapply(df[col_names] , factor)
+```
+
+
+## Unsupervised model-agnostic approaches
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.accordion {
+  background-color: #FCB97D;
+  color: #F2CC8F;
+  cursor: pointer;
+  padding: 14px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 13px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #F2CC8F;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+h3 {
+  padding-top: 0;
+  font-size: 15px;
+}
+
+.content h3 {
+  margin-bottom: 0;
+}
+
+</style>
+</head>
+<body>
+
+<button class="accordion" style='background-color:#dcffcc;'><h3>Factor analysis of mixed-type data </h3></button>
+<div class="panel">
+<p>
+```{r}
+## Import libraries
+library(FactoMineR)
+library(factoextra)
+library(plyr)
+library(dplyr)
+library(arulesCBA)
+
+## Discretize "Tenure" with respect to "Churn"/"No Churn"
+df$Binned_Tenure <- discretizeDF.supervised(Churn ~ .,
+                                            df[, c('Tenure', 'Churn')],
+                                            method = 'mdlp')$Tenure
+
+## MCA, with "Churn" set as the supplementary variable
+res.mca <- MCA(df,
+               quanti.sup = c(5, 18, 19),
+               quali.sup = c(20))
+
+## Plot relationship between levels of categorical variables obtained from MCA
+fviz_mca_var(res.mca, col.var = "cos2") 
+```
+
+</p>
+<br>
+</div>
+
+<button class="accordion" style='background-color:#dcffcc;'><h3>Hierarchical clustering of variables</h3></button>
+<div class="panel">
+<p>
+```{r cache=TRUE, message=FALSE, warning=FALSE}
+## Import libraries
+library(ClustOfVar)
+library(PCAmixdata)
+library(dendextend)
+
+## Split up continuous and categorical varibles
+split <- splitmix(df)
+
+X1 <- split$X.quanti 
+
+X2 <- split$X.quali
+
+## Hierarchical clustering
+tree <- hclustvar(X.quanti = X1, X.quali = X2)
+
+## Evaluate the stability of each partition
+x <- stability(tree, B=5) ## 5 bootstrap samples
+```
+
+Plot the hierarchically clustered variables in a dendrogram:
+
+```{r cache=TRUE}
+par(mar = c(3, 4, 3, 8))
+
+dend <- tree %>% as.dendrogram %>% hang.dendrogram
+
+dend %>% color_branches(k=5) %>% color_labels(k=5) %>% plot(horiz=TRUE)
+```
+
+</p>
+<br>
+</div>
+
+
+
+## Supervised model-agnostic approaches
+
+<button class="accordion" style='background-color:#baabda;'><h3>Correlation-based</h3></button>
+<div class="panel">
+<p> 
+
+<b>`autoEDA`</b>
+
+We have met the `autoEDA` package previously, as a tool for automated exploratory data analysis. In addition to making generating exploratory visualizations a breeze, it has a very cool `predictivePower()` function that calculates the "predictive power" of each input feature with respect to an outcome feature of your choice, which is quantified by <b>correlation</b> when the outcome feature is continuous and the <b>Kolmogorov-Smirnov distance</b> when it is categorical.
+
+Note, the author of the package has <b>warned</b> that the estimation of feature predictive power is sensitive to how the data is prepared. Therefore, like all other tasks in data science, it is very advisable to put the same dataset through different analysis methods and see how the results match up.
+
+Let's give it a try for our outcome of interest, customer churn:
+
+```{r eval=T, echo=F, message=FALSE, warning=FALSE}
+## Import libraries
+library(autoEDA)
+library(kableExtra)
+
+## Calculate variable predictive power
+autoEDA_imp <- predictivePower(df, y="Churn", outcomeType = "automatic") %>% 
+                    arrange(desc(PredictivePowerPercentage))
+
+## See in table
+kable(autoEDA_imp)  %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+
+
+<b>`ClustOfVar`</b>
+
+```{r}
+## Import libraries
+library(ClustOfVar)
+
+## Calculate similarity between each variable and Churn
+i <- 1
+
+score_list = list()
+
+for (c in colnames(within(df, rm("Churn")))){
+  score_list[[i]] <- mixedVarSim(df[[c]], df$Churn)
+  
+  i <- i + 1
+}
+
+## Concatenate the two lists to a dataframe
+score_df <- do.call(rbind, 
+                    Map(data.frame, 
+                        Var=as.list(colnames(within(df, rm("Churn")))), 
+                        Score=score_list))
+
+```
+
+
+
+</p>
+<br>
+</div>
+
+<button class="accordion" style='background-color:#baabda;'><h3>Information theory</h3></button>
+<div class="panel">
+<p> 
+```{r eval=T, echo=F, message=FALSE, warning=FALSE}
+library(plyr)
+library(dplyr)
+
+## Import data
+df <- read.csv("https://github.com/nchelaru/data-prep/raw/master/telco_cleaned_yes_no.csv")
+
+## Scale numeric features
+ind <- sapply(df, is.numeric)
+
+df[ind] <- lapply(df[ind], scale)
+
+## Re-encode "Churn" variable as 0/1
+df$Churn <- ifelse(df$Churn == "Yes", 1, 0)
+
+df$Churn <- as.factor(df$Churn)
+
+## Convert categorical variables to factor
+col_names = c('Partner', 'Dependents','PhoneService', 'Contract', 'PaymentMethod', 'DeviceProtection', 'MultipleLines', 'OnlineSecurity', 
+            'OnlineBackup', 'TechSupport', 'StreamingTV', 'StreamingMovies', 'PaperlessBilling', 'Churn', 'InternetService')
+
+df[col_names] <- lapply(df[col_names] , factor)
+```
+
+
+```{r message=FALSE, warning=FALSE}
+## Import library
+library(funModeling)
+library(scorecard)
+library(ggplot2)
+library(ggpubr)
+
+## Calulate variable importance
+fM_imp <- var_rank_info(df, "Churn")
+
+## Scorecard
+sc_iv <- iv(df, y="Churn")
+
+colnames(sc_iv) <- c('var', 'info_value')
+
+## Combine the two 
+combine_df <- left_join(fM_imp, sc_iv, by = "var") 
+
+## Min-max scale result of each package, so they are comparable
+normalize <- function(x) {
+    return ((x - min(x)) / (max(x) - min(x)))
+  }
+
+dfNorm <- as.data.frame(lapply(combine_df[, 2:6], normalize))
+
+x <- cbind(combine_df$var, dfNorm)
+
+rownames(x) <- x[, 1]
+
+x <- x[, 2:6]
+
+colnames(x) <- c('Entropy', 'Mutual information', 'Information gain', 'Gain ratio', 'Information value')
+
+## Make balloon plot
+ggballoonplot(x, fill = "value", size.range = c(1, 7)) +
+  scale_fill_viridis_c(option = "C")
+```
+
+</p>
+<br>
+</div>
+
+ 
+
+
+## Model-dependent approaches
+
+<button class="accordion" style='background-color:#9fdfcd;'><h3>Random forest</h3></button>
+<div class="panel">
+<p> 
+```{r}
+library(Boruta)
+
+set.seed(456)
+
+boruta <- Boruta(Churn~., data=df, doTrace=0)
+
+kable(boruta$ImpHistory)  %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+```{r}
+plot(boruta, las = 2, cex.axis = 0.7, xlab=NULL)
+```
+
+
+</p>
+<br>
+</div>
+
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+
+</body>
+</html>
+
+
+</div>
+</div>
+</div>
+</body>

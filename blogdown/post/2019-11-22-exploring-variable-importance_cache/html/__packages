@@ -1,0 +1,14 @@
+base
+plyr
+dplyr
+FactoMineR
+ggplot2
+factoextra
+Matrix
+arules
+discretization
+glmnet
+arulesCBA
+ClustOfVar
+PCAmixdata
+dendextend
