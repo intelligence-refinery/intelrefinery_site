@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Extractive text summarization</title>
+      <link>/post/extractive-summarization/</link>
+      <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/extractive-summarization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Fast exploratory data analysis for when you just can&#39;t wait</title>
       <link>/post/fast-exploratory-data-analysis-for-the-impatient/</link>
       <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
@@ -36,15 +45,6 @@
       
       <guid>/post/graphing-in-python-a-walkthrough/</guid>
       <description>--</description>
-    </item>
-    
-    <item>
-      <title>Word embedding</title>
-      <link>/post/word-embedding/</link>
-      <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/word-embedding/</guid>
-      <description>    </description>
     </item>
     
     <item>

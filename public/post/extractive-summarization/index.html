@@ -1,0 +1,2532 @@
+<!DOCTYPE html>
+<html lang="en-us"><link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/styles/default.min.css">
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Intelligence Refinery</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="This is meta description">
+  
+  <meta name="author" content="Intelligence Refinery">
+  <meta name="generator" content="Hugo 0.58.3" />
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="../../plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="../../plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="../../plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="../../plugins/venobox/venobox.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="../../scss/style.min.css" integrity="" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="../../images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="../../images/favicon.png " type="image/x-icon">
+
+</head><body>
+<!-- preloader start -->
+<div class="preloader">
+  
+</div>
+<!-- preloader end -->
+<!-- navigation -->
+<header class="navigation">
+  <div class="container">
+    
+    <nav class="navbar navbar-expand-lg navbar-white bg-transparent border-bottom">
+      <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation">
+        <i class="ti-menu h3"></i>
+      </button>
+
+      <div class="collapse navbar-collapse text-center" id="navigation">
+        <div class="desktop-view">
+
+          <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="https://twitter.com/IntelRefinery"><i class="ti-twitter-alt"></i></a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="https://intelrefinery.tumblr.com/"><i class="ti-tumblr"></i></a>
+            </li>
+            
+          </ul>
+
+        </div>
+
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../../"> Home </a>
+          </li>
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="../../about/about">About</a>
+          </li>
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="../../contact">Contact Us</a>
+          </li>
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="../../"></a>
+          </li>
+          
+          
+        </ul>
+
+        
+        <!-- search -->
+        <div class="search px-4">
+          <button id="searchOpen" class="search-btn"><i class="ti-search"></i></button>
+          <div class="search-wrapper">
+            <form action="//search" class="h-100">
+              <input class="search-box px-4" id="search-query" name="s" type="search" placeholder="Type & Hit Enter...">
+            </form>
+            <button id="searchClose" class="search-close"><i class="ti-close text-dark"></i></button>
+          </div>
+        </div>
+        
+
+        
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /navigation -->
+
+<section class="section-sm">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <h2 data-toc-skip>Extractive text summarization</h2>
+        <div class="mb-3"> <span
+            class="border-bottom border-primary px-2 mx-1"></span>
+          <span>February 13 2020</span></div>
+        <center><img src="../../images/post/extractive-summary.png" class="img-fluid w-75 mb-4" alt="Extractive text summarization"></center>
+        <div class="content mb-5">
+          
+<script src="../../rmarkdown-libs/kePrint/kePrint.js"></script>
+
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+  rel="stylesheet"
+  href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+</head>
+<body>
+<body data-spy="scroll" data-target="#toc">
+<div class="container">
+<div class="row">
+<!-- sidebar, which will move to the top on a small screen -->
+<div class="col-sm-2">
+<p><nav id="toc" data-toggle="toc" class="sticky-top" style='padding-top:40px'></nav></p>
+</div>
+<!-- main content area -->
+<div class="col-sm-10">
+
+
+
+
+
+
+
+
+
+<div id="textrank" class="section level1">
+<h1>textrank</h1>
+<p><code>textrank</code> is a R package that uses the textrank algorithm to <strong>1) rank sentences by their “importance”</strong> and <strong>2) identify keywords that appear more frequently in the test</strong>. The workflow presented here is a combination of posts by <a href="https://cran.r-project.org/web/packages/textrank/vignettes/textrank.html#textrank">Jan Wijffels</a> and <a href="https://www.hvitfeldt.me/blog/tidy-text-summarization-using-textrank/">Emil Hvitfeldt</a>.</p>
+<div id="worflow" class="section level2">
+<h2>Worflow</h2>
+<div id="get-text" class="section level3">
+<h3>Get text</h3>
+<p>Let’s start by grabbing the article text used in the post by <a href="https://www.hvitfeldt.me/blog/tidy-text-summarization-using-textrank/">Emil Hvitfeldt</a>, which is about a newly released Fitbit for kids. Here, I’m using a slightly different <code>rvest</code> command to scrape the article, as the instructions provided scraped a lot of extra website boilerplate text that muddied the waters, so to speak, and screwed up the <code>textrank</code> results.</p>
+<pre class="r"><code>## Import libraries
+library(tidyverse)
+library(tidytext)
+library(textrank)
+library(rvest)
+
+url &lt;- &quot;http://time.com/5196761/fitbit-ace-kids-fitness-tracker/&quot;
+
+article &lt;- read_html(url) %&gt;%
+  html_nodes(&#39;p&#39;)   %&gt;%
+  html_text()
+
+article &lt;- paste(article, collapse = &quot;\n&quot;)
+
+print(article)</code></pre>
+<pre><code>## [1] &quot;Fitbit is launching a new fitness tracker designed for children called the Fitbit Ace, which will go on sale for $99.95 in the second quarter of this year.\nThe Fitbit Ace looks a lot like the company’s Alta tracker, but with a few child-friendly tweaks. The most important of which is Fitbit’s new family account option, which gives parents control over how their child uses their tracker and is compliant with the Children’s Online Privacy Protection Act, or COPPA. Parents must approve who their child can connect with via the Fitbit app and can view their kid’s activity progress and sleep trends, the latter of which can help them manage their children’s bedtimes.\nLike many of Fitbit’s other products, the Fitbit Ace can automatically track steps, monitor active minutes, and remind kids to move when they’ve been still for too long. But while Fitbit’s default move goal is 30 minutes for adult users, the Ace’s will be 60 minutes, in line with the World Health Organization’s recommendation that children between the ages of five and 17 get an hour of daily physical activity per day. Fitbit says the tracker is designed for children eight years old and up.\nFitbit will also be introducing a Family Faceoff feature that lets kids compete in a five-day step challenge against the other members of their family account. The app also will reward children with in-app badges for achieving their health goals. Fitbit’s new child-friendly fitness band will be available in blue and purple, is showerproof, and should last for five days on a single charge.\nThe Ace launch is part of Fitbit’s broader goal of branching out to new audiences. The company also announced a new smartwatch on Tuesday called the Versa, which is being positioned as an everyday smartwatch rather than a fitness-only device or sports watch, like some of the company’s other products.\nAbove all else, the Ace is an effort to get children up and moving. The Centers for Disease Control and Prevention report that the percentage of children and adolescents affected by obesity has more than tripled since the 1970’s. But parents who want to encourage their children to move already have several less expensive options to choose from. Garmin’s $79.99 Vivofit Jr. 2, for example, comes in themed skins like these Minnie Mouse and Star Wars versions, while the wristband entices kids to move by reflecting their fitness achievements in an accompanying smartphone game. The $39.99 Nabi Compete, meanwhile, is sold in pairs so that family members can work together to achieve movement milestones.\nContact us at editors@time.com.&quot;</code></pre>
+</div>
+<div id="part-of-speech-tagging" class="section level3">
+<h3>Part-of-speech tagging</h3>
+<p>As the textrank algorithm measures similiarity between sentences by the extend of word overlap between them, it is important to compare them only in terms of the most informative words. This is done by part-of-speech (POS) tagging, to identify nouns, verbs and adjectives.</p>
+<p>Here we will use the <code>udpipe</code> package (<a href="https://github.com/bnosac/udpipe">Github repo</a>), which provides language-agnostic tokenization, tagging, lemmatization and dependency parsing of raw text.</p>
+<pre class="r"><code>## Import library
+library(udpipe)
+
+## Create model
+tagger &lt;- udpipe_download_model(&quot;english&quot;)
+tagger &lt;- udpipe_load_model(tagger$file_model)
+
+## Annotate text
+article &lt;- udpipe_annotate(tagger, article)</code></pre>
+<p>Let’s look at the results:</p>
+<pre class="r"><code>article &lt;- as.data.frame(article)
+
+article %&gt;% 
+  head(10) %&gt;% 
+  select(-sentence) %&gt;% 
+  kable() %&gt;%
+  kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;), full_width = F) %&gt;%
+  scroll_box(width = &quot;100%&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+doc_id
+</th>
+<th style="text-align:right;">
+paragraph_id
+</th>
+<th style="text-align:right;">
+sentence_id
+</th>
+<th style="text-align:left;">
+token_id
+</th>
+<th style="text-align:left;">
+token
+</th>
+<th style="text-align:left;">
+lemma
+</th>
+<th style="text-align:left;">
+upos
+</th>
+<th style="text-align:left;">
+xpos
+</th>
+<th style="text-align:left;">
+feats
+</th>
+<th style="text-align:left;">
+head_token_id
+</th>
+<th style="text-align:left;">
+dep_rel
+</th>
+<th style="text-align:left;">
+deps
+</th>
+<th style="text-align:left;">
+misc
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Fitbit
+</td>
+<td style="text-align:left;">
+Fitbit
+</td>
+<td style="text-align:left;">
+PROPN
+</td>
+<td style="text-align:left;">
+NNP
+</td>
+<td style="text-align:left;">
+Number=Sing
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+nsubj
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+is
+</td>
+<td style="text-align:left;">
+be
+</td>
+<td style="text-align:left;">
+AUX
+</td>
+<td style="text-align:left;">
+VBZ
+</td>
+<td style="text-align:left;">
+Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+aux
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+launching
+</td>
+<td style="text-align:left;">
+launch
+</td>
+<td style="text-align:left;">
+VERB
+</td>
+<td style="text-align:left;">
+VBG
+</td>
+<td style="text-align:left;">
+Tense=Pres|VerbForm=Part
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+root
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+DET
+</td>
+<td style="text-align:left;">
+DT
+</td>
+<td style="text-align:left;">
+Definite=Ind|PronType=Art
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+det
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+new
+</td>
+<td style="text-align:left;">
+new
+</td>
+<td style="text-align:left;">
+ADJ
+</td>
+<td style="text-align:left;">
+JJ
+</td>
+<td style="text-align:left;">
+Degree=Pos
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+amod
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+fitness
+</td>
+<td style="text-align:left;">
+fitness
+</td>
+<td style="text-align:left;">
+NOUN
+</td>
+<td style="text-align:left;">
+NN
+</td>
+<td style="text-align:left;">
+Number=Sing
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+compound
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+tracker
+</td>
+<td style="text-align:left;">
+tracker
+</td>
+<td style="text-align:left;">
+NOUN
+</td>
+<td style="text-align:left;">
+NN
+</td>
+<td style="text-align:left;">
+Number=Sing
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+obj
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+designed
+</td>
+<td style="text-align:left;">
+design
+</td>
+<td style="text-align:left;">
+VERB
+</td>
+<td style="text-align:left;">
+VBN
+</td>
+<td style="text-align:left;">
+Tense=Past|VerbForm=Part
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+acl
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+for
+</td>
+<td style="text-align:left;">
+for
+</td>
+<td style="text-align:left;">
+ADP
+</td>
+<td style="text-align:left;">
+IN
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+case
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+children
+</td>
+<td style="text-align:left;">
+child
+</td>
+<td style="text-align:left;">
+NOUN
+</td>
+<td style="text-align:left;">
+NNS
+</td>
+<td style="text-align:left;">
+Number=Plur
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+obl
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="extract-keywords" class="section level3">
+<h3>Extract keywords</h3>
+<blockquote>
+<p>“In order to find relevant keywords, the textrank algorithm constructs a word network. This network is constructed by looking which words follow one another. A link is set up between two words if they follow one another, the link gets a higher weight if these 2 words occur more frequenctly next to each other in the text.”</p>
+</blockquote>
+<p>The only input to <code>textrank_keywords()</code> is the lemmatized words, with the option of filtering for only certain types of words, such as nouns, verbs and adjectives:</p>
+<pre class="r"><code>article_keywords &lt;- textrank_keywords(article$lemma, 
+                                      relevant = article$upos %in% c(&quot;NOUN&quot;, &quot;VERB&quot;, &quot;ADJ&quot;))
+
+article_keywords$keywords %&gt;%
+  subset(freq &gt; 1) %&gt;%
+  kable()</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+keyword
+</th>
+<th style="text-align:right;">
+ngram
+</th>
+<th style="text-align:right;">
+freq
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+child
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tracker
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+kid
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+move
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+parent
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+app
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+other
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+goal
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fitness
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+year
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+family-account
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+account
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+activity
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+step
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+family
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+new
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="rank-sentences" class="section level3">
+<h3>Rank sentences</h3>
+<p>Loosely, the textrank algorithm computes similarities between a pair of sentences by the number of words that they have in common.</p>
+<p>The <code>textrank_sentences()</code> function takes in two inputs <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>:</p>
+<p>A dataframe with sentences:</p>
+<pre class="r"><code>sentences &lt;- unique(article[, c(&quot;sentence_id&quot;, &quot;sentence&quot;)])</code></pre>
+<p>A dataframe with words which are part of each sentence:</p>
+<pre class="r"><code>terminology &lt;- article %&gt;% 
+                  filter(upos %in% c(&quot;NOUN&quot;, &quot;VERB&quot;, &quot;ADJ&quot;)) %&gt;%
+                  select(sentence_id, lemma) </code></pre>
+<p>Based on these two dataframes, the function calculates the pairwise distance between each sentence by computing how many terms are overlapping, in terms of Jaccard distance. These pairwise distances among the sentences are next passed on to Google’s pagerank algorithm to identify the most relevant sentences.</p>
+<pre class="r"><code>tr &lt;- textrank_sentences(data = sentences, 
+                         terminology = terminology)</code></pre>
+<p>Let’s see how the sentences rank:</p>
+<pre class="r"><code>kable(tr[[&#39;sentences&#39;]] %&gt;% arrange(-textrank))</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+textrank_id
+</th>
+<th style="text-align:left;">
+sentence
+</th>
+<th style="text-align:right;">
+textrank
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Fitbit is launching a new fitness tracker designed for children called the Fitbit Ace, which will go on sale for $99.95 in the second quarter of this year.
+</td>
+<td style="text-align:right;">
+0.0784357
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:left;">
+Above all else, the Ace is an effort to get children up and moving.
+</td>
+<td style="text-align:right;">
+0.0672520
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+The most important of which is Fitbit’s new family account option, which gives parents control over how their child uses their tracker and is compliant with the Children’s Online Privacy Protection Act, or COPPA.
+</td>
+<td style="text-align:right;">
+0.0652963
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:left;">
+Fitbit’s new child-friendly fitness band will be available in blue and purple, is showerproof, and should last for five days on a single charge.
+</td>
+<td style="text-align:right;">
+0.0626908
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+But while Fitbit’s default move goal is 30 minutes for adult users, the Ace’s will be 60 minutes, in line with the World Health Organization’s recommendation that children between the ages of five and 17 get an hour of daily physical activity per day.
+</td>
+<td style="text-align:right;">
+0.0621032
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+Fitbit says the tracker is designed for children eight years old and up.
+</td>
+<td style="text-align:right;">
+0.0615568
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:left;">
+But parents who want to encourage their children to move already have several less expensive options to choose from.
+</td>
+<td style="text-align:right;">
+0.0591652
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+The app also will reward children with in-app badges for achieving their health goals.
+</td>
+<td style="text-align:right;">
+0.0588857
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+Parents must approve who their child can connect with via the Fitbit app and can view their kid’s activity progress and sleep trends, the latter of which can help them manage their children’s bedtimes.
+</td>
+<td style="text-align:right;">
+0.0578003
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Ace looks a lot like the company’s Alta tracker, but with a few child-friendly tweaks.
+</td>
+<td style="text-align:right;">
+0.0572568
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+Fitbit will also be introducing a Family Faceoff feature that lets kids compete in a five-day step challenge against the other members of their family account.
+</td>
+<td style="text-align:right;">
+0.0561673
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:left;">
+The company also announced a new smartwatch on Tuesday called the Versa, which is being positioned as an everyday smartwatch rather than a fitness-only device or sports watch, like some of the company’s other products.
+</td>
+<td style="text-align:right;">
+0.0498193
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+Like many of Fitbit’s other products, the Fitbit
+</td>
+<td style="text-align:right;">
+0.0454276
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:left;">
+The Centers for Disease Control and Prevention report that the percentage of children and adolescents affected by obesity has more than tripled since the 1970’s.
+</td>
+<td style="text-align:right;">
+0.0387110
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+Ace can automatically track steps, monitor active minutes, and remind kids to move when they’ve been still for too long.
+</td>
+<td style="text-align:right;">
+0.0370217
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+Wars versions, while the wristband entices kids to move by reflecting their fitness achievements in an accompanying smartphone game.
+</td>
+<td style="text-align:right;">
+0.0351309
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+The Fitbit
+</td>
+<td style="text-align:right;">
+0.0332401
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:left;">
+The Ace launch is part of Fitbit’s broader goal of branching out to new audiences.
+</td>
+<td style="text-align:right;">
+0.0299872
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:left;">
+Nabi Compete, meanwhile, is sold in pairs so that family members can work together to achieve movement milestones.
+</td>
+<td style="text-align:right;">
+0.0209157
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:left;">
+Garmin’s $79.99 Vivofit Jr. 2, for example, comes in themed skins like these Minnie Mouse and Star
+</td>
+<td style="text-align:right;">
+0.0077121
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:left;">
+The $39.99
+</td>
+<td style="text-align:right;">
+0.0077121
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:left;">
+Contact us at <a href="mailto:editors@time.com" class="email">editors@time.com</a>.
+</td>
+<td style="text-align:right;">
+0.0077121
+</td>
+</tr>
+</tbody>
+</table>
+<p>Makes sense, but it would be nice to have a human-made summary for comparison.</p>
+<p>Alternatively, we can see what the top five most “informative” sentences are in their order of appearance:</p>
+<pre class="r"><code>s &lt;- summary(tr, n = 5, keep.sentence.order = TRUE)
+
+cat(s, sep = &quot;\n\n&quot;)</code></pre>
+<pre><code>## Fitbit is launching a new fitness tracker designed for children called the Fitbit Ace, which will go on sale for $99.95 in the second quarter of this year.
+## 
+## The most important of which is Fitbit’s new family account option, which gives parents control over how their child uses their tracker and is compliant with the Children’s Online Privacy Protection Act, or COPPA.
+## 
+## But while Fitbit’s default move goal is 30 minutes for adult users, the Ace’s will be 60 minutes, in line with the World Health Organization’s recommendation that children between the ages of five and 17 get an hour of daily physical activity per day.
+## 
+## Fitbit’s new child-friendly fitness band will be available in blue and purple, is showerproof, and should last for five days on a single charge.
+## 
+## Above all else, the Ace is an effort to get children up and moving.</code></pre>
+<p>Finally, we can also visualize the textrank value of sentences by their order of appearance in the text.</p>
+<pre class="r"><code>tr[[&quot;sentences&quot;]] %&gt;%
+  ggplot(aes(textrank_id, textrank, fill = textrank_id)) +
+  geom_col(color=&quot;blue&quot;, fill=rgb(0.1,0.4,0.5,0.7)) +
+  theme_classic() +
+  guides(fill = &quot;none&quot;) +
+  labs(x = &quot;Sentence&quot;,
+       y = &quot;TextRank score&quot;)</code></pre>
+<p><img src="../../post/2020-02-13-bnosac-textrank_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+</div>
+<div id="another-example" class="section level2">
+<h2>Another example</h2>
+<p>Lately, I’ve been trying to analyze job descriptions. Let’s see how textrank summarization performs on one for a data scientist position.</p>
+<pre class="r"><code>link &lt;- &quot;https://ca.indeed.com/viewjob?cmp=Slice-Insurance-Technologies-Inc.&amp;t=Data+Scientist&amp;jk=35c9914ee9b0a052&amp;sjdu=vQIlM60yK_PwYat7ToXhk3myaatk1OsAkhQIw2UEit1eiAfw8fAJl6BKuZ5V5P0TgQjo7h2qNGvAZ_80Lr3XxA&amp;tk=1e1nuvuml0np3000&amp;adid=335410488&amp;pub=4a1b367933fd867b19b072952f68dceb&amp;vjs=3&quot;
+
+description &lt;- tryCatch(
+    as.character(link) %&gt;% read_html() %&gt;% html_nodes(xpath=&#39;//*[(@id = &quot;jobDescriptionText&quot;)]&#39;) %&gt;% map(xml_contents),
+    error=function(e){NA}
+  )
+  if (is.null(description)){
+    desc &lt;- NA
+  }
+  
+  
+final  &lt;- tryCatch(
+    paste(as.character(description[[1]]), collapse=&#39; &#39;),
+    error=function(e){NA}
+  )
+  if (is.null(description)){
+    NA
+  }
+
+job_des &lt;- html_text(read_html(final))
+ 
+print(job_des)</code></pre>
+<pre><code>## [1] &quot;WE are Slice Labs (Slice). We’re building a team of innovators and disruptors to change the insurance experience to meet the demands of an on-demand world. We are disrupting the idea that insurance needs to be a fixed product, with a fixed term, with fixed coverage. We believe it can and should be all digital and on-demand, so customers get only the coverage they need, right when they need it. At Slice, we’re focused on ensuring our products provide a positive, individualized customer experience. Our smaller teams invite broader thinking and problem solving, where nobody is pigeonholed into a predetermined role. We work in an open, supportive, environment that values and promotes inclusiveness, innovation, and collaboration. It’s fast-paced, dynamic and fulfilling.\n *The Data Science team is key to Slice’s ongoing success. The data we have and the models we build are foundational to our platform and quite literally drive our business. Our work improves the customer experience, grows our market share and drives business outcomes. This is an opportunity to play an active part in delivering our data vision and determining how we get there. All that to say: Data Science work here at Slice is far from theoretical.\n This ROLE develops and executes Data Science projects across the company. This means hands-on work at all points in the data lifecycle, including data wrangling and mining; feature engineering; model-building and testing; and implementation and communication. Your work will ensure that all our decisions are data-driven - this means that you will have a direct impact on the customer experience by influencing critical decisions on resource deployment and customer engagement. Our immediate applications include marketing analytics, fraud prevention, and risk/value modeling. (Our future applications are boundless!)\n YOU are passionate about data. You enjoy being able to combine your analytical, technical and business skills in one role. You love solving problems and predicting behaviours. You are a collaborator and a communicator and are energized by working with multidisciplinary teams. You are a hands-on learner and are excited by the thought of moving past theory and examples to real-time data science work.\n You bring: \n An effective communication style with an ability to translate “the complex” to “the simple”. You are adept at data visualizations and have experience working with real-time data.4+ years of practical experience using data, models, and common sense to solve tough problems in a collaborative environment. Experience deploying models is a plus!Working experience with Python, including Pandas, NumPy, scikit-learn, NLTK, and Keras/TensorFlow.An understanding of statistical and predictive modeling concepts, machine learning algorithms, clustering and classification techniques.Some exposure to one or more sub-fields of data science, especially GIS/spatial analysis; graph theory/network analysis; or natural language processing (NLP).Working experience with non-Excel BI tools such as Tableau, Looker, Superset, PowerBI, etc.You are comfortable building datasets using traditional relational databases and you’re familiar with alternative databases (noSQL, graph databases) or big data platforms such as Apache Spark.University degree in engineering, applied statistics, data mining, machine learning, mathematics or a related quantitative discipline.*\n Job Types: Full-time, Permanent\n Experience:\n Data Science: 4 years (Required)Location:\n Ottawa, ON (Preferred)&quot;</code></pre>
+<p>Part-of-speech tagging:</p>
+<pre class="r"><code>job_des &lt;- udpipe_annotate(tagger, job_des)
+
+job_des &lt;- as.data.frame(job_des)
+
+job_des %&gt;% 
+  head(10) %&gt;% 
+  select(-sentence) %&gt;% 
+  kable() %&gt;%
+  kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;), full_width = F) %&gt;%
+  scroll_box(width = &quot;100%&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+doc_id
+</th>
+<th style="text-align:right;">
+paragraph_id
+</th>
+<th style="text-align:right;">
+sentence_id
+</th>
+<th style="text-align:left;">
+token_id
+</th>
+<th style="text-align:left;">
+token
+</th>
+<th style="text-align:left;">
+lemma
+</th>
+<th style="text-align:left;">
+upos
+</th>
+<th style="text-align:left;">
+xpos
+</th>
+<th style="text-align:left;">
+feats
+</th>
+<th style="text-align:left;">
+head_token_id
+</th>
+<th style="text-align:left;">
+dep_rel
+</th>
+<th style="text-align:left;">
+deps
+</th>
+<th style="text-align:left;">
+misc
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+we
+</td>
+<td style="text-align:left;">
+PRON
+</td>
+<td style="text-align:left;">
+PRP
+</td>
+<td style="text-align:left;">
+Case=Nom|Number=Plur|Person=1|PronType=Prs
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+nsubj
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+are
+</td>
+<td style="text-align:left;">
+be
+</td>
+<td style="text-align:left;">
+AUX
+</td>
+<td style="text-align:left;">
+VBP
+</td>
+<td style="text-align:left;">
+Mood=Ind|Tense=Pres|VerbForm=Fin
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+cop
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Slice
+</td>
+<td style="text-align:left;">
+slice
+</td>
+<td style="text-align:left;">
+PROPN
+</td>
+<td style="text-align:left;">
+NNP
+</td>
+<td style="text-align:left;">
+Number=Sing
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+compound
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Labs
+</td>
+<td style="text-align:left;">
+labs
+</td>
+<td style="text-align:left;">
+PROPN
+</td>
+<td style="text-align:left;">
+NNP
+</td>
+<td style="text-align:left;">
+Number=Sing
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+root
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+(
+</td>
+<td style="text-align:left;">
+(
+</td>
+<td style="text-align:left;">
+PUNCT
+</td>
+<td style="text-align:left;">
+-LRB-
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+punct
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+SpaceAfter=No
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Slice
+</td>
+<td style="text-align:left;">
+slice
+</td>
+<td style="text-align:left;">
+PROPN
+</td>
+<td style="text-align:left;">
+NNP
+</td>
+<td style="text-align:left;">
+Number=Sing
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+appos
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+SpaceAfter=No
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+)
+</td>
+<td style="text-align:left;">
+)
+</td>
+<td style="text-align:left;">
+PUNCT
+</td>
+<td style="text-align:left;">
+-RRB-
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+punct
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+SpaceAfter=No
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+.
+</td>
+<td style="text-align:left;">
+.
+</td>
+<td style="text-align:left;">
+PUNCT
+</td>
+<td style="text-align:left;">
+.
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+punct
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+We
+</td>
+<td style="text-align:left;">
+we
+</td>
+<td style="text-align:left;">
+PRON
+</td>
+<td style="text-align:left;">
+PRP
+</td>
+<td style="text-align:left;">
+Case=Nom|Number=Plur|Person=1|PronType=Prs
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+nsubj
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+SpaceAfter=No
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+doc1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+’re
+</td>
+<td style="text-align:left;">
+’re
+</td>
+<td style="text-align:left;">
+VERB
+</td>
+<td style="text-align:left;">
+VBP
+</td>
+<td style="text-align:left;">
+Mood=Ind|Tense=Pres|VerbForm=Fin
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+root
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The keyword extraction functionality seemed lack-luster for this example too, giving what is essentially a list of most frequently appearing words.</p>
+<pre class="r"><code>job_des_keywords &lt;- textrank_keywords(job_des$lemma, 
+                                      relevant = job_des$upos %in% c(&quot;NOUN&quot;, &quot;VERB&quot;, &quot;ADJ&quot;))
+
+job_des_keywords$keywords %&gt;%
+  subset(freq &gt; 1) %&gt;%
+  kable()</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+keyword
+</th>
+<th style="text-align:right;">
+ngram
+</th>
+<th style="text-align:right;">
+freq
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+data
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+experience
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+work
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+’re
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+team
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+demand
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+customer-experience
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+problem
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+role
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+business
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+data-science
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+science
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+learn
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+database
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+product
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fix
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+customer
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mean
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+building
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+communication
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+modeling
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+theory
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+work-experience
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+analysis
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+such
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<p>Finally, let’s look at the sentence rankings:</p>
+<pre class="r"><code>sentences &lt;- unique(job_des[, c(&quot;sentence_id&quot;, &quot;sentence&quot;)])
+
+terminology &lt;- job_des %&gt;% 
+                  filter(upos %in% c(&quot;NOUN&quot;, &quot;VERB&quot;, &quot;ADJ&quot;)) %&gt;%
+                  select(sentence_id, lemma) 
+
+tr &lt;- textrank_sentences(data = sentences, 
+                         terminology = terminology)
+
+kable(tr[[&#39;sentences&#39;]] %&gt;% arrange(-textrank))</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+textrank_id
+</th>
+<th style="text-align:left;">
+sentence
+</th>
+<th style="text-align:right;">
+textrank
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:left;">
+You are adept at data visualizations and have experience working with real-time data.4+ years of practical experience using data, models, and common sense to solve tough problems in a collaborative environment.
+</td>
+<td style="text-align:right;">
+0.0703072
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:left;">
+Your work will ensure that all our decisions are data-driven - this means that you will have a direct impact on the customer experience by influencing critical decisions on resource deployment and customer engagement.
+</td>
+<td style="text-align:right;">
+0.0611901
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+Our work improves the customer experience, grows our market share and drives business outcomes.
+</td>
+<td style="text-align:right;">
+0.0575264
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:left;">
+This means hands-on work at all points in the data lifecycle, including data wrangling and mining; feature engineering; model-building and testing; and implementation and communication.
+</td>
+<td style="text-align:right;">
+0.0567150
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+The data we have and the models we build are foundational to our platform and quite literally drive our business.
+</td>
+<td style="text-align:right;">
+0.0509835
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:left;">
+You are a hands-on learner and are excited by the thought of moving past theory and examples to real-time data science work.
+</td>
+<td style="text-align:right;">
+0.0507275
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+Working experience with non-Excel BI tools such as Tableau, Looker, Superset, PowerBI, etc.You are comfortable building datasets using traditional relational databases and you’re familiar with alternative databases (noSQL, graph databases) or big data platforms such as Apache Spark.University degree in engineering, applied statistics, data mining, machine learning, mathematics or a related quantitative discipline.*
+</td>
+<td style="text-align:right;">
+0.0445864
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:left;">
+Working experience with Python, including Pandas, NumPy, scikit-learn, NLTK, and Keras/TensorFlow.An understanding of statistical and predictive modeling concepts, machine learning algorithms, clustering and classification techniques.Some exposure to one or more sub-fields of data science, especially GIS/spatial analysis; graph theory/network analysis; or natural language processing (NLP).
+</td>
+<td style="text-align:right;">
+0.0434717
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+We’re building a team of innovators and disruptors to change the insurance experience to meet the demands of an on-demand world.
+</td>
+<td style="text-align:right;">
+0.0430290
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:left;">
+You are a collaborator and a communicator and are energized by working with multidisciplinary teams.
+</td>
+<td style="text-align:right;">
+0.0420002
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+At Slice, we’re focused on ensuring our products provide a positive, individualized customer experience.
+</td>
+<td style="text-align:right;">
+0.0394096
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:left;">
+Data Science: 4 years (Required)Location:
+</td>
+<td style="text-align:right;">
+0.0362884
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:left;">
+Experience deploying models is a plus!
+</td>
+<td style="text-align:right;">
+0.0350955
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+Our smaller teams invite broader thinking and problem solving, where nobody is pigeonholed into a predetermined role.
+</td>
+<td style="text-align:right;">
+0.0342888
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:left;">
+YOU are passionate about data.
+</td>
+<td style="text-align:right;">
+0.0341904
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:left;">
+Science work here at Slice is far from theoretical.
+</td>
+<td style="text-align:right;">
+0.0332422
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+We work in an open, supportive, environment that values and promotes inclusiveness, innovation, and collaboration.
+</td>
+<td style="text-align:right;">
+0.0307840
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:left;">
+Job Types: Full-time, Permanent Experience:
+</td>
+<td style="text-align:right;">
+0.0290179
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:left;">
+This is an opportunity to play an active part in delivering our data vision and determining how we get there.
+</td>
+<td style="text-align:right;">
+0.0280136
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+We believe it can and should be all digital and on-demand, so customers get only the coverage they need, right when they need it.
+</td>
+<td style="text-align:right;">
+0.0270914
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:left;">
+Our immediate applications include marketing analytics, fraud prevention, and risk/value modeling.
+</td>
+<td style="text-align:right;">
+0.0221562
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:left;">
+You enjoy being able to combine your analytical, technical and business skills in one role.
+</td>
+<td style="text-align:right;">
+0.0211016
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+*The Data Science team is key to Slice’s ongoing success.
+</td>
+<td style="text-align:right;">
+0.0184101
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+We are disrupting the idea that insurance needs to be a fixed product, with a fixed term, with fixed coverage.
+</td>
+<td style="text-align:right;">
+0.0182936
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:left;">
+This ROLE develops and executes Data Science projects across the company.
+</td>
+<td style="text-align:right;">
+0.0152376
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+(Our future applications are boundless!)
+</td>
+<td style="text-align:right;">
+0.0120358
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:left;">
+You love solving problems and predicting behaviours.
+</td>
+<td style="text-align:right;">
+0.0114608
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:left;">
+An effective communication style with an ability to translate “the complex” to “the simple”.
+</td>
+<td style="text-align:right;">
+0.0072589
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+WE are Slice Labs (Slice).
+</td>
+<td style="text-align:right;">
+0.0052174
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+It’s fast-paced, dynamic and fulfilling.
+</td>
+<td style="text-align:right;">
+0.0052174
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:left;">
+All that to say: Data
+</td>
+<td style="text-align:right;">
+0.0052174
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:left;">
+You bring:
+</td>
+<td style="text-align:right;">
+0.0052174
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:left;">
+Ottawa, ON (Preferred)
+</td>
+<td style="text-align:right;">
+0.0052174
+</td>
+</tr>
+</tbody>
+</table>
+<p>Not bad, the top sentences are the big picture stuff that might give an overall impression of the job.</p>
+<p>And, just out of interest:</p>
+<pre class="r"><code>tr[[&quot;sentences&quot;]] %&gt;%
+  ggplot(aes(textrank_id, textrank, fill = textrank_id)) +
+  geom_col(color=&quot;blue&quot;, fill=rgb(0.1,0.4,0.5,0.7)) +
+  theme_classic() +
+  guides(fill = &quot;none&quot;) +
+  labs(x = &quot;Sentence&quot;,
+       y = &quot;TextRank score&quot;)</code></pre>
+<p><img src="../../post/2020-02-13-bnosac-textrank_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div id="conclusion" class="section level2">
+<h2>Conclusion</h2>
+<p><code>textrank</code> is a nifty little package for simple extractive text summary. However, it is important to think carefully about the <em>type</em> of summary you are aiming for, and whether this type of extractive summaries by the textrank algorithm can accomplish it.</p>
+<p><font size="+2"><strong>Pros</strong></font></p>
+<blockquote>
+<p>Easy to use</p>
+</blockquote>
+<blockquote>
+<p>Summaries make sense at a glance</p>
+</blockquote>
+<p><br></p>
+<p><font size="+2"><strong>Cons</strong></font></p>
+<blockquote>
+<p>Hard to know if these summaries <strong>really</strong> are of good quality, as there are no easy ways to validate the quality of the summaries</p>
+</blockquote>
+<blockquote>
+<p>The measure of similarities between sentences, namely the number of words that two sentences have in common, is quite simplistic, and so can only produce “summaries” in a certain sense</p>
+</blockquote>
+</div>
+</div>
+<div id="pytextrank" class="section level1">
+<h1>pytextrank</h1>
+</div>
+<div id="gensim" class="section level1">
+<h1>gensim</h1>
+</div>
+<div id="summa" class="section level1">
+<h1>summa</h1>
+</div>
+</div>
+</div>
+</body>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://rdrr.io/cran/textrank/man/textrank_sentences.html" class="uri">https://rdrr.io/cran/textrank/man/textrank_sentences.html</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+        </div>
+
+        
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+
+
+<script>
+hljs.configure({languages: []});
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5">
+        <br><hr><br>
+      </div>
+      <div class="col-lg-4 col-sm-6 mb-5">
+        <h6 data-toc-skip class="mb-4">Contact Us</h6>
+        <ul class="list-unstyled">
+          <li class="mb-3"><i class="ti-location-pin mr-3 text-primary"></i>Toronto, Canada</li>
+          <li class="mb-3"><a class="text-dark" href="mailto:intelligence.refinery@gmail.com"><i
+                class="ti-email mr-3 text-primary"></i>intelligence.refinery@gmail.com</a>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="col-lg-4 col-sm-6 mb-5">
+        <center>
+        <h6 data-toc-skip class="mb-4">Topics</h6>
+        <ul class="list-unstyled">
+          <li class="mb-3"><a class="text-dark"
+              href="../../categories/careers">Careers</a>
+          </li>
+          <li class="mb-3"><a class="text-dark"
+              href="../../categories/data-science-toolbox">Data science toolbox</a>
+          </li>
+          <li class="mb-3"><a class="text-dark"
+              href="../../categories/dev-handbook">Dev handbook</a>
+          </li>
+          <li class="mb-3"><a class="text-dark"
+              href="../../categories/natural-language-processing">Natural language processing</a>
+          </li>
+          <li class="mb-3"><a class="text-dark"
+              href="../../categories/web-development">Web development</a>
+          </li>
+        </ul>
+      </center>
+      </div>
+      
+      
+      <div class="col-lg-4 col-sm-6 mb-5">
+        <center>
+        <h6 data-toc-skip class="mb-4">Quick Links</h6>
+        <ul class="list-unstyled">
+          
+          <li class="mb-3"><a class="text-dark" href="../../about/about">About Us</a></li>
+          
+          <li class="mb-3"><a class="text-dark" href="../../"></a></li>
+          
+          <li><a class="text-dark" href='https://nancychelaru.rbind.io'>Nancy's portfolio</a></li>
+        </ul>
+        </center>
+      </div>
+      <div class="col-12 border-top py-4 text-center">
+        |  @2019 Intelligence Refinery  |  All Rights Reserved  |
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var indexURL = "/index.json"
+</script>
+
+<!-- Google Map API -->
+<script src="../../"></script>
+<!-- JS Plugins -->
+
+<script src="../../plugins/jQuery/jquery.min.js"></script>
+
+<script src="../../plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="../../plugins/slick/slick.min.js"></script>
+
+<script src="../../plugins/venobox/venobox.min.js"></script>
+
+<script src="../../plugins/search/fuse.min.js"></script>
+
+<script src="../../plugins/search/mark.js"></script>
+
+<script src="../../plugins/search/search.js"></script>
+
+<script src="../../plugins/google-map/gmap.js"></script>
+
+<!-- Main Script -->
+
+<script src="../../js/script.min.js"></script>
+<!-- google analitycs -->
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+  ga('create', 'Your ID', 'auto');
+  ga('send', 'pageview');
+</script></body>
+</html>

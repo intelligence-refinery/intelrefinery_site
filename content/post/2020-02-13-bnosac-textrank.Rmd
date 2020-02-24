@@ -1,0 +1,355 @@
+---
+title: Extractive text summarization 
+author: ''
+date: '2020-02-13'
+slug: extractive-summarization
+categories:
+  - Natural language processing
+tags: 
+  - R
+  - Python
+  - Package
+  - textrank
+  - 'Text summarization'
+image: images/post/extractive-summary.png
+---
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+  rel="stylesheet"
+  href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+</head>
+<body>
+
+<body data-spy="scroll" data-target="#toc"> 
+<div class="container">
+<div class="row">
+<!-- sidebar, which will move to the top on a small screen -->
+<div class="col-sm-2">
+<nav id="toc" data-toggle="toc" class="sticky-top" style='padding-top:40px'></nav>
+</div>
+<!-- main content area -->
+<div class="col-sm-10">
+
+```{r, echo=F, eval=T}
+library(knitr)
+opts_chunk$set(echo=T, message=F, warning=F, cache=T)
+
+library(reticulate)
+```
+
+```{r, echo=F, eval=T}
+library(plyr)
+library(dplyr)
+library(magrittr)
+library(kableExtra)
+```
+
+ 
+
+
+
+# textrank 
+
+`textrank` is a R package that uses the textrank algorithm to **1) rank sentences by their "importance"** and **2) identify keywords that appear more frequently in the test**. The workflow presented here is a combination of posts by [Jan Wijffels](https://cran.r-project.org/web/packages/textrank/vignettes/textrank.html#textrank) and [Emil Hvitfeldt](https://www.hvitfeldt.me/blog/tidy-text-summarization-using-textrank/). 
+
+
+## Worflow
+
+### Get text
+ 
+Let's start by grabbing the article text used in the post by [Emil Hvitfeldt](https://www.hvitfeldt.me/blog/tidy-text-summarization-using-textrank/), which is about a newly released Fitbit for kids. Here, I'm using a slightly different `rvest` command to scrape the article, as the instructions provided scraped a lot of extra website boilerplate text that muddied the waters, so to speak, and screwed up the `textrank` results.
+
+```{r}
+## Import libraries
+library(tidyverse)
+library(tidytext)
+library(textrank)
+library(rvest)
+
+url <- "http://time.com/5196761/fitbit-ace-kids-fitness-tracker/"
+
+article <- read_html(url) %>%
+  html_nodes('p')   %>%
+  html_text()
+
+article <- paste(article, collapse = "\n")
+
+print(article)
+```
+ 
+### Part-of-speech tagging
+
+As the textrank algorithm measures similiarity between sentences by the extend of word overlap between them, it is important to compare them only in terms of the most informative words. This is done by part-of-speech (POS) tagging, to identify nouns, verbs and adjectives.
+
+Here we will use the `udpipe` package ([Github repo](https://github.com/bnosac/udpipe)), which provides language-agnostic tokenization, tagging, lemmatization and dependency parsing of raw text. 
+
+```{r}
+## Import library
+library(udpipe)
+
+## Create model
+tagger <- udpipe_download_model("english")
+tagger <- udpipe_load_model(tagger$file_model)
+
+## Annotate text
+article <- udpipe_annotate(tagger, article)
+```
+
+Let's look at the results:
+
+```{r}
+article <- as.data.frame(article)
+
+article %>% 
+  head(10) %>% 
+  select(-sentence) %>% 
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = F) %>%
+  scroll_box(width = "100%")
+```
+ 
+
+
+### Extract keywords
+
+> "In order to find relevant keywords, the textrank algorithm constructs a word network. This network is constructed by looking which words follow one another. A link is set up between two words if they follow one another, the link gets a higher weight if these 2 words occur more frequenctly next to each other in the text."
+
+
+The only input to `textrank_keywords()` is the lemmatized words, with the option of filtering for only certain types of words, such as nouns, verbs and adjectives:
+
+
+```{r, fig.align='center'}
+article_keywords <- textrank_keywords(article$lemma, 
+                                      relevant = article$upos %in% c("NOUN", "VERB", "ADJ"))
+
+article_keywords$keywords %>%
+  subset(freq > 1) %>%
+  kable()
+```
+
+### Rank sentences
+
+Loosely, the textrank algorithm computes similarities between a pair of sentences by the number of words that they have in common.
+
+The `textrank_sentences()` function takes in two inputs [^1]: 
+
+[^1]: https://rdrr.io/cran/textrank/man/textrank_sentences.html
+
+A dataframe with sentences:
+
+```{r}
+sentences <- unique(article[, c("sentence_id", "sentence")])
+```
+
+A dataframe with words which are part of each sentence:
+
+```{r}
+terminology <- article %>% 
+                  filter(upos %in% c("NOUN", "VERB", "ADJ")) %>%
+                  select(sentence_id, lemma) 
+```
+
+Based on these two dataframes, the function calculates the pairwise distance between each sentence by computing how many terms are overlapping, in terms of Jaccard distance. These pairwise distances among the sentences are next passed on to Google's pagerank algorithm to identify the most relevant sentences.
+
+```{r}
+tr <- textrank_sentences(data = sentences, 
+                         terminology = terminology)
+```
+
+
+Let's see how the sentences rank:
+
+```{r}
+kable(tr[['sentences']] %>% arrange(-textrank))
+```
+
+Makes sense, but it would be nice to have a human-made summary for comparison.
+
+Alternatively, we can see what the top five most "informative" sentences are in their order of appearance:
+
+```{r}
+s <- summary(tr, n = 5, keep.sentence.order = TRUE)
+
+cat(s, sep = "\n\n")
+```
+
+
+
+Finally, we can also visualize the textrank value of sentences by their order of appearance in the text.
+ 
+```{r}
+tr[["sentences"]] %>%
+  ggplot(aes(textrank_id, textrank, fill = textrank_id)) +
+  geom_col(color="blue", fill=rgb(0.1,0.4,0.5,0.7)) +
+  theme_classic() +
+  guides(fill = "none") +
+  labs(x = "Sentence",
+       y = "TextRank score")
+```
+
+ 
+## Another example
+
+Lately, I've been trying to analyze job descriptions. Let's see how textrank summarization performs on one for a data scientist position.
+
+```{r}
+link <- "https://ca.indeed.com/viewjob?cmp=Slice-Insurance-Technologies-Inc.&t=Data+Scientist&jk=35c9914ee9b0a052&sjdu=vQIlM60yK_PwYat7ToXhk3myaatk1OsAkhQIw2UEit1eiAfw8fAJl6BKuZ5V5P0TgQjo7h2qNGvAZ_80Lr3XxA&tk=1e1nuvuml0np3000&adid=335410488&pub=4a1b367933fd867b19b072952f68dceb&vjs=3"
+
+description <- tryCatch(
+    as.character(link) %>% read_html() %>% html_nodes(xpath='//*[(@id = "jobDescriptionText")]') %>% map(xml_contents),
+    error=function(e){NA}
+  )
+  if (is.null(description)){
+    desc <- NA
+  }
+  
+  
+final  <- tryCatch(
+    paste(as.character(description[[1]]), collapse=' '),
+    error=function(e){NA}
+  )
+  if (is.null(description)){
+    NA
+  }
+
+job_des <- html_text(read_html(final))
+ 
+print(job_des)
+```
+
+
+Part-of-speech tagging:
+
+```{r}
+job_des <- udpipe_annotate(tagger, job_des)
+
+job_des <- as.data.frame(job_des)
+
+job_des %>% 
+  head(10) %>% 
+  select(-sentence) %>% 
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = F) %>%
+  scroll_box(width = "100%")
+```
+
+The keyword extraction functionality seemed lack-luster for this example too, giving what is essentially a list of most frequently appearing words.
+
+```{r}
+job_des_keywords <- textrank_keywords(job_des$lemma, 
+                                      relevant = job_des$upos %in% c("NOUN", "VERB", "ADJ"))
+
+job_des_keywords$keywords %>%
+  subset(freq > 1) %>%
+  kable()
+```
+
+Finally, let's look at the sentence rankings:
+
+```{r}
+sentences <- unique(job_des[, c("sentence_id", "sentence")])
+
+terminology <- job_des %>% 
+                  filter(upos %in% c("NOUN", "VERB", "ADJ")) %>%
+                  select(sentence_id, lemma) 
+
+tr <- textrank_sentences(data = sentences, 
+                         terminology = terminology)
+
+kable(tr[['sentences']] %>% arrange(-textrank))
+```
+
+Not bad, the top sentences are the big picture stuff that might give an overall impression of the job. 
+
+And, just out of interest:
+
+```{r}
+tr[["sentences"]] %>%
+  ggplot(aes(textrank_id, textrank, fill = textrank_id)) +
+  geom_col(color="blue", fill=rgb(0.1,0.4,0.5,0.7)) +
+  theme_classic() +
+  guides(fill = "none") +
+  labs(x = "Sentence",
+       y = "TextRank score")
+```
+
+
+## Conclusion
+
+`textrank` is a nifty little package for simple extractive text summary. However, it is important to think carefully about the *type* of summary you are aiming for, and whether this type of extractive summaries by the textrank algorithm can accomplish it.
+
+ 
+<font size="+2">**Pros**</font>
+
+> Easy to use
+
+> Summaries make sense at a glance
+ 
+<br>
+
+<font size="+2">**Cons**</font>
+
+> Hard to know if these summaries **really** are of good quality, as there are no easy ways to validate the quality of the summaries
+ 
+> The measure of similarities between sentences, namely the number of words that two sentences have in common, is quite simplistic, and so can only produce "summaries" in a certain sense
+ 
+
+ 
+# pytextrank
+
+
+# gensim
+
+# summa
+
+# sumy
+ 
+
+
+```{python}
+from __future__ import absolute_import
+from __future__ import division, print_function, unicode_literals
+
+from sumy.parsers.html import HtmlParser
+from sumy.parsers.plaintext import PlaintextParser
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.summarizers.lsa import LsaSummarizer as Summarizer
+from sumy.nlp.stemmers import Stemmer
+from sumy.utils import get_stop_words
+```
+
+```{python}
+def sumy_function(url):
+  LANGUAGE = "english"
+  SENTENCES_COUNT = 10
+  
+  parser = HtmlParser.from_url(url, Tokenizer(LANGUAGE))
+  # or for plain text files
+  # parser = PlaintextParser.from_file("document.txt", Tokenizer(LANGUAGE))
+  # parser = PlaintextParser.from_string("Check this out.", Tokenizer(LANGUAGE))
+  stemmer = Stemmer(LANGUAGE)
+  
+  summarizer = Summarizer(stemmer)
+  summarizer.stop_words = get_stop_words(LANGUAGE)
+  
+  for sentence in summarizer(parser.document, SENTENCES_COUNT):
+      print(sentence)
+      
+sumy_function("https://en.wikipedia.org/wiki/Automatic_summarization")
+```
+
+
+
+
+</div>
+</div>
+</div>
+</body>

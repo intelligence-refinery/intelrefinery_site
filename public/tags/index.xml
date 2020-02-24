@@ -39,6 +39,15 @@
     </item>
     
     <item>
+      <title>Package</title>
+      <link>/tags/package/</link>
+      <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/package/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Python</title>
       <link>/tags/python/</link>
       <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
@@ -62,6 +71,24 @@
       <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/streamlit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Text summarization</title>
+      <link>/tags/text-summarization/</link>
+      <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/text-summarization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>textrank</title>
+      <link>/tags/textrank/</link>
+      <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/textrank/</guid>
       <description></description>
     </item>
     

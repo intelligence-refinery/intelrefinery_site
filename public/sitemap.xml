@@ -23,6 +23,11 @@
   </url>
   
   <url>
+    <loc>/post/extractive-summarization/</loc>
+    <lastmod>2020-02-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/fast-exploratory-data-analysis-for-the-impatient/</loc>
     <lastmod>2020-02-13T00:00:00+00:00</lastmod>
   </url>
@@ -53,6 +58,11 @@
   </url>
   
   <url>
+    <loc>/tags/package/</loc>
+    <lastmod>2020-02-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/</loc>
     <lastmod>2020-02-13T00:00:00+00:00</lastmod>
   </url>
@@ -78,17 +88,22 @@
   </url>
   
   <url>
+    <loc>/tags/text-summarization/</loc>
+    <lastmod>2020-02-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/textrank/</loc>
+    <lastmod>2020-02-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/visualizations/</loc>
     <lastmod>2020-02-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/voila/</loc>
-    <lastmod>2020-02-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/word-embedding/</loc>
     <lastmod>2020-02-13T00:00:00+00:00</lastmod>
   </url>
   
