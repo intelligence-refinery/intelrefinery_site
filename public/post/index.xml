@@ -6,10 +6,46 @@
     <description>Recent content in Posts on Intelligence Refinery</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 27 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 13 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Fast exploratory data analysis for when you just can&#39;t wait</title>
+      <link>/post/fast-exploratory-data-analysis-for-the-impatient/</link>
+      <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/fast-exploratory-data-analysis-for-the-impatient/</guid>
+      <description>--</description>
+    </item>
+    
+    <item>
+      <title>Going beyond Jupyter notebooks</title>
+      <link>/post/making-python-apps/</link>
+      <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/making-python-apps/</guid>
+      <description>--</description>
+    </item>
+    
+    <item>
+      <title>Graphing in Python - New(er) kids on the block</title>
+      <link>/post/graphing-in-python-a-walkthrough/</link>
+      <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/graphing-in-python-a-walkthrough/</guid>
+      <description>--</description>
+    </item>
+    
+    <item>
+      <title>Word embedding</title>
+      <link>/post/word-embedding/</link>
+      <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/word-embedding/</guid>
+      <description>    </description>
+    </item>
     
     <item>
       <title>Data science for business</title>
@@ -21,29 +57,11 @@
     </item>
     
     <item>
-      <title>Fast exploratory data analysis for when you just can&#39;t wait</title>
-      <link>/post/fast-exploratory-data-analysis-for-the-impatient/</link>
-      <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/fast-exploratory-data-analysis-for-the-impatient/</guid>
-      <description>--</description>
-    </item>
-    
-    <item>
       <title>Version control with Git</title>
       <link>/post/version-control-git-handbook/</link>
       <pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/version-control-git-handbook/</guid>
-      <description>--</description>
-    </item>
-    
-    <item>
-      <title>Graphing in Python - New(er) kids on the block</title>
-      <link>/post/graphing-in-python-a-walkthrough/</link>
-      <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/graphing-in-python-a-walkthrough/</guid>
       <description>--</description>
     </item>
     
@@ -72,15 +90,6 @@
       
       <guid>/post/neat-html-snippets-to-jazz-up-your-site/</guid>
       <description>--      h3 {font-size: 24px;}</description>
-    </item>
-    
-    <item>
-      <title>Going beyond Jupyter notebooks</title>
-      <link>/post/making-python-apps/</link>
-      <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/making-python-apps/</guid>
-      <description>As useful as they are, and they really are, Jupyter notebooks can feel rather stale after a few years.</description>
     </item>
     
   </channel>

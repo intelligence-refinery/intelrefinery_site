@@ -118,7 +118,7 @@
         <h2 data-toc-skip>Graphing in Python - New(er) kids on the block</h2>
         <div class="mb-3"> <span
             class="border-bottom border-primary px-2 mx-1"></span>
-          <span>November 25 2019</span></div>
+          <span>February 13 2020</span></div>
         <center><img src="../../images/post/python_graphing.png" class="img-fluid w-75 mb-4" alt="Graphing in Python - New(er) kids on the block"></center>
         <div class="content mb-5">
           
@@ -165,6 +165,9 @@ fig = px.scatter(iris,
 <center>
 <img src="https://i.ibb.co/ySJxLN6/fig1.png" alt="plotly_express" border="0"></a>
 </center>
+<p>Here is a collection of useful links curated by us for all things Plotly:</p>
+<iframe width="100%" height="700" src="https://raindrop.io/collection/8810326" scrolling="yes" allowfullscreen>
+</iframe>
 <p><br></p>
 <h2 id="yellowbrick">Yellowbrick</h2>
 <p>This <a href="https://www.scikit-yb.org/en/latest/">package</a>, built on top of <code>Matplotlib</code>, facilitates visualizing a variety of information from various stages of machine learning workflows. It is a sizable library, and looking through its API is an education in itself.</p>
@@ -172,7 +175,7 @@ fig = px.scatter(iris,
 <p>We have not had many chances to use <code>Yellowbrick</code> yet, but are looking forward to being able to delve deeper into this package in the future!</p>
 <p><br></p>
 <h2 id="plotnine">Plotnine</h2>
-<p>One of the strengths of the R language is its very powerful graphing package <code>ggplot2</code>, with its distinctive implementation of Leland Wilkinson’s <em>Grammar of Graphics</em>. The <code>Plotnine</code> package brings this (at least part of it, it seems for now) capability to Python, with very little change to the R syntax. Here is a (ever growing) <a href="https://raindrop.io/collection/8766091">collection</a> of useful links curated by us to get your started with using <code>Plotnine</code>.</p>
+<p>One of the strengths of the R language is its very powerful graphing package <code>ggplot2</code>, with its distinctive implementation of Leland Wilkinson’s <em>Grammar of Graphics</em>. The <code>Plotnine</code> package brings this (at least part of it, it seems for now) capability to Python, with very little change to the R syntax.</p>
 <p>The brackets around the <code>ggplot()</code> function call looks strange at first, but it is needed for the signature multi-line <code>ggplot2</code> grammer to work:</p>
 <pre class="python"><code>## Import libraries
 import pandas as pd
@@ -194,7 +197,7 @@ p = (
 
 ## Display plot
 p.draw();</code></pre>
-<p><img src="../../post/2019-11-25-graphing-in-python-a-walkthrough_files/figure-html/unnamed-chunk-2-1.png" width="100%" /></p>
+<p><img src="../../post/2020-02-13-graphing-in-python-a-walkthrough_files/figure-html/unnamed-chunk-2-1.png" width="100%" /></p>
 <p>If you want to save the plot to file:</p>
 <pre class="python"><code>p.save(&quot;output.png&quot;)</code></pre>
 <p>And just because I can see myself wanting to use these plots in a Streamlit app, here is a working template:</p>
@@ -218,6 +221,9 @@ a = (
 fig = a.draw();   ## Needed to remove the &quot;ggplot&lt;#&gt;&quot; message
 
 st.pyplot()</code></pre>
+<p>Finally, as always, here is a (ever growing) collection of links curated by us to get your started with using <code>Plotnine</code>:</p>
+<iframe width="100%" height="700" src="https://raindrop.io/collection/8766091" scrolling="yes" allowfullscreen>
+</iframe>
 </div>
 </div>
 </div>
@@ -272,6 +278,9 @@ hljs.initHighlightingOnLoad();
           </li>
           <li class="mb-3"><a class="text-dark"
               href="../../categories/dev-handbook">Dev handbook</a>
+          </li>
+          <li class="mb-3"><a class="text-dark"
+              href="../../categories/natural-language-processing">Natural language processing</a>
           </li>
           <li class="mb-3"><a class="text-dark"
               href="../../categories/web-development">Web development</a>

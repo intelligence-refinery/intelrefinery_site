@@ -49,6 +49,17 @@ One of the most exciting things about data science is when you get your hands on
 
 Unfortunately, before you can get to the fun stuff (though who said that EDA can't be fun), it's important to get an idea of its overall structure and potential problems. Here is a round up of our favourite packages for getting acquainted with a dataset while writing a minimum amount of code.
 
+## `esquisse`: interactive data exploration with `ggplot2`
+
+If you are *really* impatient, `esquisse` is an RStudio addin that launches a point-and-click GUI for absolutely no-code interactive EDA. After drag-and-drop selection of the features that you want to visualize, it not only generates customized beautiful `ggplot2` figures but also exports the code so that you can easily replicate them elsewhere. 
+
+From its [official documentation](https://dreamrs.github.io/esquisse/):
+
+![](https://dreamrs.github.io/esquisse/reference/figures/esquisse.gif)
+ 
+`esquisse` can also be used as a [module](https://dreamrs.github.io/esquisse/articles/shiny-usage.html) inside your Shiny application.
+
+
 ## `dataMaid`: quality check of raw data
 
 To quickly spot things like missing values, misclassified variables, and erroneous values, I prefer `dataMaid` for its straight forward combination of metrics and visualizations.
@@ -170,7 +181,7 @@ kable(t(head(autoEDA_results$overview, 4)), colnames=NULL) %>%
 
 In the last row, there is a handy `PredictivePower` metric for each input variable with respect to a specified target variable. For now, we can ignore this as I will cover it in more details in a later post examining variable importance.
 
-## `ExPanDaR`: interactive data exploration
+## `ExPanDaR`: your own Shiny app for data exploration
 
 `ExPanDaR` provides a really nifty Shiny app for interactive explorations of your data set. Originally designed for examining time-series data, the package requires the input dataframe to have a 1) time/date column and 2) a column that uniquely identifies each row. As the time/date column is only needed if you want to visualize time-dependent trends, to use a dataset without a time dimension you can just add a new numeric column (`ts`) with a constant and set that as the time dimension. An index column would suffice for the second requirement. In the original Telco dataset, the `customerID` column would have worked fine. As I had dropped it in the process of data cleaning, I will just add a new index column (`ID`).
 

@@ -74,6 +74,12 @@ fig = px.scatter(iris,
 <img src="https://i.ibb.co/ySJxLN6/fig1.png" alt="plotly_express" border="0"></a>
 </center>
 
+Here is a collection of useful links curated by us for all things Plotly:
+
+ 
+<iframe width="100%"  height=700  src="https://raindrop.io/collection/8810326" scrolling='yes' allowfullscreen></iframe>
+
+
 <br>
 
 ## Yellowbrick
@@ -89,7 +95,7 @@ We have not had many chances to use `Yellowbrick` yet, but are looking forward t
 
 ## Plotnine
 
-One of the strengths of the R language is its very powerful graphing package `ggplot2`, with its distinctive implementation of Leland Wilkinson's *Grammar of Graphics*. The `Plotnine` package brings this (at least part of it, it seems for now) capability to Python, with very little change to the R syntax. Here is a (ever growing) [collection](https://raindrop.io/collection/8766091) of useful links curated by us to get your started with using `Plotnine`.
+One of the strengths of the R language is its very powerful graphing package `ggplot2`, with its distinctive implementation of Leland Wilkinson's *Grammar of Graphics*. The `Plotnine` package brings this (at least part of it, it seems for now) capability to Python, with very little change to the R syntax. 
 
 The brackets around the `ggplot()` function call looks strange at first, but it is needed for the signature multi-line `ggplot2` grammer to work:
 
@@ -148,7 +154,10 @@ fig = a.draw();   ## Needed to remove the "ggplot<#>" message
 st.pyplot()
 ```
 
- 
+Finally, as always, here is a (ever growing) collection of links curated by us to get your started with using `Plotnine`:
+
+<iframe width="100%"  height=700  src="https://raindrop.io/collection/8766091" scrolling='yes' allowfullscreen></iframe>
+
 
 
 
