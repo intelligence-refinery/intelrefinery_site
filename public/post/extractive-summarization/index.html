@@ -13,7 +13,7 @@
   <meta name="description" content="This is meta description">
   
   <meta name="author" content="Intelligence Refinery">
-  <meta name="generator" content="Hugo 0.58.3" />
+  <meta name="generator" content="Hugo 0.57.2" />
 
   <!-- plugins -->
   
@@ -1165,7 +1165,7 @@ cat(s, sep = &quot;\n\n&quot;)</code></pre>
   guides(fill = &quot;none&quot;) +
   labs(x = &quot;Sentence&quot;,
        y = &quot;TextRank score&quot;)</code></pre>
-<p><img src="../../post/2020-02-13-bnosac-textrank_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="../../post/2020-02-13-extractive-summarizatin_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
 </div>
 <div id="another-example" class="section level2">
@@ -1190,12 +1190,16 @@ final  &lt;- tryCatch(
     NA
   }
 
-job_des &lt;- html_text(read_html(final))
+job_des_raw &lt;- html_text(read_html(final))
  
-print(job_des)</code></pre>
+print(job_des_raw)</code></pre>
 <pre><code>## [1] &quot;WE are Slice Labs (Slice). We’re building a team of innovators and disruptors to change the insurance experience to meet the demands of an on-demand world. We are disrupting the idea that insurance needs to be a fixed product, with a fixed term, with fixed coverage. We believe it can and should be all digital and on-demand, so customers get only the coverage they need, right when they need it. At Slice, we’re focused on ensuring our products provide a positive, individualized customer experience. Our smaller teams invite broader thinking and problem solving, where nobody is pigeonholed into a predetermined role. We work in an open, supportive, environment that values and promotes inclusiveness, innovation, and collaboration. It’s fast-paced, dynamic and fulfilling.\n *The Data Science team is key to Slice’s ongoing success. The data we have and the models we build are foundational to our platform and quite literally drive our business. Our work improves the customer experience, grows our market share and drives business outcomes. This is an opportunity to play an active part in delivering our data vision and determining how we get there. All that to say: Data Science work here at Slice is far from theoretical.\n This ROLE develops and executes Data Science projects across the company. This means hands-on work at all points in the data lifecycle, including data wrangling and mining; feature engineering; model-building and testing; and implementation and communication. Your work will ensure that all our decisions are data-driven - this means that you will have a direct impact on the customer experience by influencing critical decisions on resource deployment and customer engagement. Our immediate applications include marketing analytics, fraud prevention, and risk/value modeling. (Our future applications are boundless!)\n YOU are passionate about data. You enjoy being able to combine your analytical, technical and business skills in one role. You love solving problems and predicting behaviours. You are a collaborator and a communicator and are energized by working with multidisciplinary teams. You are a hands-on learner and are excited by the thought of moving past theory and examples to real-time data science work.\n You bring: \n An effective communication style with an ability to translate “the complex” to “the simple”. You are adept at data visualizations and have experience working with real-time data.4+ years of practical experience using data, models, and common sense to solve tough problems in a collaborative environment. Experience deploying models is a plus!Working experience with Python, including Pandas, NumPy, scikit-learn, NLTK, and Keras/TensorFlow.An understanding of statistical and predictive modeling concepts, machine learning algorithms, clustering and classification techniques.Some exposure to one or more sub-fields of data science, especially GIS/spatial analysis; graph theory/network analysis; or natural language processing (NLP).Working experience with non-Excel BI tools such as Tableau, Looker, Superset, PowerBI, etc.You are comfortable building datasets using traditional relational databases and you’re familiar with alternative databases (noSQL, graph databases) or big data platforms such as Apache Spark.University degree in engineering, applied statistics, data mining, machine learning, mathematics or a related quantitative discipline.*\n Job Types: Full-time, Permanent\n Experience:\n Data Science: 4 years (Required)Location:\n Ottawa, ON (Preferred)&quot;</code></pre>
 <p>Part-of-speech tagging:</p>
-<pre class="r"><code>job_des &lt;- udpipe_annotate(tagger, job_des)
+<pre class="r"><code>## Create model
+tagger &lt;- udpipe_download_model(&quot;english&quot;)
+tagger &lt;- udpipe_load_model(tagger$file_model)
+
+job_des &lt;- udpipe_annotate(tagger, job_des_raw)
 
 job_des &lt;- as.data.frame(job_des)
 
@@ -2354,6 +2358,9 @@ Ottawa, ON (Preferred)
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>library(magrittr)
+
+x &lt;- tr[[&#39;sentences&#39;]] %&gt;% arrange(-textrank) %&gt;% head(10)</code></pre>
 <p>Not bad, the top sentences are the big picture stuff that might give an overall impression of the job.</p>
 <p>And, just out of interest:</p>
 <pre class="r"><code>tr[[&quot;sentences&quot;]] %&gt;%
@@ -2363,7 +2370,7 @@ Ottawa, ON (Preferred)
   guides(fill = &quot;none&quot;) +
   labs(x = &quot;Sentence&quot;,
        y = &quot;TextRank score&quot;)</code></pre>
-<p><img src="../../post/2020-02-13-bnosac-textrank_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="../../post/2020-02-13-extractive-summarizatin_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 </div>
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>
@@ -2387,12 +2394,605 @@ Ottawa, ON (Preferred)
 </div>
 <div id="pytextrank" class="section level1">
 <h1>pytextrank</h1>
+<pre class="python"><code>import spacy
+import pytextrank
+
+# example text
+text = r.job_des_raw
+ 
+# load a spaCy model, depending on language, scale, etc.
+nlp = spacy.load(&quot;en_core_web_sm&quot;)
+ 
+# add PyTextRank to the spaCy pipeline
+tr = pytextrank.TextRank()
+
+nlp.add_pipe(tr.PipelineComponent, name=&quot;textrank&quot;, last=True)
+ 
+doc = nlp(text)</code></pre>
+<pre class="python"><code># examine the top-ranked phrases in the document
+pytextrank = []
+for c in list(doc._.textrank.summary(limit_phrases=10, limit_sentences=10)):
+        pytextrank.append(str(c))
+        print(&#39;---&#39;)</code></pre>
+<pre><code>## ---
+## ---
+## ---
+## ---
+## ---
+## ---
+## ---
+## ---
+## ---
+## ---</code></pre>
+<pre class="python"><code>for p in doc._.phrases[:10]:
+    print(&#39;{:.4f} {:5d}  {}&#39;.format(p.rank, p.count, p.text))
+    print(p.chunks)</code></pre>
+<pre><code>## 0.0789     1  data mining
+## [data mining]
+## 0.0768     1  data science
+## [data science]
+## 0.0764     3  data
+## [data, data, The data]
+## 0.0762     1  experience deploying models
+## [Experience deploying models]
+## 0.0746     1  data visualizations
+## [data visualizations]
+## 0.0741     1  big data platforms
+## [big data platforms]
+## 0.0739     1  data wrangling
+## [data wrangling]
+## 0.0725     1  experience
+## [experience]
+## 0.0717     1  nlp).working experience
+## [NLP).Working experience]
+## 0.0713     1  practical experience
+## [practical experience]</code></pre>
 </div>
 <div id="gensim" class="section level1">
 <h1>gensim</h1>
+<pre class="python"><code>from gensim.summarization.summarizer import summarize
+
+for sent in summarize(text, split=True, ratio=0.3):
+  print(sent)
+  print(&#39;-&#39;)</code></pre>
+<pre><code>## We’re building a team of innovators and disruptors to change the insurance experience to meet the demands of an on-demand world.
+## -
+## The data we have and the models we build are foundational to our platform and quite literally drive our business.
+## -
+## Our work improves the customer experience, grows our market share and drives business outcomes.
+## -
+## All that to say: Data Science work here at Slice is far from theoretical.
+## -
+## This means hands-on work at all points in the data lifecycle, including data wrangling and mining; feature engineering; model-building and testing; and implementation and communication.
+## -
+## Your work will ensure that all our decisions are data-driven - this means that you will have a direct impact on the customer experience by influencing critical decisions on resource deployment and customer engagement.
+## -
+## You are a collaborator and a communicator and are energized by working with multidisciplinary teams.
+## -
+## You are a hands-on learner and are excited by the thought of moving past theory and examples to real-time data science work.
+## -
+## You are adept at data visualizations and have experience working with real-time data.4+ years of practical experience using data, models, and common sense to solve tough problems in a collaborative environment.
+## -</code></pre>
 </div>
 <div id="summa" class="section level1">
 <h1>summa</h1>
+<pre class="python"><code>from summa.summarizer import summarize
+
+for sent in summarize(text, split=True, ratio=0.3):
+  print(sent)
+  print(&#39;-&#39;)</code></pre>
+<pre><code>## *The Data Science team is key to Slice’s ongoing success.
+## -
+## The data we have and the models we build are foundational to our platform and quite literally drive our business.
+## -
+## Our work improves the customer experience, grows our market share and drives business outcomes.
+## -
+## All that to say: Data Science work here at Slice is far from theoretical.
+## -
+## This means hands-on work at all points in the data lifecycle, including data wrangling and mining; feature engineering; model-building and testing; and implementation and communication.
+## -
+## Your work will ensure that all our decisions are data-driven - this means that you will have a direct impact on the customer experience by influencing critical decisions on resource deployment and customer engagement.
+## -
+## You are a hands-on learner and are excited by the thought of moving past theory and examples to real-time data science work.
+## -
+## You are adept at data visualizations and have experience working with real-time data.4+ years of practical experience using data, models, and common sense to solve tough problems in a collaborative environment.
+## -
+## Experience deploying models is a plus!Working experience with Python, including Pandas, NumPy, scikit-learn, NLTK, and Keras/TensorFlow.An understanding of statistical and predictive modeling concepts, machine learning algorithms, clustering and classification techniques.Some exposure to one or more sub-fields of data science, especially GIS/spatial analysis; graph theory/network analysis; or natural language processing (NLP).Working experience with non-Excel BI tools such as Tableau, Looker, Superset, PowerBI, etc.You are comfortable building datasets using traditional relational databases and you’re familiar with alternative databases (noSQL, graph databases) or big data platforms such as Apache Spark.University degree in engineering, applied statistics, data mining, machine learning, mathematics or a related quantitative discipline.*
+## -</code></pre>
+</div>
+<div id="summary" class="section level1">
+<h1>Summary</h1>
+<pre class="python"><code>res = r.x
+
+z = res[&#39;sentence&#39;].tolist()</code></pre>
+<pre class="python"><code>import pandas as pd
+import collections
+
+ 
+gensim = summarize(text, split=True, ratio=0.3)
+
+summa = summarize(text, split=True, ratio=0.3)
+
+a = pytextrank + gensim + summa + z
+
+counter=collections.Counter(a)
+ 
+pd.DataFrame(counter, index=[0]).T</code></pre>
+<pre><code>##                                                     0
+## You are adept at data visualizations and have e...  4
+## Some exposure to one or more sub-fields of data...  1
+## University degree in engineering, applied stati...  1
+## The Data Science team is key to Slice’s ongoing...  1
+## YOU are passionate about data.                      1
+## You are comfortable building datasets using tra...  1
+## This means hands-on work at all points in the d...  4
+## WE are Slice Labs (Slice).                          1
+## We’re building a team of innovators and disrupt...  2
+## We are disrupting the idea that insurance needs...  1
+## *The Data Science team is key to Slice’s ongoin...  2
+## The data we have and the models we build are fo...  3
+## Our work improves the customer experience, grow...  3
+## All that to say: Data Science work here at Slic...  2
+## Your work will ensure that all our decisions ar...  3
+## You are a hands-on learner and are excited by t...  3
+## Experience deploying models is a plus!Working e...  2
+## Working experience with non-Excel BI tools such...  1
+## Working experience with Python, including Panda...  1
+## You are a collaborator and a communicator and a...  1</code></pre>
+<pre class="python"><code>summa_df = pd.DataFrame({&#39;phrases&#39;: summa,
+                   &#39;summa&#39;: [1]*len(summa)})
+
+#summa_df.set_index(&#39;phrases&#39;)
+
+gensim_df = pd.DataFrame({&#39;phrases&#39;: gensim,
+                   &#39;gensim&#39;: [1]*len(gensim)})
+
+#gensim_df.set_index(&#39;phrases&#39;)
+
+pytextrank_df = pd.DataFrame({&#39;phrases&#39;: pytextrank,
+                   &#39;pytextrank&#39;: [1]*len(pytextrank)})
+
+#pytextrank_df.set_index(&#39;phrases&#39;)
+
+textrank_df = pd.DataFrame({&#39;phrases&#39;: z,
+                   &#39;r_textrank&#39;: [1]*len(z)})</code></pre>
+<pre class="python"><code>from functools import reduce
+v = reduce(lambda left,right: pd.merge(left,right,on=&#39;phrases&#39;, how=&#39;outer&#39;), [summa_df, gensim_df, pytextrank_df, textrank_df])
+
+v = v.fillna(&#39;0&#39;)
+
+v = v.set_index(&#39;phrases&#39;)
+
+for x in v:
+  v[x] = pd.to_numeric(v[x])</code></pre>
+<pre class="python"><code>import seaborn as sns 
+import matplotlib.pyplot as plt
+ 
+ 
+g=sns.clustermap(v)
+
+g.savefig(&quot;output.png&quot;)
+
+plt.show()</code></pre>
+<p><img src="../../post/2020-02-13-extractive-summarizatin_files/figure-html/unnamed-chunk-28-1.png" width="960" /></p>
+<pre class="r"><code>k &lt;- py$v
+
+kable(k)</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+summa
+</th>
+<th style="text-align:right;">
+gensim
+</th>
+<th style="text-align:right;">
+pytextrank
+</th>
+<th style="text-align:right;">
+r_textrank
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+*The Data Science team is key to Slice’s ongoing success.
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The data we have and the models we build are foundational to our platform and quite literally drive our business.
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Our work improves the customer experience, grows our market share and drives business outcomes.
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+All that to say: Data Science work here at Slice is far from theoretical.
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+This means hands-on work at all points in the data lifecycle, including data wrangling and mining; feature engineering; model-building and testing; and implementation and communication.
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Your work will ensure that all our decisions are data-driven - this means that you will have a direct impact on the customer experience by influencing critical decisions on resource deployment and customer engagement.
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+You are a hands-on learner and are excited by the thought of moving past theory and examples to real-time data science work.
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+You are adept at data visualizations and have experience working with real-time data.4+ years of practical experience using data, models, and common sense to solve tough problems in a collaborative environment.
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Experience deploying models is a plus!Working experience with Python, including Pandas, NumPy, scikit-learn, NLTK, and Keras/TensorFlow.An understanding of statistical and predictive modeling concepts, machine learning algorithms, clustering and classification techniques.Some exposure to one or more sub-fields of data science, especially GIS/spatial analysis; graph theory/network analysis; or natural language processing (NLP).Working experience with non-Excel BI tools such as Tableau, Looker, Superset, PowerBI, etc.You are comfortable building datasets using traditional relational databases and you’re familiar with alternative databases (noSQL, graph databases) or big data platforms such as Apache Spark.University degree in engineering, applied statistics, data mining, machine learning, mathematics or a related quantitative discipline.*
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Some exposure to one or more sub-fields of data science, especially GIS/spatial analysis; graph theory/network analysis; or natural language processing (NLP).Working experience with non-Excel BI tools such as Tableau, Looker, Superset, PowerBI, etc.
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+University degree in engineering, applied statistics, data mining, machine learning, mathematics or a related quantitative discipline.
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The Data Science team is key to Slice’s ongoing success.
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+YOU are passionate about data.
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+You are comfortable building datasets using traditional relational databases and you’re familiar with alternative databases (noSQL, graph databases) or big data platforms such as Apache Spark.
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WE are Slice Labs (Slice).
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+We’re building a team of innovators and disruptors to change the insurance experience to meet the demands of an on-demand world.
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+We are disrupting the idea that insurance needs to be a fixed product, with a fixed term, with fixed coverage.
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Working experience with non-Excel BI tools such as Tableau, Looker, Superset, PowerBI, etc.You are comfortable building datasets using traditional relational databases and you’re familiar with alternative databases (noSQL, graph databases) or big data platforms such as Apache Spark.University degree in engineering, applied statistics, data mining, machine learning, mathematics or a related quantitative discipline.*
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Working experience with Python, including Pandas, NumPy, scikit-learn, NLTK, and Keras/TensorFlow.An understanding of statistical and predictive modeling concepts, machine learning algorithms, clustering and classification techniques.Some exposure to one or more sub-fields of data science, especially GIS/spatial analysis; graph theory/network analysis; or natural language processing (NLP).
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+You are a collaborator and a communicator and are energized by working with multidisciplinary teams.
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="sumy" class="section level1">
+<h1>sumy</h1>
+<pre class="python"><code>from __future__ import absolute_import
+from __future__ import division, print_function, unicode_literals
+
+from sumy.parsers.html import HtmlParser
+from sumy.parsers.plaintext import PlaintextParser
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.summarizers.lsa import LsaSummarizer as Summarizer
+from sumy.nlp.stemmers import Stemmer
+from sumy.utils import get_stop_words</code></pre>
+<pre class="python"><code>def sumy_function(url, SENTENCES_COUNT = 9, LANGUAGE = &quot;english&quot;):
+  
+  parser = HtmlParser.from_url(url, Tokenizer(LANGUAGE))
+  # or for plain text files
+  # parser = PlaintextParser.from_file(&quot;document.txt&quot;, Tokenizer(LANGUAGE))
+  # parser = PlaintextParser.from_string(&quot;Check this out.&quot;, Tokenizer(LANGUAGE))
+  stemmer = Stemmer(LANGUAGE)
+  
+  summarizer = Summarizer(stemmer)
+  summarizer.stop_words = get_stop_words(LANGUAGE)
+  
+  for sentence in summarizer(parser.document, SENTENCES_COUNT):
+      print(sentence)
+      print(&#39;\n&#39;)
+      
+sumy_function(&quot;https://ca.indeed.com/viewjob?cmp=Slice-Insurance-Technologies-Inc.&amp;t=Data+Scientist&amp;jk=35c9914ee9b0a052&amp;sjdu=vQIlM60yK_PwYat7ToXhk3myaatk1OsAkhQIw2UEit1eiAfw8fAJl6BKuZ5V5P0TgQjo7h2qNGvAZ_80Lr3XxA&amp;tk=1e1nuvuml0np3000&amp;adid=335410488&amp;pub=4a1b367933fd867b19b072952f68dceb&amp;vjs=3&quot;)</code></pre>
+<pre><code>## We’re building a team of innovators and disruptors to change the insurance experience to meet the demands of an on-demand world.
+## 
+## 
+## At Slice, we’re focused on ensuring our products provide a positive, individualized customer experience.
+## 
+## 
+## Our smaller teams invite broader thinking and problem solving, where nobody is pigeonholed into a predetermined role.
+## 
+## 
+## We work in an open, supportive, environment that values and promotes inclusiveness, innovation, and collaboration.
+## 
+## 
+## Our work improves the customer experience, grows our market share and drives business outcomes.
+## 
+## 
+## You are a hands-on learner and are excited by the thought of moving past theory and examples to real-time data science work.
+## 
+## 
+## 4+ years of practical experience using data, models, and common sense to solve tough problems in a collaborative environment.
+## 
+## 
+## An understanding of statistical and predictive modeling concepts, machine learning algorithms, clustering and classification techniques.
+## 
+## 
+## University degree in engineering, applied statistics, data mining, machine learning, mathematics or a related quantitative discipline.</code></pre>
 </div>
 </div>
 </div>
@@ -2448,6 +3048,9 @@ hljs.initHighlightingOnLoad();
         <ul class="list-unstyled">
           <li class="mb-3"><a class="text-dark"
               href="../../categories/careers">Careers</a>
+          </li>
+          <li class="mb-3"><a class="text-dark"
+              href="../../categories/data-science">Data science</a>
           </li>
           <li class="mb-3"><a class="text-dark"
               href="../../categories/data-science-toolbox">Data science toolbox</a>

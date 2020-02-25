@@ -41,6 +41,8 @@ image: images/post/extractive-summary.png
 ```{r, echo=F, eval=T}
 library(knitr)
 opts_chunk$set(echo=T, message=F, warning=F, cache=T)
+
+library(reticulate)
 ```
 
 ```{r, echo=F, eval=T}
@@ -308,6 +310,41 @@ tr[["sentences"]] %>%
 
 # summa
 
+# sumy
+ 
+
+
+```{python}
+from __future__ import absolute_import
+from __future__ import division, print_function, unicode_literals
+
+from sumy.parsers.html import HtmlParser
+from sumy.parsers.plaintext import PlaintextParser
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.summarizers.lsa import LsaSummarizer as Summarizer
+from sumy.nlp.stemmers import Stemmer
+from sumy.utils import get_stop_words
+```
+
+```{python}
+def sumy_function(url):
+  LANGUAGE = "english"
+  SENTENCES_COUNT = 10
+  
+  parser = HtmlParser.from_url(url, Tokenizer(LANGUAGE))
+  # or for plain text files
+  # parser = PlaintextParser.from_file("document.txt", Tokenizer(LANGUAGE))
+  # parser = PlaintextParser.from_string("Check this out.", Tokenizer(LANGUAGE))
+  stemmer = Stemmer(LANGUAGE)
+  
+  summarizer = Summarizer(stemmer)
+  summarizer.stop_words = get_stop_words(LANGUAGE)
+  
+  for sentence in summarizer(parser.document, SENTENCES_COUNT):
+      print(sentence)
+      
+sumy_function("https://en.wikipedia.org/wiki/Automatic_summarization")
+```
 
 
 
