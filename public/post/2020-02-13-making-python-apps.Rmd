@@ -1,7 +1,7 @@
 ---
 title: Going beyond Jupyter notebooks
 author: ''
-date: '2020-02-13'
+date: '2020-03-23'
 categories:
   - Data science toolbox
 tags:
@@ -112,19 +112,11 @@ if __name__ == '__main__':
 
 Of course, Plotly Dash provides many other functionalities that Streamlit is not capable of, at least for now. However, the simplicity of working with Streamlit makes it so satistfying to quickly whip up an interactive app to showcase your work.
 
-For example, I have made two Streamlit apps to host my microlearning series on survival analysis and building a random forest classifier to predict customer churn. I made them both multipage apps that allow progressive reveal of the content at the learner's pace, in order to take advantage of the easy interactive widgets to the fullest extent. Granted that I had the workflow written out before hand, but making either one of these apps took only 2-3 days. Check out this one about integrating unsupervised and supervised machine learning!
-
-<br>
-
-
-```{r, echo=F, out.width='100%'}
-knitr::include_url("https://rf-streamlit.herokuapp.com/", height = "900px")
-```
-
- 
+For example, I have made two Streamlit apps to host my microlearning series on [survival analysis](https://survival-analysis.herokuapp.com/) and integrating unsupervised and supervised machine learning to predict [customer churn](https://rf-streamlit.herokuapp.com/). I made them both multipage apps that allow progressive reveal of the content at the learner's pace, in order to take advantage of the easy interactive widgets to the fullest extent. Granted that I had the workflow written out before hand, but making either one of these apps took only 2-3 days.  
 
 If you are interested in trying Streamlit out, there are several demo apps listed in the documentation linked above. In addition, many enthusiastic adopters of Streamlit have [tweeted](https://twitter.com/streamlit?lang=en) about their own creations.
 
+<br>
 
 ## Plotly Dash
 

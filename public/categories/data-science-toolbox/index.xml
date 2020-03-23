@@ -6,10 +6,28 @@
     <description>Recent content in Data science toolbox on Intelligence Refinery</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 13 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/data-science-toolbox/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Going beyond Jupyter notebooks</title>
+      <link>/post/making-python-apps/</link>
+      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/making-python-apps/</guid>
+      <description>--</description>
+    </item>
+    
+    <item>
+      <title>Hierarchical clustering</title>
+      <link>/post/hierarchical-clustering/</link>
+      <pubDate>Tue, 25 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/hierarchical-clustering/</guid>
+      <description>Introduction</description>
+    </item>
     
     <item>
       <title>Fast exploratory data analysis for when you just can&#39;t wait</title>
@@ -21,29 +39,11 @@
     </item>
     
     <item>
-      <title>Going beyond Jupyter notebooks</title>
-      <link>/post/making-python-apps/</link>
-      <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/making-python-apps/</guid>
-      <description>--</description>
-    </item>
-    
-    <item>
       <title>Graphing in Python - New(er) kids on the block</title>
       <link>/post/graphing-in-python-a-walkthrough/</link>
       <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>/post/graphing-in-python-a-walkthrough/</guid>
-      <description>--</description>
-    </item>
-    
-    <item>
-      <title>Data science for business</title>
-      <link>/post/data-science-for-business/</link>
-      <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/data-science-for-business/</guid>
       <description>--</description>
     </item>
     

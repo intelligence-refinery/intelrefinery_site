@@ -8,7 +8,6 @@ categories:
 tags: 
   - R
   - Python
-  - Package
   - textrank
   - 'Text summarization'
 image: images/post/extractive-summary.png
@@ -54,7 +53,6 @@ library(kableExtra)
 ```
 
  
-
 
 
 # textrank 

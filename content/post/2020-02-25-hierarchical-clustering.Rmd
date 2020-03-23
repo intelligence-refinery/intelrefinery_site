@@ -1,0 +1,377 @@
+---
+title: Hierarchical clustering
+author: ''
+date: '2020-02-25'
+slug: hierarchical-clustering
+categories:
+  - Data science toolbox
+tags:
+  - Hierarchical clustering
+  - Unsupervised learning
+image: images/post/hierarchical_clustering.png
+---
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+  rel="stylesheet"
+  href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+</head>
+<body>
+
+<body data-spy="scroll" data-target="#toc"> 
+<div class="container">
+<div class="row">
+<!-- sidebar, which will move to the top on a small screen -->
+<div class="col-sm-2">
+<nav id="toc" data-toggle="toc" class="sticky-top" style='padding-top:40px'></nav>
+</div>
+<!-- main content area -->
+<div class="col-sm-10">
+
+
+```{r, echo=F, message=F, warning=F}
+library(knitr)
+opts_chunk$set(echo=T, message=F, warning=F, cache=F)
+
+library(kableExtra)
+library(plyr)
+library(dplyr)
+
+library(reticulate)
+use_python('/Library/Frameworks/Python.framework/Versions/3.7/bin/python3')
+```
+
+## Introduction
+
+<iframe src="https://coda.io/embed/7qrzWuCrpO/_subsu" height=700 width='100%' allow="fullscreen"></iframe>
+ 
+<br>
+
+## Workflow
+
+### 1. Data normalization
+
+```{python}
+## Import lbraries
+import numpy as np
+import pandas as pd
+from sklearn import datasets
+
+## Import data
+iris = datasets.load_iris()
+
+df = pd.DataFrame(data= np.c_[iris['data'], iris['target']],
+                     columns= iris['feature_names'] + ['target'])
+```
+
+```{r, echo=F}
+py$df %>% head(10) %>% kable()
+```
+
+```{python}
+def normalize_col(col):
+  return (col-col.min())/(col.max()-col.min())
+  
+features_df = df.drop('target', axis=1)
+
+normalized_data = features_df.apply(lambda x: normalize_col(x))
+```
+
+
+```{r, echo=F}
+py$normalized_data %>% head(10) %>% kable()
+```
+
+### 2. Find optimal distance/dissimilarity metric
+
+
+
+<div class="container">
+<!-- Nav tabs -->
+<ul class="nav nav-pills nav-justified" role="tablist">
+
+<li class="nav-item active">
+<a class="nav-link active" data-toggle="tab" href="#python"><font size="+2"><b>Python</b></font></a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" data-toggle="tab" href="#r"><font size="+2"><b>R</b></font></a>
+</li>
+
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+<div id="python" class="container tab-pane active">
+
+`scikit-learn` supports {“ward”, “complete”, “average”, “single”}
+
+`scikit-learn` supports  ['cityblock', 'cosine', 'euclidean', 'l1', 'l2', 'manhattan'].
+
+```{python}
+linkage_list = ['single', 'complete', 'average', 'weighted', 'centroid', 'median', 'ward']
+
+affinity_list = ['cityblock', 'cosine', 'euclidean', 'l1', 'l2', 'manhattan', 'braycurtis', 'canberra', 'chebyshev',
+                 'correlation', 'dice', 'hamming', 'jaccard', 'kulsinski', 'mahalanobis', 'minkowski', 'rogerstanimoto',
+                 'russellrao', 'seuclidean', 'sokalmichener', 'sokalsneath', 'sqeuclidean', 'yule']
+
+```
+
+Cophenetic correlation is commonly used:
+
+```{python}
+## Import libraries
+from scipy.cluster.hierarchy import dendrogram, linkage
+from scipy.cluster.hierarchy import cophenet
+from scipy.spatial.distance import pdist
+
+## Calculate Cophenetic coefficient for every possible combinations
+affinity_col = []
+linkage_col = []
+coph_coef = []
+
+for a in affinity_list:
+  for l in linkage_list:
+  
+    ## Create column of affinity metric
+    affinity_col.append(a)
+  
+    ## Create column of linkage metric
+    linkage_col.append(l)
+    
+    ## Create column of cophenetic coefficient
+    try:
+      Z = linkage(normalized_data, method=l, metric=a)
+      
+      c, coph_dists = cophenet(Z, pdist(normalized_data, a))
+      
+      coph_coef.append(c)
+    except:
+      coph_coef.append(None)
+
+coph_coef_df = pd.DataFrame(list(zip(affinity_col, linkage_col, coph_coef)), 
+                            columns =['Affinity', 'Linkage', 'Coef'])
+```
+
+```{r, echo=F}
+py$coph_coef_df %>% arrange(desc(Coef)) %>% top_n(10) %>% kable()
+```
+
+Since `scikit-learn` supports a smaller subset of affinity metrics, let's see which ones:
+
+```{python, eval=F}
+sklearn_affinity = ['cityblock', 'cosine', 'euclidean', 'l1', 'l2', 'manhattan']
+
+coph_coef_df[coph_coef_df['Affinity'].isin(sklearn_affinity)].sort_values(by='Coef', ascending=False)
+```
+
+```{python, echo=F}
+t = coph_coef_df[coph_coef_df['Affinity'].isin(['cityblock', 'cosine', 'euclidean', 'l1', 'l2', 'manhattan'])].sort_values(by='Coef', ascending=False)
+```
+
+```{r, echo=F}
+py$t %>% head(10) %>% kable()
+```
+
+</div>
+
+<div id="r" class="container tab-pane fade">
+
+https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cophenetic
+
+</div>
+
+<br>
+
+### 3. Hierarchical clustering
+
+
+<div class="container">
+<!-- Nav tabs -->
+<ul class="nav nav-pills nav-justified" role="tablist">
+
+<li class="nav-item active">
+<a class="nav-link active" data-toggle="tab" href="#scipy"><font size="+2"><b>`sciPy`</b></font></a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" data-toggle="tab" href="#sklearn"><font size="+2"><b>`scikit-learn`</b></font></a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" data-toggle="tab" href="#cluster"><font size="+2"><b>`cluster`</b></font></a>
+</li>
+
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+<div id="scipy" class="container tab-pane active">
+```{python}
+from scipy.cluster.hierarchy import fcluster
+import matplotlib.pyplot as plt
+
+Z = linkage(normalized_data, method='average', metric='kulsinski')
+ 
+dendrogram(
+    Z,
+    truncate_mode='lastp',  # show only the last p merged clusters
+    p=12,  # show only the last p merged clusters
+    show_leaf_counts=True,   
+    leaf_rotation=90.,
+    leaf_font_size=12.,
+    show_contracted=True,  # to get a distribution impression in truncated branches
+)
+plt.show()
+```
+
+```{python}
+max_d = 50
+
+df['cluster'] = fcluster(Z, max_d, criterion='distance')
+ 
+df.groupby('cluster')['target'].value_counts()
+```
+
+
+</div>
+
+<div id="sklearn" class="container tab-pane fade">
+```{python}
+## Import libraries
+from sklearn.cluster import AgglomerativeClustering
+
+## Hierarchical clustering
+groups = AgglomerativeClustering(n_clusters=3, affinity='cosine', linkage='average')
+
+df['sk_cluster'] = groups.fit_predict(normalized_data)
+ 
+df.groupby('sk_cluster')['target'].value_counts()
+```
+
+ 
+</div>
+
+<div id="cluster" class="container tab-pane fade">
+
+`dist()` supports: "euclidean", "maximum", "manhattan", "canberra", "binary" or "minkowski"
+
+`hclust()` supports: "ward.D", "ward.D2", "single", "complete", "average" (= UPGMA), "mcquitty" (= WPGMA), "median" (= WPGMC) or "centroid" (= UPGMC).
+
+```{r}
+library(data.table)
+
+distance_list = list()
+linkage_list = list()
+coph_list = list()
+
+for (d in c("euclidean", "maximum", "manhattan", "canberra", "binary", "minkowski")) {
+  for (l in c("ward.D", "ward.D2", "single", "complete", "average", "mcquitty", "median","centroid")) {
+    distance_list <- c(distance_list, d)
+    
+    linkage_list <- c(linkage_list, l)
+    
+    distances <- dist(py$normalized_data, method=d)
+    hcl <- hclust(distances, method=l)
+    
+    d2 <- cophenetic(hcl)
+    #print(cor(distances, d2))
+    
+    coph_list <- c(coph_list, cor(distances, d2))
+  }
+}
+
+res_df = NULL
+
+res_df = do.call(rbind, Map(data.frame, Distance=distance_list, Linkage=linkage_list, Coph=coph_list)) %>% arrange(desc(Coph))
+```
+
+```{r}
+res_df  %>% kable()
+```
+
+
+Agglomerative clustering:
+
+```{r}
+library(cluster)
+library(factoextra)
+
+
+d <- dist(py$normalized_data, method='binary')		## Calculates distance
+
+hcl <- hclust(d, method='average')	## Hierchical clustering 
+
+plot(hcl)
+
+fviz_dend(hcl, cex = 0.5,
+          k = 4, 
+          palette = "jco") # Color palette
+```
+```{r}
+sub_grp <- cutree(hcl, k = 4)
+
+
+py$df %>%
+  mutate(cluster = sub_grp) %>% 
+  group_by(cluster, target)  %>%
+  summarise(Freq = n())
+```
+
+ 
+ 
+
+Divisive clustering
+
+```{r}
+## Import library
+library(factoextra)
+
+## Clustering
+res.diana <- diana(py$normalized_data, stand = TRUE)
+
+## Plot the dendrogram
+
+fviz_dend(res.diana, cex = 0.5,
+          k = 4, # Cut in four groups
+          palette = "jco") # Color palette
+```
+
+</div>
+
+</div>
+</div>
+
+
+
+ 
+
+
+
+</div>
+</div>
+
+
+
+### 4. Validate clusterings
+
+
+
+
+
+
+</div>
+</div>
+</div>
+</body>
+
+## Resources and references
+
+<iframe src="https://coda.io/embed/7qrzWuCrpO/_sul4c?hideSections=true" width=100% height=700 style="max-width: 100%;" allow="fullscreen"></iframe>

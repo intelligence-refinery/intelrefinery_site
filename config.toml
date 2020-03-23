@@ -97,7 +97,7 @@ googleAnalitycsID = "Your ID"
 email = "intelligence.refinery@gmail.com"
 location = "Toronto, Canada"
 # copyright
-copyright = "|  @2019 Intelligence Refinery  |  All Rights Reserved  |"
+copyright = "|  @2020 Intelligence Refinery  |  All Rights Reserved  |"
 
   # Preloader
   [params.preloader]

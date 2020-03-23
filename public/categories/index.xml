@@ -6,26 +6,26 @@
     <description>Recent content in Categories on Intelligence Refinery</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 24 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Data science</title>
-      <link>/categories/data-science/</link>
-      <pubDate>Mon, 24 Feb 2020 00:00:00 +0000</pubDate>
+      <title>Data science toolbox</title>
+      <link>/categories/data-science-toolbox/</link>
+      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/categories/data-science/</guid>
+      <guid>/categories/data-science-toolbox/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Data science toolbox</title>
-      <link>/categories/data-science-toolbox/</link>
-      <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
+      <title>Statistics</title>
+      <link>/categories/statistics/</link>
+      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/categories/data-science-toolbox/</guid>
+      <guid>/categories/statistics/</guid>
       <description></description>
     </item>
     

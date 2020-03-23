@@ -1,12 +1,13 @@
 ---
 title: Practical Statistics for Data Scientists
 author: ''
-date: '2020-02-24'
-slug: practical-statistics-for-data-scientists
+date: '2020-03-23'
 categories:
-  - Data science
+  - Statistics
 tags:
+  - R
   - Textbook
+slug: practical-statistics-for-data-scientists
 image: images/post/practical_stats.png
 ---
 
@@ -23,12 +24,16 @@ image: images/post/practical_stats.png
 
 According to the preface:
 
-<blockquote>This book is aimed at the data scientist with some familiarity with the R
+<blockquote><font size='+1'>"This book is aimed at the data scientist with some familiarity with the R
 programming language, and with some prior (perhaps spotty or ephemeral)
-exposure to statistics.</blockquote>
+exposure to statistics."</blockquote>
 
-<blockquote>
-Two goals underlie this book: 1) to lay out, in digestible, navigable, and easily referenced form, key concepts from statistics that are relevant to data science, and 2) to explain which concepts are important and useful from a data science perspective, which are less so, and why. 
+<blockquote><font size='+1'>
+"Two goals underlie this book: 
+<br>
+1) to lay out, in digestible, navigable, and easily referenced form, key concepts from statistics that are relevant to data science, and 
+<br>
+2) to explain which concepts are important and useful from a data science perspective, which are less so, and why."
 </blockquote>
 
 
@@ -38,107 +43,95 @@ Two goals underlie this book: 1) to lay out, in digestible, navigable, and easil
 
 <details>
     <summary><b><font size='+2'>1. Exploratory Data Analysis</font></b></summary>
-    <ul>
-      <li>Elements of Structured Data</li>
-      <li>Rectangular Data</li>
-      <li>Estimates of Location</li>
-      <li>Estimates of Variability</li>
-      <li>Exploring the Data Distribution</li>
-      <li>Exploring Binary and Categorical Data</li>
-      <li>Correlation</li>
-      <li>Exploring Two or More Variables</li>
-      <li>Summary</li>
-    </ul>
+      <input type="checkbox" disabled><font size='+1'><b>  Elements of Structured Data</b></input></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Rectangular Data</b></input></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Estimates of Location</b></input></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Estimates of Variability</b></input></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Exploring the Data Distribution</input></b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Exploring Binary and Categorical Data</input></b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Correlation</input></b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Exploring Two or More Variables</input></b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Summary</input></b></input><br>
 </details>
 <details>
     <summary><b><font size='+2'>2. Data and Sampling Distributions</font></b></summary>
-    <ul>
-      <li>Random Sampling and Sample Bias</li>
-      <li>Selection Bias</li>
-      <li>Sampling Distribution of a Statistic</li>
-      <li>The Bootstrap</li>
-      <li>Confidence Intervals</li>
-      <li>Normal Distribution</li>
-      <li>Long-Tailed Distributions</li>
-      <li>Student's t-Distribution</li>
-      <li>Binomial Distribution</li>
-      <li>Poisson and Related Distributions</li>
-      <li>Summary</li>
-    </ul>
+      <input type="checkbox" disabled><font size='+1'><b>  Random Sampling and Sample Bias</b></input></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Selection Bias</b></input></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Sampling Distribution of a Statistic</b></input></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  The Bootstrap</b></input></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Confidence Intervals</input></b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Normal Distribution</input></b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Long-Tailed Distributions</input></b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Student's t-Distribution</input></b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Binomial Distribution</input></b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Poisson and Related Distributions</input></b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Summary</input></b></input><br>
 </details>
 <details>
     <summary><b><font size='+2'>3. Statistical Experiments and Significance Testing</font></b></summary>
-    <ul>
-      <li>A/B Testing</li>
-      <li>Hypothesis Tests</li>
-      <li>Resampling</li>
-      <li>Statistical Significance and P-values</li>
-      <li>t-Tests</li>
-      <li>Multiple Testing</li>
-      <li>Degrees of Freedom</li>
-      <li>ANOVA</li>
-      <li>Chi-Square Test</li>
-      <li>Multi-Arm Bandit Algorithm</li>
-      <li>Power and Sample Size</li>
-      <li>Summary</li>
-    </ul>
+      <input type="checkbox" checked><font size='+1'><b>  A/B testing</b> <i>[March 23, 2020]</i></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Hypothesis Tests</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Resampling</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Statistical Significance and P-values</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  t-Tests</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Multiple Testing</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Degrees of Freedom</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  ANOVA</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Chi-Square Test</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Multi-Arm Bandit Algorithm</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Power and Sample Size</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Summary</b></input><br>
 </details>
 <details>
     <summary><b><font size='+2'>4. Regression and Prediction</font></b></summary>
-    <ul>
-      <li>Simple Linear Regression</li>
-      <li>Multiple Linear Regression</li>
-      <li>Prediction Using Regression</li>
-      <li>Factor Variables in Regression</li>
-      <li>Interpreting the Regression Equation</li>
-      <li>Testing the Assumptions: Regression Diagnostics</li>
-      <li>Polynomial and Spline Regression</li>
-      <li>Summary</li>
-    </ul>
+      <input type="checkbox" disabled><font size='+1'><b>  Simple Linear Regression</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Multiple Linear Regression</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Prediction Using Regression</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Factor Variables in Regression</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Interpreting the Regression Equation</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Testing the Assumptions: Regression Diagnostics</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Polynomial and Spline Regression</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Summary</b></input><br>
 </details>
 <details>
     <summary><b><font size='+2'>5. Classification</font></b></summary>
-    <ul>
-      <li>Naive Bayes</li>
-      <li>Discriminant Analysis</li>
-      <li>Logistic Regression</li>
-      <li>Evaluating Classification Models</li>
-      <li>Strategies for Imbalanced Data</li>
-      <li>Summary</li>
-    </ul>
+      <input type="checkbox" disabled><font size='+1'><b>  Naive Bayes</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Discriminant Analysis</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Logistic Regression</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Evaluating Classification Models</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Strategies for Imbalanced Data</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Summary</b></input><br>
 </details>
 <details>
     <summary><b><font size='+2'>6. Statistical Machine Learning</font></b></summary>
-    <ul>
-      <li>K-Nearest Neighbours</li>
-      <li>Tree Models</li>
-      <li>Bagging and the Random Forest</li>
-      <li>Boosting</li>
-    </ul>
+      <input type="checkbox" disabled><font size='+1'><b>  K-Nearest Neighbours</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Tree Models</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Bagging and the Random Forest</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Boosting</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Summary</b></input><br>
 </details>
 <details>
     <summary><b><font size='+2'>7. Unsupervised Learning</font></b></summary>
-    <ul>
-      <li>Principal Components Analysis</li>
-      <li>K-Means Clustering</li>
-      <li>Hierarchical Clustering</li>
-      <li>Model-Based Clustering</li>
-      <li>Scaling and Categorical Variables</li>
-      <li>Summary</li>
-    </ul>
+      <input type="checkbox" disabled><font size='+1'><b>  Principal Components Analysis</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  K-Means Clustering</b></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Hierarchical Clustering</b></input></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Model-Based Clustering</b></input></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Scaling and Categorical Variables</b></input></input><br>
+      <input type="checkbox" disabled><font size='+1'><b>  Summary</b></input></input><br>
 </details>
 
 
 <br>
 
-## Impression
+## Impressions
  
-### Strengths
+<h3 font size='-3'>Strengths</h3>
 
-> Book is divided up into concepts, which provides useful chunks to guide learning
+> Book is divided up into fairly bite-sized concepts, which provide useful chunks to guide learning
 
+<br>
 
-### Weaknesses
+<h3 font size='-3'>Weaknesses</h3>
 
 > The amount of equations included in the text can interrupt flow and be confusing to readers without a significant statistics background
  
