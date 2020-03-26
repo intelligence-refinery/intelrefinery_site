@@ -6,10 +6,19 @@
     <description>Recent content on Intelligence Refinery</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Practical Statistics for Data Scientists</title>
+      <link>/post/practical-statistics-for-data-scientists/</link>
+      <pubDate>Thu, 26 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/practical-statistics-for-data-scientists/</guid>
+      <description>A second edition, *Practical Statistics for Data Scientists: 50+ Essential Concepts Using R and Python* is scheduled for publication on June 9, 2020.</description>
+    </item>
     
     <item>
       <title>Going beyond Jupyter notebooks</title>
@@ -18,15 +27,6 @@
       
       <guid>/post/making-python-apps/</guid>
       <description>--</description>
-    </item>
-    
-    <item>
-      <title>Practical Statistics for Data Scientists</title>
-      <link>/post/practical-statistics-for-data-scientists/</link>
-      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/practical-statistics-for-data-scientists/</guid>
-      <description>A second edition, *Practical Statistics for Data Scientists: 50+ Essential Concepts Using R and Python* is scheduled for publication on June 9, 2020.</description>
     </item>
     
     <item>

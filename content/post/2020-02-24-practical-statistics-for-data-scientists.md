@@ -1,7 +1,7 @@
 ---
 title: Practical Statistics for Data Scientists
 author: ''
-date: '2020-03-23'
+date: '2020-03-26'
 categories:
   - Statistics
 tags:
